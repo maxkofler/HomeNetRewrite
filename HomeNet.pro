@@ -10,11 +10,19 @@ SOURCES += \
         config/parser/loadfile.cpp \
         config/parser/parseblock.cpp \
         config/parser/parser.cpp \
-        config/hnconfig/hnconfig.cpp
+        #HomeNet
+        homenet/homenet.cpp \
+        homenet/hnconfig/hnconfig.cpp \
+        #Weathersens
+        weathersens/weathersens.cpp
 
 HEADERS += \
         log/log.h \
         log/logfunction.h \
         config/parser/parseblock.h \
         config/parser/parser.h \
-        config/hnconfig/hnconfig.h
+        #HomeNet
+        homenet/homenet.h \
+        homenet/hnconfig/hnconfig.h \
+        #Weathersens
+        weathersens/weathersens.h

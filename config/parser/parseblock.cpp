@@ -24,13 +24,15 @@ int ParseBlock::parseFromLine(std::string line){
         }else
             break;
     }
+
+    return this->_blocks.size();
 }
 
 std::string ParseBlock::toString(){
     FUN();
     std::string ret = "";
-    for (auto i : this->_blocks){
-        ret += "[" + i + "]";
+    for (size_t i = 0; i < this->_blocks.size(); i++){
+        ret += "[" + this->_blocks.at(i) + "]";
     }
     return ret;
 }
