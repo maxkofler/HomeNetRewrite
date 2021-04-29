@@ -4,12 +4,10 @@
 class Log;
 #include "logfunction.h"
 
-#ifdef log
-    extern Log* log;
-#endif
-
+extern Log* log;
 
 #define FUN() LogFunction logfun(__PRETTY_FUNCTION__, log)
+
 #define LOGE(text) log->log(text, Log::E);
 #define LOGW(text) log->log(text, Log::W);
 #define LOGI(text) log->log(text, Log::I);

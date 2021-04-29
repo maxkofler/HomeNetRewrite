@@ -6,8 +6,13 @@ CONFIG -= qt
 SOURCES += \
         log/log.cpp \
         log/logfunction.cpp \
-        main.cpp
+        main.cpp \
+        parser/loadfile.cpp \
+        parser/parseblock.cpp \
+        parser/parser.cpp
 
 HEADERS += \
         log/log.h \
-        log/logfunction.h
+        log/logfunction.h \
+        parser/parseblock.h \
+        parser/parser.h
