@@ -7,12 +7,14 @@ SOURCES += \
         log/log.cpp \
         log/logfunction.cpp \
         main.cpp \
-        parser/loadfile.cpp \
-        parser/parseblock.cpp \
-        parser/parser.cpp
+        config/parser/loadfile.cpp \
+        config/parser/parseblock.cpp \
+        config/parser/parser.cpp \
+        config/hnconfig/hnconfig.cpp
 
 HEADERS += \
         log/log.h \
         log/logfunction.h \
-        parser/parseblock.h \
-        parser/parser.h
+        config/parser/parseblock.h \
+        config/parser/parser.h \
+        config/hnconfig/hnconfig.h

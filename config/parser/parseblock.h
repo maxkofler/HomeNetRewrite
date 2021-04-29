@@ -21,6 +21,8 @@ public:
      */
     int                         parseFromLine(std::string line);
 
+    std::string                 toString();
+
     std::vector<std::string>    getBlocks(){return this->_blocks;}
 private:
     std::vector<std::string>    _blocks;

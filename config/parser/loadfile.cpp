@@ -16,6 +16,7 @@ int Parser::parseFile(std::string path){
         while(getline(this->_curFile, buf)){
             ParseBlock block;
             block.parseFromLine(buf);
+            LOGF("Parsed line: " + block.toString());
             this->_entries.push_back(block);
         }
 

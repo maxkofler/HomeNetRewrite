@@ -14,12 +14,13 @@ public:
 
     /**
      * @brief Loads a file and parses it
-     * @param path      The path to the file to load
-     * @return          The ammount of lines parsed
-     *                  -1 when file not openable
+     * @param path          The path to the file to load
+     * @return              The ammount of lines parsed
+     *                      -1 when file not openable
      */
-    int                 parseFile(std::string path);
+    int                     parseFile(std::string path);
 
+    std::vector<ParseBlock> getVector(){return this->_entries;}
 
 private:
     std::string             _curPath;

@@ -21,6 +21,16 @@ int ParseBlock::parseFromLine(std::string line){
         //Check whether we found the tokens
         if (pos1 != std::string::npos && pos2 != std::string::npos){
             this->_blocks.push_back(line.substr(pos1+1, pos2-pos1-1));
-        }
+        }else
+            break;
     }
+}
+
+std::string ParseBlock::toString(){
+    FUN();
+    std::string ret = "";
+    for (auto i : this->_blocks){
+        ret += "[" + i + "]";
+    }
+    return ret;
 }
