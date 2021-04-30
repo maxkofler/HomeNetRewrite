@@ -2,6 +2,8 @@
 
 HomeNet::HomeNet(std::string configPath){
     this->_config = new HNConfig(configPath);
+    this->_py = new HNPython();
+    this->_py->addPythonPath(this->_config->getConfig("pythonpath"));
 }
 
 bool HomeNet::startWS(){

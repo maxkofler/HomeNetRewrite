@@ -4,6 +4,7 @@
 class Weathersens;
 
 #include "log/log.h"
+#include "wsconfig/wsconfig.h"
 #include "homenet/homenet.h"
 
 #include <string>
@@ -14,7 +15,9 @@ public:
     Weathersens(std::string wsConfigPath, HomeNet* hn);
 
 private:
-    HomeNet*            _hn;
+    bool                    _ok;
+    HomeNet*                _hn;
+    WSConfig*               _config;
 };
 
 #endif // WEATHERSENS_H

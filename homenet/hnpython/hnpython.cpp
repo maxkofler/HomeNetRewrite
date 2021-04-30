@@ -1,22 +1,30 @@
 #include "hnpython.h"
 
 HNPython::HNPython(){
+    FUN();
     Py_Initialize();
+    LOGI("Started python!");
 }
 
 HNPython::~HNPython(){
+    FUN();
     Py_Finalize();
+    LOGI("Stopped python!");
 }
 
 void HNPython::restartPython(){
+    FUN();
     Py_Finalize();
     Py_Initialize();
+    LOGI("Restarted python!");
 }
 
 void HNPython::addPythonPath(std::string path){
+    FUN();
     QString pPath;
     pPath.fromStdString(path);
     PySys_SetPath(pPath.toStdWString().c_str());
+    LOGD("Added \"" + path + "\" to python-PATH");
 }
 
 PyModule HNPython::loadModule(std::string name){

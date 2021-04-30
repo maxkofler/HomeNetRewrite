@@ -4,16 +4,16 @@
 class Log;
 #include "logfunction.h"
 
-extern Log* log;
+extern Log* hlog;
 
-#define FUN() LogFunction logfun(__PRETTY_FUNCTION__, log)
+#define FUN() LogFunction logfun(__PRETTY_FUNCTION__, hlog)
 
-#define LOGE(text) log->log(text, Log::E);
-#define LOGW(text) log->log(text, Log::W);
-#define LOGI(text) log->log(text, Log::I);
-#define LOGD(text) log->log(text, Log::D);
-#define LOGF(text) log->log(text, Log::F);
-#define LOG(text, level) log->log(text, level);
+#define LOGE(text) hlog->log(text, Log::E);
+#define LOGW(text) hlog->log(text, Log::W);
+#define LOGI(text) hlog->log(text, Log::I);
+#define LOGD(text) hlog->log(text, Log::D);
+#define LOGF(text) hlog->log(text, Log::F);
+#define LOG(text, level) hlog->log(text, level);
 
 #include <vector>
 #include <string>

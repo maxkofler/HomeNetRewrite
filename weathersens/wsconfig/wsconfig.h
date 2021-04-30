@@ -1,17 +1,17 @@
-#ifndef HNCONFIG_H
-#define HNCONFIG_H
+#ifndef WSCONFIG_H
+#define WSCONFIG_H
 
-class HNConfig;
+class WSConfig;
 
 #include "log/log.h"
 #include "parser/parser.h"
 
 #include <string>
 
-class HNConfig
+class WSConfig
 {
 public:
-    HNConfig(std::string fPath);
+    WSConfig(std::string configPath);
 
     /**
      * @brief Returns the config provided under the name
@@ -19,9 +19,8 @@ public:
      * @return              The config, empty string when not found
      */
     std::string             getConfig(std::string name);
-
 private:
     Parser                  _parser;
 };
 
-#endif // HNCONFIG_H
+#endif // WSCONFIG_H

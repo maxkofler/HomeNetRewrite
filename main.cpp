@@ -5,11 +5,11 @@
 
 using namespace std;
 
-Log* log;
+Log* hlog;
 
-int main()
+int main(int argc, char** argv)
 {
-    log = new Log();
+    hlog = new Log();
     FUN();
 
     HomeNet hn("/hn/hnconfig.txt");

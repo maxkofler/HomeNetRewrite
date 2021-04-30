@@ -6,6 +6,7 @@ class HomeNet;
 #include "log/log.h"
 #include "hnconfig/hnconfig.h"
 #include "weathersens/weathersens.h"
+#include "hnpython/hnpython.h"
 
 #include <string>
 
@@ -29,6 +30,8 @@ public:
     friend class Weathersens;
 private:
     HNConfig*           _config;
+
+    HNPython*           _py;
 
     Weathersens*        _ws;
 };
