@@ -24,6 +24,8 @@ public:
     std::string                 toString();
 
     std::vector<std::string>    getBlocks(){return this->_blocks;}
+
+    size_t                      getBlockCount(){return this->_blocks.size();}
 private:
     std::vector<std::string>    _blocks;
 };

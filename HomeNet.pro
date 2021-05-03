@@ -20,7 +20,9 @@ SOURCES += \
         homenet/hnconfig/hnconfig.cpp \
         #Weathersens
         weathersens/weathersens.cpp \
-        weathersens/wsconfig/wsconfig.cpp
+        weathersens/wsconfig/wsconfig.cpp \
+        weathersens/wsdriverlist/wsdriver/wsdriver.cpp \
+        weathersens/wsdriverlist/wsdriverlist.cpp
 
 HEADERS += \
         homenet/hnpython/hnpython.h \
@@ -34,4 +36,6 @@ HEADERS += \
         homenet/hnconfig/hnconfig.h \
         #Weathersens
         weathersens/weathersens.h \
-        weathersens/wsconfig/wsconfig.h
+        weathersens/wsconfig/wsconfig.h \
+        weathersens/wsdriverlist/wsdriver/wsdriver.h \
+        weathersens/wsdriverlist/wsdriverlist.h
