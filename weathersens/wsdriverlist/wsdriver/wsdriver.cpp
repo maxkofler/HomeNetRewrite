@@ -5,6 +5,10 @@ WSDriver::WSDriver(){
     this->_nextLVId = 0;
 }
 
+WSDriver::~WSDriver(){
+    FUN();
+}
+
 bool WSDriver::fetch(std::vector<ParseBlock> blocks, size_t* pos, uint* nextGVId){
     FUN();
 
@@ -12,6 +16,8 @@ bool WSDriver::fetch(std::vector<ParseBlock> blocks, size_t* pos, uint* nextGVId
         LOGE("Tried to fetch a line not containing a driver!");
         return false;
     }
+
+    this->_name = blocks.at(*pos).getBlockAt(1);
 
     (*pos)++;
 

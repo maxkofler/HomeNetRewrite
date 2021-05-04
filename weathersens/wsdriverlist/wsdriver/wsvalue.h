@@ -27,6 +27,7 @@ public:
      */
     bool                        fromParsedBlock(ParseBlock block, uint lId, uint gId);
 
+    std::string                 name(){return this->_name;}
 
 private:
     bool                            _loaded;    //Whether this value was loaded correctly

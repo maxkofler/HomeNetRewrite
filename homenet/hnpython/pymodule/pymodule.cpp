@@ -6,10 +6,13 @@ PyModule::PyModule(){
 }
 
 PyModule::~PyModule(){
+    //Keep these lines to figure out what to do with them.
+    //These produce invalid pointer, SEGFAULT and ABORT errors LOL
+    /*
     delete this->_pName;
     delete this->_pModule;
     delete this->_pDict;
-    this->_is_loaded = false;
+    */
 }
 
 std::string PyModule::execFunction(std::string name, PyObject* args){

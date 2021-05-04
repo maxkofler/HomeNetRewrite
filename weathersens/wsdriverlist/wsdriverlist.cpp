@@ -1,5 +1,7 @@
 #include "wsdriverlist.h"
 
+#include <Python.h>
+
 WSDriverList::WSDriverList(std::string name){
     this->_listParser.parseFile(name);
     this->_nextGVId = 0;
@@ -18,4 +20,17 @@ WSDriverList::WSDriverList(std::string name){
             pos_vect++;
         }
     }
+}
+
+bool WSDriverList::importPythonDrivers(HNPython* pyInst){
+    for (size_t i = 0; i < this->_drivers.size(); i++){
+        std::string name = this->_drivers.at(i).name() + ".main";
+        auto mod = pyInst->loadModule(name);
+        if (mod.imported())
+            this->_drivers.at(i).setPythonModule(mod);
+        else{
+            LOGE("Not adding module with name \"" + name + "\"!");
+        }
+    }
+    return true;
 }

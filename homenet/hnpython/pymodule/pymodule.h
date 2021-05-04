@@ -23,6 +23,8 @@ public:
      */
     std::string                 execFunction(std::string name, PyObject* args);
 
+    bool                        imported(){return this->_is_loaded;}
+
     friend class HNPython;
 private:
     PyObject                    *_pName;

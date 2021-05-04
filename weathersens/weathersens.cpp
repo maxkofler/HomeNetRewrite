@@ -12,6 +12,9 @@ Weathersens::Weathersens(std::string wsConfigPath, HomeNet* hn){
         return;
     }
     this->_driverDir = conf;
+    this->_hn->_py->addPythonPath(this->_driverDir);
+
+
     conf = this->_config->getConfig("driverlist");
     if (conf.empty()){
         LOGE("Could not find config for \"driverlist\", Weathersens will not load!");
@@ -22,13 +25,10 @@ Weathersens::Weathersens(std::string wsConfigPath, HomeNet* hn){
     LOGD("Weathersens reached runlevel 1!");
     this->_driverlist = new WSDriverList(this->_driverListPath);
     LOGD("Weathersens reached runlevel 2!");
+    this->_driverlist->importPythonDrivers(this->_hn->_py);
 }
 
 Weathersens::~Weathersens(){
     delete this->_config;
     delete this->_driverlist;
-}
-
-void Weathersens::loadDrivers(){
-    //parseDriverList();
 }

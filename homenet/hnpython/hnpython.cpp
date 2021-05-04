@@ -22,9 +22,11 @@ void HNPython::restartPython(){
 void HNPython::addPythonPath(std::string path){
     FUN();
     QString pPath;
-    pPath.fromStdString(path);
+    pPath = pPath.fromStdString(path);
     PySys_SetPath(pPath.toStdWString().c_str());
-    LOGD("Added \"" + path + "\" to python-PATH");
+
+    std::string s (pPath.toStdString());
+    LOGD("Added \"" + s + "\" from \"" + path + "\" to python-PATH");
 }
 
 PyModule HNPython::loadModule(std::string name){

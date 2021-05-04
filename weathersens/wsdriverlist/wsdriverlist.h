@@ -6,6 +6,7 @@ class WSDriverList;
 #include "log/log.h"
 #include "parser/parser.h"
 #include "wsdriver/wsdriver.h"
+#include "homenet/hnpython/hnpython.h"
 
 #include <string>
 
@@ -13,6 +14,13 @@ class WSDriverList
 {
 public:
     WSDriverList(std::string driverListPath);
+
+    /**
+     * @brief importDriversPython
+     * @param pyInst
+     * @return
+     */
+    bool                        importPythonDrivers(HNPython* pyInst);
 
 private:
     Parser                      _listParser;
