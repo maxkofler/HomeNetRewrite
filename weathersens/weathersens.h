@@ -5,6 +5,7 @@ class Weathersens;
 
 #include "log/log.h"
 #include "wsconfig/wsconfig.h"
+#include "wsdriverlist/wsdriverlist.h"
 #include "homenet/homenet.h"
 
 #include <string>
@@ -30,8 +31,10 @@ private:
     HomeNet*                _hn;
     WSConfig*               _config;
 
+    WSDriverList*           _driverlist;
+
     std::string             _driverDir;
-    std::string             _driverList;
+    std::string             _driverListPath;
 
 
     /**

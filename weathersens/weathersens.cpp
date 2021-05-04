@@ -17,13 +17,16 @@ Weathersens::Weathersens(std::string wsConfigPath, HomeNet* hn){
         LOGE("Could not find config for \"driverlist\", Weathersens will not load!");
         return;
     }
-    this->_driverList = conf;
+    this->_driverListPath = conf;
     this->_runlevel = 1;
     LOGD("Weathersens reached runlevel 1!");
+    this->_driverlist = new WSDriverList(this->_driverListPath);
+    LOGD("Weathersens reached runlevel 2!");
 }
 
 Weathersens::~Weathersens(){
     delete this->_config;
+    delete this->_driverlist;
 }
 
 void Weathersens::loadDrivers(){

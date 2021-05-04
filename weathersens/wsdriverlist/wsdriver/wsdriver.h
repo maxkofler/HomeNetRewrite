@@ -7,7 +7,7 @@ class WSDriver;
 #include <vector>
 
 #include "log/log.h"
-#include "parser/parser.h"
+#include "parser/parseblock.h"
 #include "wsvalue.h"
 
 class WSDriver
@@ -15,15 +15,19 @@ class WSDriver
 public:
     WSDriver();
 
+
     /**
-     * @brief Fetches the driver data from the parser
-     * @param parser            The parser to fetch from
+     * @brief fetch
+     * @param blocks
+     * @param pos
      * @return
      */
-    bool                        fetch(Parser* parser);
+    bool                        fetch(std::vector<ParseBlock> blocks, size_t* pos, uint* nextGVId);
 private:
     std::string                 _name;
     std::vector<WSValue>        _values;
+
+    uint                        _nextLVId;
 };
 
 #endif // WSDRIVER_H

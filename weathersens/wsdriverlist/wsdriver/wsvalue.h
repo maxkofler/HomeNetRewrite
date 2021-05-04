@@ -12,6 +12,11 @@ class WSValue
 {
 public:
     WSValue();
+    /*
+    ~WSValue(){
+        FUN();
+    }
+    */
 
     /**
      * @brief Fetches values from a parsed block

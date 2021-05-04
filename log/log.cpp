@@ -3,11 +3,15 @@
 #include <iostream>
 
 
-Log::Log(){
+Log::Log(uint level){
+    this->_curLevel = level;
 }
 
-void Log::log(std::string text, int level){
-    std::cout << "[" << this->_functionStack.back()->name() << "]>>" << text << std::endl;
+void Log::log(std::string text, uint level){
+    if (level <= _curLevel){
+        std::cout << "(" << level << ")";
+        std::cout << "[" << this->_functionStack.back()->name() << "]>>" << text << std::endl;
+    }
 }
 
 void Log::push(LogFunction *fun){

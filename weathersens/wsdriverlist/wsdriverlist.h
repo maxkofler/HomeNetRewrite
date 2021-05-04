@@ -5,11 +5,20 @@ class WSDriverList;
 
 #include "log/log.h"
 #include "parser/parser.h"
+#include "wsdriver/wsdriver.h"
+
+#include <string>
 
 class WSDriverList
 {
 public:
     WSDriverList(std::string driverListPath);
+
+private:
+    Parser                      _listParser;
+    std::vector<WSDriver>       _drivers;
+
+    uint                        _nextGVId;      //This value holds the next global ID for a value
 };
 
 #endif // WSDRIVERLIST_H

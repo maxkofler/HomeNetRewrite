@@ -21,7 +21,7 @@ extern Log* hlog;
 class Log
 {
 public:
-    Log();
+    Log(uint level);
 
     const static int E = 0;
     const static int W = 1;
@@ -33,9 +33,10 @@ public:
 
     void                        pop();
 
-    void                        log(std::string text, int level);
+    void                        log(std::string text, uint level);
 
 private:
     std::vector<LogFunction* >  _functionStack;
+    uint                        _curLevel;
 };
 #endif // LOG_H

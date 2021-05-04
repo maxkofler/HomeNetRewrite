@@ -8,7 +8,7 @@ Log* hlog;
 
 int main(int argc, char** argv)
 {
-    hlog = new Log();
+    hlog = new Log(Log::D);
     FUN();
     {
         //Plot some info about the program
@@ -23,6 +23,8 @@ int main(int argc, char** argv)
         HomeNet hn("/hn/hnconfig.conf");
 
         hn.startWS();
+
+        LOGI("Quiting...");
     }
     using namespace std;
 }
