@@ -24,9 +24,24 @@ Weathersens::Weathersens(std::string wsConfigPath, HomeNet* hn){
     this->_runlevel = 1;
     LOGD("Weathersens reached runlevel 1!");
     this->_driverlist = new WSDriverList(this->_driverListPath);
+    this->_runlevel = 2;
     LOGD("Weathersens reached runlevel 2!");
     this->_driverlist->importPythonDrivers(this->_hn->_py);
+    this->_runlevel = 3;
+    LOGD("Weathersens reached runlevel 3!");
 }
+
+void Weathersens::sync(){
+    FUN();
+    std::string workDir = this->_hn->_config->getConfig("workdir");
+    if (workDir.empty()){
+        LOGE("Could not find workdir config!");
+        return;
+    }
+
+    this->_driverlist->callValues(workDir);
+}
+
 
 Weathersens::~Weathersens(){
     delete this->_config;

@@ -28,6 +28,8 @@ public:
      */
     void                endWS();
 
+    Weathersens*        getWS(){return this->_ws;}
+
     friend class Weathersens;
 private:
     HNConfig*           _config;

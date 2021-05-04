@@ -25,7 +25,19 @@ public:
      */
     bool                        fetch(std::vector<ParseBlock> blocks, size_t* pos, uint* nextGVId);
 
-    void                        setPythonModule(PyModule mod){this->_driverPyModule = mod;}
+    /**
+     * @brief Sets the python module and the python instance
+     * @param mod
+     * @param pyInst
+     */
+    void                        setPythonModule(PyModule mod, HNPython* pyInst){this->_driverPyModule = mod;
+                                                                                this->_pyInstance = pyInst;}
+
+    /**
+     * @brief Queries all the values from the driver
+     * @return
+     */
+    bool                        queryValues(std::string workPath);
 
     std::string                 name(){return this->_name;}
 private:
@@ -34,6 +46,7 @@ private:
 
     uint                        _nextLVId;
 
+    HNPython*                   _pyInstance;
     PyModule                    _driverPyModule;
 };
 

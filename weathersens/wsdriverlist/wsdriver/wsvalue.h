@@ -28,13 +28,25 @@ public:
     bool                        fromParsedBlock(ParseBlock block, uint lId, uint gId);
 
     std::string                 name(){return this->_name;}
+    uint                        gId(){return this->_gId;}
+    uint                        lId(){return this->_lId;}
+
+    void                        value(std::string type, std::string value)  {
+                                                                                this->_vtype = type;
+                                                                                this->_value = value;
+                                                                                this->_holdsValue = true;
+                                                                            }
 
 private:
     bool                            _loaded;    //Whether this value was loaded correctly
     bool                            _holdsValue;//Whether this value is containing values for WS to get
     std::string                     _name;      //The Name / Description of the value
-    std::string                     _type;      //The type of the value, affects how the value may be presented to the end user
+    std::string                     _dtype;     //The type of the value, affects how the value may be presented to the end user
     std::string                     _unit;      //The unit of the value, displayed to the user
+
+    std::string                     _value;     //The effective value
+    std::string                     _vtype;     //The type of value: N = nAV, I = int, S = string, F = float...
+
     uint                            _lId;       //The local ID inside the driver
     uint                            _gId;       //The global ID inside Weathersens
 };

@@ -21,6 +21,9 @@ public:
      */
     void                    loadDrivers();
 
+
+    void                    sync();
+
 private:
     int                     _runlevel;
                             /*  -1          Unable to start in this state

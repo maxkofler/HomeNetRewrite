@@ -27,10 +27,18 @@ bool WSDriverList::importPythonDrivers(HNPython* pyInst){
         std::string name = this->_drivers.at(i).name() + ".main";
         auto mod = pyInst->loadModule(name);
         if (mod.imported())
-            this->_drivers.at(i).setPythonModule(mod);
+            this->_drivers.at(i).setPythonModule(mod, pyInst);
         else{
             LOGE("Not adding module with name \"" + name + "\"!");
         }
+    }
+    return true;
+}
+
+bool WSDriverList::callValues(std::string workDir){
+    for (size_t i = 0; i < this->_drivers.size(); i++){
+        WSDriver& curDriver = this->_drivers.at(i);
+        curDriver.queryValues(workDir);
     }
     return true;
 }

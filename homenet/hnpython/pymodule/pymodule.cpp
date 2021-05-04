@@ -38,8 +38,16 @@ std::string PyModule::execFunction(std::string name, PyObject* args){
     //Call the object
     PyObject* res = PyObject_CallObject(pFunc, args);
 
-    LOGD("Called python function \"" + name + "\" with result \"" + _PyUnicode_AsString(res) + "\"");
+    if (!res){
+        LOGE("Execution of function \"" + name + "\" resulted in system error: ");
+        PyErr_Print();
+        //E - Error
+        //S - System
+        return "ES";
+    }
+
+    LOGD("Called python function \"" + name + "\" with result \"" + std::string(_PyUnicode_AsString(res)) + "\"");
 
     //Return
-    return _PyUnicode_AsString(res);
+    return std::string(_PyUnicode_AsString(res));
 }

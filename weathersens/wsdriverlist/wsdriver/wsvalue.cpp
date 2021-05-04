@@ -15,15 +15,11 @@ bool WSValue::fromParsedBlock(ParseBlock block, uint lId, uint gId){
         return false;
     }
 
-    this->_type = block.getBlockAt(1);
+    this->_dtype = block.getBlockAt(1);
     this->_name = block.getBlockAt(2);
     this->_unit = block.getBlockAt(3);
     this->_lId = lId;
     this->_gId = gId;
-
-    LOGD("My local ID: " + std::to_string(lId));
-    LOGD("My global ID: " + std::to_string(gId));
-
 
     this->_loaded = true;
     return true;

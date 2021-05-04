@@ -24,6 +24,10 @@ int main(int argc, char** argv)
 
         hn.startWS();
 
+        auto ws = hn.getWS();
+
+        ws->sync();
+
         LOGI("Quiting...");
     }
     using namespace std;
