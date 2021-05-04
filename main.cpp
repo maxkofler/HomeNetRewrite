@@ -10,19 +10,19 @@ int main(int argc, char** argv)
 {
     hlog = new Log();
     FUN();
-
-    //Plot some info about the program
     {
-        std::string out = "";
-        for(int i = 0; i < argc; i++){
-            out += "[" + std::string(argv[i]) + "]";
+        //Plot some info about the program
+        {
+            std::string out = "";
+            for(int i = 0; i < argc; i++){
+                out += "[" + std::string(argv[i]) + "]";
+            }
+            LOGI("Starting HomeNet with args \"" + out + "\"...");
         }
-        LOGI("Starting HomeNet with args \"" + out + "\"...");
+
+        HomeNet hn("/hn/hnconfig.conf");
+
+        hn.startWS();
     }
-
-    HomeNet hn("/hn/hnconfig.txt");
-
-    hn.startWS();
-
-    return 0;
+    using namespace std;
 }

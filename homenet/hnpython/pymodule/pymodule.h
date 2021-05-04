@@ -13,6 +13,7 @@ class PyModule
 {
 public:
     PyModule();
+    ~PyModule();
 
     /**
      * @brief Executes the specified function in this module

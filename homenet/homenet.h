@@ -14,6 +14,7 @@ class HomeNet
 {
 public:
     HomeNet(std::string configPath);
+    ~HomeNet();
 
     /**
      * @brief Starts the Weathersens sub-module

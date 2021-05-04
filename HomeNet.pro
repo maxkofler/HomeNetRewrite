@@ -2,7 +2,7 @@ QMAKE_CXXFLAGS += -I/usr/include/python3.9
 QMAKE_CXXFLAGS += -I/usr/include/python3.9
 QMAKE_LINK += -lpython3.9
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += c++17
 CONFIG -= app_bundle
 CONFIG += qt
 
@@ -22,6 +22,7 @@ SOURCES += \
         weathersens/weathersens.cpp \
         weathersens/wsconfig/wsconfig.cpp \
         weathersens/wsdriverlist/wsdriver/wsdriver.cpp \
+        weathersens/wsdriverlist/wsdriver/wsvalue.cpp \
         weathersens/wsdriverlist/wsdriverlist.cpp
 
 HEADERS += \
@@ -38,4 +39,5 @@ HEADERS += \
         weathersens/weathersens.h \
         weathersens/wsconfig/wsconfig.h \
         weathersens/wsdriverlist/wsdriver/wsdriver.h \
+        weathersens/wsdriverlist/wsdriver/wsvalue.h \
         weathersens/wsdriverlist/wsdriverlist.h

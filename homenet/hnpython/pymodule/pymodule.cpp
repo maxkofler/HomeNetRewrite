@@ -5,6 +5,13 @@ PyModule::PyModule(){
     this->_is_loaded = false;
 }
 
+PyModule::~PyModule(){
+    delete this->_pName;
+    delete this->_pModule;
+    delete this->_pDict;
+    this->_is_loaded = false;
+}
+
 std::string PyModule::execFunction(std::string name, PyObject* args){
     FUN();
     std::string ret;

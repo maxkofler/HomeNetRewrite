@@ -25,6 +25,12 @@ public:
 
     std::vector<std::string>    getBlocks(){return this->_blocks;}
 
+    std::string                 getBlockAt(uint pos){
+        if (pos < this->_blocks.size())
+            return this->_blocks.at(pos);
+        return std::string("");
+    }
+
     size_t                      getBlockCount(){return this->_blocks.size();}
 private:
     std::vector<std::string>    _blocks;

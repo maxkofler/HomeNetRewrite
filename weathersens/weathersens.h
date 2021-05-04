@@ -13,6 +13,7 @@ class Weathersens
 {
 public:
     Weathersens(std::string wsConfigPath, HomeNet* hn);
+    ~Weathersens();
 
     /**
      * @brief Loads the drivers into the python-environment

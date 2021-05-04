@@ -22,6 +22,10 @@ Weathersens::Weathersens(std::string wsConfigPath, HomeNet* hn){
     LOGD("Weathersens reached runlevel 1!");
 }
 
+Weathersens::~Weathersens(){
+    delete this->_config;
+}
+
 void Weathersens::loadDrivers(){
     //parseDriverList();
 }
