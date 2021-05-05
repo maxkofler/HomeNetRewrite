@@ -44,13 +44,16 @@ Weathersens::Weathersens(std::string wsConfigPath, HomeNet* hn){
 
 void Weathersens::callValues(){
     FUN();
+    this->_m_driverlist.lock();
     std::string workDir = this->_hn->_config->getConfig("workdir");
     if (workDir.empty()){
         LOGE("Could not find workdir config!");
         return;
+        this->_m_driverlist.unlock();
     }
 
     this->_driverlist->callValues(workDir);
+    this->_m_driverlist.unlock();
 }
 
 

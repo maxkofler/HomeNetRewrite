@@ -1,6 +1,12 @@
 #include <iostream>
 #include <string>
 
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+
 #include "log/log.h"
 #include "homenet/homenet.h"
 
@@ -26,9 +32,16 @@ int main(int argc, char** argv)
 
         auto ws = hn.getWS();
 
-        ws->callValues();
+        ws->startSyncLoop();
+
+        LOGI("Waiting 15 sec...");
+        sleep(15);
+
+        ws->stopSyncLoop();
 
         LOGI("Quiting...");
     }
-    using namespace std;
+
+    LOGI("Bye!");
+    sleep(1);
 }

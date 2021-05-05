@@ -23,7 +23,8 @@ SOURCES += \
         weathersens/wsconfig/wsconfig.cpp \
         weathersens/wsdriverlist/wsdriver/wsdriver.cpp \
         weathersens/wsdriverlist/wsdriver/wsvalue.cpp \
-        weathersens/wsdriverlist/wsdriverlist.cpp
+        weathersens/wsdriverlist/wsdriverlist.cpp \
+        weathersens/wssyncloop.cpp
 
 HEADERS += \
         homenet/hnpython/hnpython.h \
