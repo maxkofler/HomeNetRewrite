@@ -62,10 +62,12 @@ bool WSDriver::queryValues(std::string workPath){
     for (size_t i = 0; i < this->_values.size(); i++){
         WSValue& curVal = this->_values.at(i);
 
-        wp = workPath + this->_name + curVal.name();
+        wp = workPath + "/" + this->_name + "/" + curVal.name();
 
         //Create the directories for the wp
-        std::filesystem::create_directories(wp);
+        LOGD("Working directory for value " + std::to_string(i) + ": " + wp);
+        if (!std::filesystem::create_directories(wp)){
+        }
 
         //First arg(int): globalValueId
         PyTuple_SetItem(pyQueryArgs, 0, Py_BuildValue("i#", curVal.gId()));

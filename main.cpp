@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 
         auto ws = hn.getWS();
 
-        ws->sync();
+        ws->callValues();
 
         LOGI("Quiting...");
     }

@@ -22,7 +22,10 @@ public:
     void                    loadDrivers();
 
 
-    void                    sync();
+    /**
+     * @brief
+     */
+    void                    callValues();
 
 private:
     int                     _runlevel;
@@ -36,8 +39,9 @@ private:
 
     WSDriverList*           _driverlist;
 
-    std::string             _driverDir;
-    std::string             _driverListPath;
+    uint                    _syncTimeout;       //The time WS waits for the next sync
+    std::string             _driverDir;         //The directory in that all drivers sit in
+    std::string             _driverListPath;    //The path to the driverlist
 
 
     /**
