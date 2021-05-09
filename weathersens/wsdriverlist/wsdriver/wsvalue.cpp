@@ -24,3 +24,12 @@ bool WSValue::fromParsedBlock(ParseBlock block, uint lId, uint gId){
     this->_loaded = true;
     return true;
 }
+
+std::string WSValue::toString(){
+    std::string ret = "gId: [" + std::to_string(this->_gId) + "] lId: [" + std::to_string(this->_lId);
+    ret += "] name:[" + this->_name + "] displayType:[" + this->_dtype;
+    ret += "] valueType:[";
+    ret.append(1, this->_vtype);
+    ret += "] value:[" + this->_value + "] unit:[" + this->_unit + "]";
+    return ret;
+}

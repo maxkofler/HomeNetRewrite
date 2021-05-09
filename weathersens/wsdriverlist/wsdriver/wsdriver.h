@@ -39,6 +39,8 @@ public:
      */
     bool                        queryValues(std::string workPath);
 
+    std::string                 valueOverview();
+
     std::string                 name(){return this->_name;}
 private:
     std::string                 _name;

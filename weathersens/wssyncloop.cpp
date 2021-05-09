@@ -31,7 +31,12 @@ void Weathersens::syncLoop(){
     while (this->_runSyncLoop){
         this->_m_runSyncLoop.unlock();
         this->callValues();
-        sleep(this->_syncTimeout);
+        LOGP(this->_driverlist->valueOverview());
+        int r = sleep(this->_syncTimeout);
+        if (r == -1){
+            LOGE("Aborting syncloop due to sleep() error!");
+            break;
+        }
         this->_m_runSyncLoop.lock();
     }
     //The output must be flushed on an ending thread

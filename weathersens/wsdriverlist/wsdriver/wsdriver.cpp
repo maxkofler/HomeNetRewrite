@@ -80,11 +80,7 @@ bool WSDriver::queryValues(std::string workPath){
 
         LOGI("Return from function call: \"" + pyRet + "\"");
 
-        if (pyRet == "E" || pyRet == "N"){
-            curVal.value("N", "");
-        }else{
-            curVal.value(std::to_string(pyRet[0]), pyRet.substr(1, pyRet.length()-2));
-        }
+        curVal.value(pyRet[0], pyRet.substr(1, pyRet.length()-1));
     }
 
     //And then pause the driver again
@@ -94,4 +90,12 @@ bool WSDriver::queryValues(std::string workPath){
     }
 
     return true;
+}
+
+std::string WSDriver::valueOverview(){
+    std::string ret = "WSDriver \"" + this->_name + "\":\n";
+    for (auto& i : this->_values){
+        ret += "\t" + i.toString() + "\n";
+    }
+    return ret;
 }

@@ -14,7 +14,7 @@ Log* hlog;
 
 int main(int argc, char** argv)
 {
-    hlog = new Log(Log::D);
+    hlog = new Log(Log::P);
     FUN();
     {
         //Plot some info about the program

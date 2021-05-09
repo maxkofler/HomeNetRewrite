@@ -42,3 +42,11 @@ bool WSDriverList::callValues(std::string workDir){
     }
     return true;
 }
+
+std::string WSDriverList::valueOverview(){
+    std::string ret = "";
+    for (auto& i : this->_drivers){
+        ret += i.valueOverview();
+    }
+    return ret;
+}

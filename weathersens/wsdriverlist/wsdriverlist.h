@@ -24,6 +24,8 @@ public:
 
     bool                        callValues(std::string workDir);
 
+    std::string                 valueOverview();
+
 private:
     Parser                      _listParser;
     std::vector<WSDriver>       _drivers;
