@@ -20,6 +20,17 @@
 #    
 #   functions resume() and pause() HAVE to return "N", else the execution will not continue
 
+
+############
+## OUTPUT ##
+############
+
+#	All logs have to contain flush=True, if this is not present the output will
+#	appear at the very end of HomeNet. example:
+#		print("Hello HomeNet!", flush=True)
+#
+#	These outputs do not use the default loging system, this is qeued to be implemented soon
+
 #   Following functions HAVE to be present!
 
 #   This function will get called before every getValue(...) call so the driver can prepare
