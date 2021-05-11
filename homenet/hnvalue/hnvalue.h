@@ -1,17 +1,17 @@
 #ifndef WSVALUE_H
 #define WSVALUE_H
 
-class WSValue;
+class HNValue;
 
 #include "log/log.h"
 #include "parser/parseblock.h"
 
 #include <string>
 
-class WSValue
+class HNValue
 {
 public:
-    WSValue();
+    HNValue();
     /*
     ~WSValue(){
         FUN();

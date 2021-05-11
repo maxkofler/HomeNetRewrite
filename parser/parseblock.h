@@ -13,6 +13,10 @@ class ParseBlock
 {
 public:
     ParseBlock();
+    ~ParseBlock(){
+        FUN();
+        this->_blocks.clear();
+    }
 
     /**
      * @brief Tries to parse the contents of this block from a line

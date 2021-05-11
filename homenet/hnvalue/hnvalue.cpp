@@ -1,12 +1,12 @@
-#include "wsvalue.h"
+#include "hnvalue.h"
 
-WSValue::WSValue(){
+HNValue::HNValue(){
     FUN();
     this->_loaded = false;
     this->_holdsValue = false;
 }
 
-bool WSValue::fromParsedBlock(ParseBlock block, uint lId, uint gId){
+bool HNValue::fromParsedBlock(ParseBlock block, uint lId, uint gId){
     FUN();
 
     //First of all check for the right size of the block
@@ -25,7 +25,7 @@ bool WSValue::fromParsedBlock(ParseBlock block, uint lId, uint gId){
     return true;
 }
 
-std::string WSValue::toString(){
+std::string HNValue::toString(){
     std::string ret = "gId: [" + std::to_string(this->_gId) + "] lId: [" + std::to_string(this->_lId);
     ret += "] name:[" + this->_name + "] displayType:[" + this->_dtype;
     ret += "] valueType:[";

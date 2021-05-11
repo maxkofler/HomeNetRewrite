@@ -5,7 +5,7 @@ class HomeNet;
 
 #include "log/log.h"
 #include "hnconfig/hnconfig.h"
-#include "weathersens/weathersens.h"
+#include "hndrivers/hndrivers.h"
 #include "hnpython/hnpython.h"
 
 #include <string>
@@ -16,27 +16,13 @@ public:
     HomeNet(std::string configPath);
     ~HomeNet();
 
-    /**
-     * @brief Starts the Weathersens sub-module
-     * @return          Whether the start was successfull
-     */
-    bool                startWS();
-
-    /**
-     * @brief Ends the Weathersens sub-module
-     * @return
-     */
-    void                endWS();
-
-    Weathersens*        getWS(){return this->_ws;}
-
-    friend class Weathersens;
+    friend class HNDrivers;
 private:
     HNConfig*           _config;
 
     HNPython*           _py;
 
-    Weathersens*        _ws;
+    HNDrivers*          _drivers;
 };
 
 #endif // HOMENET_H

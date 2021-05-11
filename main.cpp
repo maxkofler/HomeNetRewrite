@@ -28,17 +28,6 @@ int main(int argc, char** argv)
 
         HomeNet hn("/etc/homenet/hnconfig.conf");
 
-        hn.startWS();
-
-        auto ws = hn.getWS();
-
-        ws->startSyncLoop();
-
-        LOGI("Waiting 15 sec...");
-        sleep(15);
-
-        ws->stopSyncLoop();
-
         LOGI("Quiting...");
     }
 
