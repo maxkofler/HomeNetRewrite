@@ -14,7 +14,7 @@ Log* hlog;
 
 int main(int argc, char** argv)
 {
-    hlog = new Log(Log::P);
+    hlog = new Log(Log::F);
     FUN();
     {
         //Plot some info about the program
@@ -26,7 +26,7 @@ int main(int argc, char** argv)
             LOGI("Starting HomeNet with args \"" + out + "\"...");
         }
 
-        HomeNet hn("/hn/hnconfig.conf");
+        HomeNet hn("/etc/homenet/hnconfig.conf");
 
         hn.startWS();
 

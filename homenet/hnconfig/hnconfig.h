@@ -1,6 +1,12 @@
 #ifndef HNCONFIG_H
 #define HNCONFIG_H
 
+/**
+ *Required configs:
+ *
+ *      -
+ */
+
 class HNConfig;
 
 #include "log/log.h"

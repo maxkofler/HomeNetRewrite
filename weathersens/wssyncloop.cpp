@@ -28,7 +28,7 @@ void Weathersens::stopSyncLoop(){
 void Weathersens::syncLoop(){
     FUN();
     this->_m_runSyncLoop.lock();
-    while (this->_runSyncLoop){
+    while (this->_runSyncLoop && this->_runlevel > 2){
         this->_m_runSyncLoop.unlock();
         this->callValues();
         LOGP(this->_driverlist->valueOverview());

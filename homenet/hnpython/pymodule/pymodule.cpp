@@ -46,8 +46,9 @@ std::string PyModule::execFunction(std::string name, PyObject* args){
         return "ES";
     }
 
-    LOGD("Called python function \"" + name + "\" with result \"" + std::string(_PyUnicode_AsString(res)) + "\"");
+    //LOGD("Called python function \"" + name + "\" with result \"" + std::string(_PyUnicode_AsString(res)) + "\"");
 
     //Return
     return std::string(_PyUnicode_AsString(res));
+    //return "I2";
 }
