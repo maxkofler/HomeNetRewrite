@@ -8,6 +8,7 @@ HNPython::HNPython(){
 
 HNPython::~HNPython(){
     FUN();
+    LOGI("Stopping python...");
     Py_Finalize();
     LOGI("Stopped python!");
 }

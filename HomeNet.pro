@@ -8,6 +8,8 @@ CONFIG += qt
 
 SOURCES += \
         homenet/hndrivers/fetchDrivers.cpp \
+        homenet/hndrivers/hndriver/syncvalues.cpp \
+        homenet/hndrivers/importDrivers.cpp \
         log/log.cpp \
         log/logfunction.cpp \
         main.cpp \

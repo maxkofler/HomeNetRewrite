@@ -28,6 +28,10 @@ int main(int argc, char** argv)
 
         HomeNet hn("/etc/homenet/hnconfig.conf");
 
+        hn.sync();
+
+        LOGI("Overview:\n" + hn.getOverview());
+
         LOGI("Quiting...");
     }
 

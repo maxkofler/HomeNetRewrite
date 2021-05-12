@@ -16,6 +16,10 @@ public:
     HomeNet(std::string configPath);
     ~HomeNet();
 
+    bool                sync();
+
+    std::string         getOverview();
+
     friend class HNDrivers;
 private:
     HNConfig*           _config;

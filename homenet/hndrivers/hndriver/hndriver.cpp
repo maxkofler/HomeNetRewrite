@@ -2,6 +2,7 @@
 
 HNDriver::HNDriver(){
     FUN();
+    this->_moduleLoaded = false;
 }
 
 HNDriver::~HNDriver(){
@@ -20,5 +21,16 @@ bool HNDriver::fetchFromBlock(ParseBlock block){
 }
 
 void HNDriver::addValue(HNValue v){
+    FUN();
     this->_values.push_back(v);
+}
+
+std::string HNDriver::getOverview(){
+    FUN();
+    std::string ret = "[driver]-> \"" + this->_name + "\":\n";
+    for (auto& i : this->_values){
+        ret += "\t[value]-> " + i.toString() + "\n";
+    }
+
+    return ret;
 }

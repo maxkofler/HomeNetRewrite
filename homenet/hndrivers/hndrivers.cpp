@@ -12,14 +12,15 @@ HNDrivers::~HNDrivers(){
     this->_runlevel = -1;
 }
 
-bool HNDrivers::start(HNConfig* config){
+bool HNDrivers::start(HNConfig* config, HNPython* pyInst){
     //Parsing configs
     {
         this->_driverListPath = config->getConfig("driverlist");
         this->_driversPath = config->getConfig("driverdir");
+        this->_workDir = config->getConfig("workdir");
         std::string syncTimeStr = config->getConfig("synctime");
 
-        if (this->_driverListPath.empty() || this->_driversPath.empty() || syncTimeStr.empty()){
+        if (this->_driverListPath.empty() || this->_driversPath.empty() || this->_workDir.empty() || syncTimeStr.empty()){
             LOGE("Can not start HNDrivers: one or more configs not provided!");
             return false;
         }
@@ -32,6 +33,29 @@ bool HNDrivers::start(HNConfig* config){
     this->_driverListParser->parseFile(this->_driverListPath);
     LOGI("Fetching driver data...");
     this->p_fetchDrivers();
+    this->_runlevel = 1;
+
+    this->_python = pyInst;
+    if (!this->p_importDrivers()){
+        LOGE("Not imported drivers!");
+        return false;
+    }
 
     return true;
+}
+
+bool HNDrivers::sync(){
+    bool ret = true;
+    for (auto& i : this->_drivers){
+        ret = ret && i.syncValues(this->_workDir);
+    }
+    return ret;
+}
+
+std::string HNDrivers::getOverview(){
+    std::string ret = "";
+    for (auto& i : this->_drivers){
+        ret += i.getOverview();
+    }
+    return ret;
 }
