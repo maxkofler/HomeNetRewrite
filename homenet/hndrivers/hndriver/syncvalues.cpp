@@ -8,8 +8,10 @@ bool HNDriver::syncValues(std::string workDir){
         return false;
     }
 
+    std::string buf;
     for (auto& i : this->_values){
-        this->p_callValue(i, workDir);
+        buf = this->p_callValue(i, workDir);
+        i.setValueFromPython(buf[0], buf.substr(1, buf.size()-1));
     }
 
     this->p_pauseDriver();

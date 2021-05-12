@@ -15,8 +15,8 @@ bool HNValue::fromParsedBlock(ParseBlock block, uint lId, uint gId){
         return false;
     }
 
-    this->_dtype = block.getBlockAt(1);
-    this->_name = block.getBlockAt(2);
+    this->_name = block.getBlockAt(1);
+    this->_dtype = block.getBlockAt(2);
     this->_unit = block.getBlockAt(3);
     this->_lId = lId;
     this->_gId = gId;

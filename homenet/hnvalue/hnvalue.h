@@ -31,7 +31,7 @@ public:
     uint                        gId(){return this->_gId;}
     uint                        lId(){return this->_lId;}
 
-    void                        value(char type, std::string value)  {
+    void                        setValueFromPython(char type, std::string value)  {
                                                                                 this->_vtype = type;
                                                                                 this->_value = value;
                                                                                 this->_holdsValue = true;

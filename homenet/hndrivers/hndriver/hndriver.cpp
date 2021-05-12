@@ -31,6 +31,5 @@ std::string HNDriver::getOverview(){
     for (auto& i : this->_values){
         ret += "\t[value]-> " + i.toString() + "\n";
     }
-
     return ret;
 }

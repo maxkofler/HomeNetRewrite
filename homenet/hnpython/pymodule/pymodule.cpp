@@ -46,7 +46,14 @@ std::string PyModule::execFunction(std::string name, PyObject* args){
         return "ES";
     }
 
-    //LOGD("Called python function \"" + name + "\" with result \"" + std::string(_PyUnicode_AsString(res)) + "\"");
+    try{
+        std::string(_PyUnicode_AsString(res));
+    }catch(...){
+        LOGE("The return value does not exist!!!");
+        return "ER";
+    }
+
+    LOGD("Called python function \"" + name + "\" with result \"" + std::string(_PyUnicode_AsString(res)) + "\"");
 
     //Return
     return std::string(_PyUnicode_AsString(res));
