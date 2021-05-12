@@ -7,6 +7,7 @@ class HomeNet;
 #include "hnconfig/hnconfig.h"
 #include "hndrivers/hndrivers.h"
 #include "hnpython/hnpython.h"
+#include "hnhistory/hnhistory.h"
 
 #include <string>
 
@@ -22,11 +23,19 @@ public:
 
     friend class HNDrivers;
 private:
+    int                 _runlevel;
+
     HNConfig*           _config;
 
     HNPython*           _py;
 
     HNDrivers*          _drivers;
+
+    HNHistory*          _history;
+
+
+    //Private functions
+    void                p_cleanPointers();
 };
 
 #endif // HOMENET_H

@@ -36,6 +36,9 @@ public:
     }
 
     size_t                      getBlockCount(){return this->_blocks.size();}
+
+    //setters
+    void                        append(std::string e){this->_blocks.push_back(e);}
 private:
     std::vector<std::string>    _blocks;
 };

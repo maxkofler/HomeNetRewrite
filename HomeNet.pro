@@ -10,9 +10,12 @@ SOURCES += \
         homenet/hndrivers/fetchDrivers.cpp \
         homenet/hndrivers/hndriver/syncvalues.cpp \
         homenet/hndrivers/importDrivers.cpp \
+        homenet/hnhistory/hnhistory.cpp \
+        homenet/hnhistory/valuehistory.cpp \
         log/log.cpp \
         log/logfunction.cpp \
         main.cpp \
+        parser/appendToFile.cpp \
         parser/loadfile.cpp \
         parser/parseblock.cpp \
         parser/parser.cpp \
@@ -35,6 +38,7 @@ SOURCES += \
         #weathersens/wssyncloop.cpp
 
 HEADERS += \
+        homenet/hnhistory/hnhistory.h \
         log/log.h \
         log/logfunction.h \
         parser/parseblock.h \

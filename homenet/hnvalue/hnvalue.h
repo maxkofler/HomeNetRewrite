@@ -7,6 +7,7 @@ class HNValue;
 #include "parser/parseblock.h"
 
 #include <string>
+#include <chrono>
 
 class HNValue
 {
@@ -34,8 +35,13 @@ public:
     void                        setValueFromPython(char type, std::string value)  {
                                                                                 this->_vtype = type;
                                                                                 this->_value = value;
+                                                                                this->_queryTime = time(nullptr);
                                                                                 this->_holdsValue = true;
                                                                             }
+
+    char                        valueType(){return this->_vtype;}
+    std::string                 value(){return this->_value;}
+    time_t                      queryTime(){return this->_queryTime;}
 
     std::string                 toString();
     std::string                 toTransmissionString();
@@ -52,6 +58,8 @@ private:
 
     uint                            _lId;       //The local ID inside the driver
     uint                            _gId;       //The global ID inside Weathersens
+
+    std::time_t                     _queryTime; //The timestamp this value was set
 };
 
 #endif // WSVALUE_H

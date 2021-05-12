@@ -28,6 +28,14 @@ public:
      */
     ParseBlock                  getNext();
 
+    /**
+     * @brief Appends the provided Block to the end of the specified file
+     * @param path              The path to the file to append
+     * @param entry             The entry to insert
+     * @return
+     */
+    bool                        appendToFile(std::string path, ParseBlock entry);
+
 private:
     std::string                 _curPath;
     std::ifstream               _curFile;
