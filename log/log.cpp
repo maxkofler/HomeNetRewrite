@@ -5,6 +5,11 @@
 
 Log::Log(uint level){
     this->_curLevel = level;
+    this->_outfile.open("hnlog.txt", std::ios::out);
+}
+
+Log::~Log(){
+    this->_outfile.close();
 }
 
 void Log::log(std::string text, uint level){
@@ -13,6 +18,9 @@ void Log::log(std::string text, uint level){
         std::cout << "(" << level << ")";
         std::cout << "[" << this->_functionStack.back()->name() << "]>>" << text << std::endl;
         std::cout.flush();
+
+        this->_outfile << "(" << level << ")";
+        this->_outfile << "[" << this->_functionStack.back()->name() << "]>>" << text << std::endl;
     }
 }
 

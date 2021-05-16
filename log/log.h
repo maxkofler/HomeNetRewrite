@@ -4,26 +4,28 @@
 class Log;
 #include "logfunction.h"
 
-extern Log* hlog;
+extern Log hlog;
 
 #define FUN() LogFunction logfun(__PRETTY_FUNCTION__, hlog)
 
-#define LOGP(text) hlog->log(text, Log::P);
-#define LOGE(text) hlog->log(text, Log::E);
-#define LOGW(text) hlog->log(text, Log::W);
-#define LOGI(text) hlog->log(text, Log::I);
-#define LOGD(text) hlog->log(text, Log::D);
-#define LOGF(text) hlog->log(text, Log::F);
-#define LOG(text, level) hlog->log(text, level);
-#define FLUSH() hlog->flush();
+#define LOGP(text) hlog.log(text, Log::P);
+#define LOGE(text) hlog.log(text, Log::E);
+#define LOGW(text) hlog.log(text, Log::W);
+#define LOGI(text) hlog.log(text, Log::I);
+#define LOGD(text) hlog.log(text, Log::D);
+#define LOGF(text) hlog.log(text, Log::F);
+#define LOG(text, level) hlog.log(text, level);
+#define FLUSH() hlog.flush();
 
 #include <vector>
 #include <string>
+#include <fstream>
 
 class Log
 {
 public:
     Log(uint level);
+    ~Log();
 
     const static int P = 0;
     const static int E = 1;
@@ -43,5 +45,7 @@ public:
 private:
     std::vector<LogFunction* >  _functionStack;
     uint                        _curLevel;
+
+    std::fstream                _outfile;
 };
 #endif // LOG_H

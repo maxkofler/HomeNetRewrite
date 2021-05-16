@@ -7,7 +7,7 @@ class LogFunction;
 
 class LogFunction{
 public:
-    LogFunction(const char* name, Log* log);
+    LogFunction(const char* name, Log& log);
     ~LogFunction();
 
     const char*     name(){return this->_name;}

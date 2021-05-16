@@ -11,7 +11,7 @@
 #include "log/log.h"
 #include "homenet/homenet.h"
 
-Log* hlog;
+Log hlog(Log::F);
 HomeNet* hn;
 
 void sighandler(int s){
@@ -21,7 +21,7 @@ void sighandler(int s){
 
 int main(int argc, char** argv)
 {
-    hlog = new Log(Log::F);
+    //hlog = new Log(Log::F);
     FUN();
     {
         //Plot some info about the program
