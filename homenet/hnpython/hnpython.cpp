@@ -3,6 +3,7 @@
 HNPython::HNPython(){
     FUN();
     Py_Initialize();
+    PyRun_SimpleString("import sys");
     LOGI("Started python!");
 }
 
@@ -17,17 +18,17 @@ void HNPython::restartPython(){
     FUN();
     Py_Finalize();
     Py_Initialize();
+    PyRun_SimpleString("import sys");
     LOGI("Restarted python!");
 }
 
 void HNPython::addPythonPath(std::string path){
     FUN();
-    QString pPath;
-    pPath = pPath.fromStdString(path);
-    PySys_SetPath(pPath.toStdWString().c_str());
 
-    std::string s (pPath.toStdString());
-    LOGD("Added \"" + s + "\" from \"" + path + "\" to python-PATH");
+    std::string pPath = "sys.path.append(\"" + path + "\")";
+    PyRun_SimpleString(pPath.c_str());
+
+    LOGD("Added \"" + pPath + "\" from \"" + path + "\" to python-PATH");
 }
 
 PyModule HNPython::loadModule(std::string name){
