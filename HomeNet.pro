@@ -1,6 +1,6 @@
 QMAKE_CXXFLAGS += -std=c++17 -I/usr/include/python3.9
 QMAKE_LINK += -lpython3.9
-LIBS += -stdc++fs
+LIBS += -lstdc++fs
 TEMPLATE = app
 CONFIG += c++17
 CONFIG -= app_bundle
