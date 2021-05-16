@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <signal.h>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -11,6 +12,12 @@
 #include "homenet/homenet.h"
 
 Log* hlog;
+HomeNet* hn;
+
+void sighandler(int s){
+    LOGI("Catched signal: " + std::to_string(s));
+    hn->stopSyncLoop();
+}
 
 int main(int argc, char** argv)
 {
@@ -26,13 +33,18 @@ int main(int argc, char** argv)
             LOGI("Starting HomeNet with args \"" + out + "\"...");
         }
 
-        HomeNet hn("/etc/homenet/hnconfig.conf");
+        hn = new HomeNet("/etc/homenet/hnconfig.conf");
 
-        hn.sync();
+        signal(SIGINT, sighandler);
 
-        LOGI("Overview:\n" + hn.getOverview());
+        hn->startSyncLoop();
 
-        LOGI("Quiting...");
+        while(hn->isSyncLoopRunning())
+            sleep(1);
+
+        LOGI("Exiting...");
+
+        delete hn;
     }
 
     LOGI("Bye!");

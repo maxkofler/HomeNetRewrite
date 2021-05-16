@@ -12,6 +12,7 @@ SOURCES += \
         homenet/hndrivers/importDrivers.cpp \
         homenet/hnhistory/hnhistory.cpp \
         homenet/hnhistory/valuehistory.cpp \
+        homenet/syncloop.cpp \
         log/log.cpp \
         log/logfunction.cpp \
         main.cpp \

@@ -2,6 +2,7 @@
 
 HomeNet::HomeNet(std::string configPath){
     FUN();
+    this->_runSyncLoop = false;
     this->_runlevel = -1;
     this->_config = new HNConfig(configPath);
     this->_py = new HNPython();
@@ -11,17 +12,20 @@ HomeNet::HomeNet(std::string configPath){
 
     //Parse the neccesary configs if these fail, homenet will quit
     {
-        std::string conf;
 
-        conf = this->_config->getConfig("historydir");
+        std::string confHistoryDir = this->_config->getConfig("historydir");
+        std::string confSyncLoopSleep = this->_config->getConfig("synctime");
 
-        if (conf.empty()){
+
+        if (confHistoryDir.empty() || confSyncLoopSleep.empty()){
             LOGE("Could not find one or more NECESSARY configs!");
             this->p_cleanPointers();
             exit(-1);
         }
 
-        this->_history = new HNHistory(conf);
+        this->_history = new HNHistory(confHistoryDir);
+
+        this->_syncloop_sleeptime = std::stoi(confSyncLoopSleep);
 
         this->_runlevel = 1;
     }
@@ -29,12 +33,19 @@ HomeNet::HomeNet(std::string configPath){
 
 HomeNet::~HomeNet(){
     FUN();
+    this->stopSyncLoop();
     this->p_cleanPointers();
 }
 
 bool HomeNet::sync(){
     FUN();
-    return this->_drivers->sync(*this->_history);
+    bool ret;
+    LOGD("Locking syncing mutex...");
+    this->_m_syncing.lock();
+    ret =  this->_drivers->sync(*this->_history);
+    LOGD("Unlocking syncing mutex...");
+    this->_m_syncing.unlock();
+    return ret;
 }
 
 std::string HomeNet::getOverview(){

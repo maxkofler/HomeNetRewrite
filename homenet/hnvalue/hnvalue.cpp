@@ -26,10 +26,10 @@ bool HNValue::fromParsedBlock(ParseBlock block, uint lId, uint gId){
 }
 
 std::string HNValue::toString(){
-    std::string ret = "gId: [" + std::to_string(this->_gId) + "] lId: [" + std::to_string(this->_lId);
-    ret += "] name:[" + this->_name + "] displayType:[" + this->_dtype;
-    ret += "] valueType:[";
+    std::string ret = "gId: [" + std::to_string(this->_gId) + "]\t lId: [" + std::to_string(this->_lId);
+    ret += "]\t displayType:[" + this->_dtype;
+    ret += "]\t valueType:[";
     ret.append(1, this->_vtype);
-    ret += "] value:[" + this->_value + "] unit:[" + this->_unit + "]";
+    ret += "]\t value:[" + this->_value + "]\t unit:[" + this->_unit + "]\t name:[" + this->_name + "]";
     return ret;
 }

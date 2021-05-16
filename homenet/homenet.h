@@ -10,6 +10,8 @@ class HomeNet;
 #include "hnhistory/hnhistory.h"
 
 #include <string>
+#include <mutex>
+#include <thread>
 
 class HomeNet
 {
@@ -18,6 +20,11 @@ public:
     ~HomeNet();
 
     bool                sync();
+
+    bool                startSyncLoop();
+    bool                stopSyncLoop();
+
+    bool                isSyncLoopRunning();
 
     std::string         getOverview();
 
@@ -36,6 +43,14 @@ private:
 
     //Private functions
     void                p_cleanPointers();
+
+    //Syncloop
+    int                 _syncloop_sleeptime;
+    std::mutex          _m_syncing;
+    bool                _runSyncLoop;
+    std::mutex          _m_runSyncLoop;
+    std::thread*        _t_syncLoop;
+    void                p_syncLoop();
 };
 
 #endif // HOMENET_H
