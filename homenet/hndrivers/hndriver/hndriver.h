@@ -6,6 +6,7 @@ class HNDriver;
 #include "log/log.h"
 #include "homenet/hnvalue/hnvalue.h"
 #include "homenet/hnpython/hnpython.h"
+#include "homenet/hnhistory/hnhistory.h"
 #include "parser/parseblock.h"
 
 #include <vector>
@@ -22,7 +23,7 @@ public:
 
     void                            setPyModule(PyModule mod){FUN(); this->_pyModule = mod; this->_moduleLoaded=true;}
 
-    bool                            syncValues(std::string workDir);
+    bool                            syncValues(std::string workDir, HNHistory& history);
 
     std::string                     getName(){return this->_name;}
     std::string                     getOverview();

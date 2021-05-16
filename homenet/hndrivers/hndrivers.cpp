@@ -44,10 +44,10 @@ bool HNDrivers::start(HNConfig* config, HNPython* pyInst){
     return true;
 }
 
-bool HNDrivers::sync(){
+bool HNDrivers::sync(HNHistory& history){
     bool ret = true;
     for (auto& i : this->_drivers){
-        ret = ret && i.syncValues(this->_workDir);
+        ret = ret && i.syncValues(this->_workDir, history);
     }
     return ret;
 }

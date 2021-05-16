@@ -1,6 +1,7 @@
 #include "homenet.h"
 
 HomeNet::HomeNet(std::string configPath){
+    FUN();
     this->_runlevel = -1;
     this->_config = new HNConfig(configPath);
     this->_py = new HNPython();
@@ -32,16 +33,19 @@ HomeNet::~HomeNet(){
 }
 
 bool HomeNet::sync(){
-    return this->_drivers->sync();
+    FUN();
+    return this->_drivers->sync(*this->_history);
 }
 
 std::string HomeNet::getOverview(){
+    FUN();
     return this->_drivers->getOverview();
 }
 
 
 void HomeNet::p_cleanPointers(){
     FUN();
+    LOGD("Deleting objects...");
     if (this->_runlevel >= 0){
         delete this->_config;
         delete this->_py;
@@ -49,7 +53,6 @@ void HomeNet::p_cleanPointers(){
     }
 
     if (this->_runlevel >= 1){
-        LOGE("Deleting history!");
         delete this->_history;
     }
 }

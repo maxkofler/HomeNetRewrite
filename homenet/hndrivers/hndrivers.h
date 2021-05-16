@@ -7,6 +7,7 @@ class HNDrivers;
 #include "hndriver/hndriver.h"
 #include "homenet/hnconfig/hnconfig.h"
 #include "homenet/hnpython/hnpython.h"
+#include "homenet/hnhistory/hnhistory.h"
 #include "parser/parser.h"
 
 #include <vector>
@@ -26,9 +27,10 @@ public:
 
     /**
      * @brief Syncs all driver values with the python modules
+     * @param history           A reference to the history module
      * @return
      */
-    bool                        sync();
+    bool                        sync(HNHistory& history);
 
     /**
      * @brief Returns a string containing a driver overview

@@ -2,7 +2,7 @@
 
 #include <filesystem>
 
-bool HNDriver::syncValues(std::string workDir){
+bool HNDriver::syncValues(std::string workDir, HNHistory& history){
     if (!this->p_resumeDriver()){
         LOGE("Error resuming driver, not calling values!");
         return false;
@@ -12,6 +12,7 @@ bool HNDriver::syncValues(std::string workDir){
     for (auto& i : this->_values){
         buf = this->p_callValue(i, workDir);
         i.setValueFromPython(buf[0], buf.substr(1, buf.size()-1));
+        history.createValueEntry(this->_name, i);
     }
 
     this->p_pauseDriver();
