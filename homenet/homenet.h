@@ -13,44 +13,90 @@ class HomeNet;
 #include <mutex>
 #include <thread>
 
-class HomeNet
-{
+class HomeNet{
+
 public:
+    /**
+     * @brief HomeNet
+     * @param configPath        The path to the config file used in HomeNet
+     */
     HomeNet(std::string configPath);
     ~HomeNet();
+    /**
+     * @brief   Calls in the values from the drivers
+     * @return
+     */
+    bool                        sync();
 
-    bool                sync();
+    /**
+     * @brief   Starts the loop in that HomeNet constantly syncs the values in a new thread
+     * @return
+     */
+    bool                        startSyncLoop();
 
-    bool                startSyncLoop();
-    bool                stopSyncLoop();
+    /**
+     * @brief   Stops the loop in that HomeNet syncs the values, blocks for some time
+     * @return
+     */
+    bool                        stopSyncLoop();
 
-    bool                isSyncLoopRunning();
+    /**
+     * @brief   Returns whether the sync loop is currently running or not
+     * @return
+     */
+    bool                        isSyncLoopRunning();
 
-    std::string         getOverview();
+    /**
+     * @brief   Returns a string containing an overview of the current state of HomeNet
+     * @return
+     */
+    std::string                 getOverview();
 
-    friend class HNDrivers;
+
 private:
-    int                 _runlevel;
+    /**
+     * @brief _runlevel         The runlevel HomeNet is currently in
+     */
+    int                         _runlevel;
 
-    HNConfig*           _config;
+    /**
+     * @brief _config           Represents the config file used to fetch settings for HomeNet
+     */
+    HNConfig*                   _config;
 
-    HNPython*           _py;
+    /**
+     * @brief _py               The wrapper for the Python - api
+     */
+    HNPython*                   _py;
 
-    HNDrivers*          _drivers;
+    /**
+     * @brief _drivers          Contains all the drivers and their values
+     */
+    HNDrivers*                  _drivers;
 
-    HNHistory*          _history;
+    /**
+     * @brief _history          Util for handling history entries
+     */
+    HNHistory*                  _history;
 
 
     //Private functions
-    void                p_cleanPointers();
+    void                        p_cleanPointers();
 
     //Syncloop
-    int                 _syncloop_sleeptime;
-    std::mutex          _m_syncing;
-    bool                _runSyncLoop;
-    std::mutex          _m_runSyncLoop;
-    std::thread*        _t_syncLoop;
-    void                p_syncLoop();
+    //The time that passes between syncs
+    int                         _syncloop_sleeptime;
+    //A mutex locking during syncing
+    std::mutex                  _m_syncing;
+    //Whether the syncloop should keep running
+    bool                        _runSyncLoop;
+    //A mutex to protect _runSyncLoop
+    std::mutex                  _m_runSyncLoop;
+    //The thread in that the syncloop is running in
+    std::thread*                _t_syncLoop;
+
+    //The function that runs the sync loop
+    void                        p_syncLoop();
 };
 
 #endif // HOMENET_H
