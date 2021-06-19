@@ -11,7 +11,7 @@
 #include "log/log.h"
 #include "homenet/homenet.h"
 
-Log hlog(Log::F, true);
+Log hlog(Log::I, true);
 HomeNet* hn;
 
 void sighandler(int s){

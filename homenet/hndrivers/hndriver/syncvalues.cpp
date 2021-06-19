@@ -56,7 +56,7 @@ std::string HNDriver::p_callValue(HNValue &v, std::string workDir){
         return std::string("");
     }
 
-    std::string wp = workDir + this->_name + "/" + v.name();
+    std::string wp = workDir + "/" + this->_name + "/" + v.name();
 
     LOGD("Working directory for value " + v.name() + ": " + wp);
     if (!std::filesystem::create_directories(wp)){
