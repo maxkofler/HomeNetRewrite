@@ -31,6 +31,7 @@ HomeNet::HomeNet(std::string configPath){
     }
     {
         this->_networking = new HNNetworking();
+        this->_networking->startListening(8080);
         this->_runlevel = 2;
     }
 }

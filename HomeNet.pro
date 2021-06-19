@@ -14,10 +14,11 @@ SOURCES += \
         homenet/hndrivers/importDrivers.cpp \
         homenet/hnhistory/hnhistory.cpp \
         homenet/hnhistory/valuehistory.cpp \
-        homenet/hnnetworking/hnnetworking.cpp \
-        homenet/hnnetworking/private_slots/hnnetworking_p_sl_newConnection.cpp \
-        homenet/hnnetworking/private_slots/hnnetworking_p_sl_sock_readyRead.cpp \
-        homenet/hnnetworking/private_slots/hnnetworking_p_sl_sock_stateChanged.cpp \
+        homenet/hnnetworking/hnclient/hnclient.cpp \
+        homenet/hnnetworking/hnclient/hnclient_listenRead.cpp \
+        homenet/hnnetworking/hnnetworking/hnnetworking.cpp \
+        homenet/hnnetworking/hnnetworking/hnnetworking_p_listen.cpp \
+        homenet/hnnetworking/hnnetworking/hnnetworking_startListening.cpp \
         homenet/syncloop.cpp \
         log/log.cpp \
         log/logfunction.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
 
 HEADERS += \
         homenet/hnhistory/hnhistory.h \
+        homenet/hnnetworking/hnclient.h \
         homenet/hnnetworking/hnnetworking.h \
         log/log.h \
         log/logfunction.h \

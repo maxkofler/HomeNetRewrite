@@ -1,27 +1,31 @@
 #ifndef HNNETWORKING_H
 #define HNNETWORKING_H
 
+class HNNetworking;
+
 #include <QTcpServer>
-#include <QTcpSocket>
 #include <QObject>
 
 #include <vector>
 
 #include "log/log.h"
+#include "hnclient.h"
 
 class HNNetworking : public QObject {
 Q_OBJECT
 public:
     HNNetworking();
 
-private slots:
-    void                                    p_sl_newConnection();
-    void                                    p_sl_sock_stateChanged(QAbstractSocket::SocketState socketState);
-    void                                    p_sl_sock_readyRead();
+    void                                    startListening(int port);
 
+    friend class                            HNClient;
 private:
     QTcpServer*                             _server;
-    QList<QTcpSocket*>                      _sockets;
+    QList<HNClient*>                        _clients;
+
+    std::thread*                            _t_listen;
+    bool                                    _listen;
+    void                                    p_listen();
 };
 
 #endif // HNNETWORKING_H
