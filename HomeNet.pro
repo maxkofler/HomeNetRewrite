@@ -5,6 +5,8 @@ TEMPLATE = app
 CONFIG += c++17
 CONFIG -= app_bundle
 CONFIG += qt
+QT += network
+QT += core
 
 SOURCES += \
         homenet/hndrivers/fetchDrivers.cpp \
@@ -12,6 +14,10 @@ SOURCES += \
         homenet/hndrivers/importDrivers.cpp \
         homenet/hnhistory/hnhistory.cpp \
         homenet/hnhistory/valuehistory.cpp \
+        homenet/hnnetworking/hnnetworking.cpp \
+        homenet/hnnetworking/private_slots/hnnetworking_p_sl_newConnection.cpp \
+        homenet/hnnetworking/private_slots/hnnetworking_p_sl_sock_readyRead.cpp \
+        homenet/hnnetworking/private_slots/hnnetworking_p_sl_sock_stateChanged.cpp \
         homenet/syncloop.cpp \
         log/log.cpp \
         log/logfunction.cpp \
@@ -40,6 +46,7 @@ SOURCES += \
 
 HEADERS += \
         homenet/hnhistory/hnhistory.h \
+        homenet/hnnetworking/hnnetworking.h \
         log/log.h \
         log/logfunction.h \
         parser/parseblock.h \

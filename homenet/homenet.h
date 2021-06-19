@@ -8,13 +8,15 @@ class HomeNet;
 #include "hndrivers/hndrivers.h"
 #include "hnpython/hnpython.h"
 #include "hnhistory/hnhistory.h"
+#include "hnnetworking/hnnetworking.h"
 
 #include <string>
 #include <mutex>
 #include <thread>
+#include <QObject>
 
-class HomeNet{
-
+class HomeNet : public QObject{
+    Q_OBJECT
 public:
     /**
      * @brief HomeNet
@@ -52,6 +54,8 @@ public:
      */
     std::string                 getOverview();
 
+signals:
+    void                        synced();
 
 private:
     /**
@@ -78,6 +82,12 @@ private:
      * @brief _history          Util for handling history entries
      */
     HNHistory*                  _history;
+
+    /**
+     * @brief _networking       Submodule to handle incoming networking connections
+     *                          and value queries
+     */
+    HNNetworking*               _networking;
 
 
     //Private functions

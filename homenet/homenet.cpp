@@ -29,6 +29,10 @@ HomeNet::HomeNet(std::string configPath){
 
         this->_runlevel = 1;
     }
+    {
+        this->_networking = new HNNetworking();
+        this->_runlevel = 2;
+    }
 }
 
 HomeNet::~HomeNet(){
@@ -45,6 +49,7 @@ bool HomeNet::sync(){
     ret =  this->_drivers->sync(*this->_history);
     LOGD("Unlocking syncing mutex...");
     this->_m_syncing.unlock();
+    emit synced();
     return ret;
 }
 
@@ -61,6 +66,7 @@ void HomeNet::p_cleanPointers(){
         delete this->_config;
         delete this->_py;
         delete this->_drivers;
+        delete this->_networking;
     }
 
     if (this->_runlevel >= 1){

@@ -3,6 +3,7 @@
 #include <filesystem>
 
 bool HNDriver::syncValues(std::string workDir, HNHistory& history){
+    FUN();
     if (!this->p_resumeDriver()){
         LOGE("Error resuming driver, not calling values!");
         return false;
@@ -21,6 +22,7 @@ bool HNDriver::syncValues(std::string workDir, HNHistory& history){
 }
 
 bool HNDriver::p_resumeDriver(){
+    FUN();
     if (!this->_moduleLoaded){
         LOGE("Python module is not loaded!");
         return false;
@@ -34,6 +36,7 @@ bool HNDriver::p_resumeDriver(){
 }
 
 bool HNDriver::p_pauseDriver(){
+    FUN();
     if (!this->_moduleLoaded){
         LOGE("Python module is not loaded!");
         return false;
@@ -47,6 +50,7 @@ bool HNDriver::p_pauseDriver(){
 }
 
 std::string HNDriver::p_callValue(HNValue &v, std::string workDir){
+    FUN();
     if (!this->_moduleLoaded){
         LOGE("Python module is not loaded!");
         return std::string("");
