@@ -1,7 +1,6 @@
-include_directories(include ../Log/include ${PYTHON_INCLUDE_DIRS})
+include_directories(include ${PROJECT_SOURCE_DIR}/Log/include ${PYTHON_INCLUDE_DIRS})
 
 find_package(PythonLibs REQUIRED)
-find_package(Qt5 COMPONENTS Core REQUIRED)
 
 set (HEADERS
     include/hnpython.h
@@ -21,4 +20,4 @@ set (SOURCES
 
 add_library(hnpython ${SOURCES} ${HEADERS})
 
-target_link_libraries(hnpython ${PYTHON_LIBRARIES} Qt5::Core)
+target_link_libraries(hnpython ${PYTHON_LIBRARIES})
