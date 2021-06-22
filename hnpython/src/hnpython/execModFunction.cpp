@@ -9,7 +9,7 @@ std::string HNPython::execModFunction(std::string modName, std::string funName, 
     }
 
     if (this->_modules.count(modName) <= 0){
-        LOGE("Could not find the specifie module as loaded: \"" + modName + "\"!");
+        LOGE("Could not find the specified module as loaded: \"" + modName + "\"!");
         return "ES2";
     }
 
