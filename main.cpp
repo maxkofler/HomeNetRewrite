@@ -1,24 +1,25 @@
 #include <iostream>
+#include <fstream>
 
 #include "log.h"
 
-#include "hnpython.h"
+#include "hnparser.h"
 
 Log* hlog;
 
 int main()
 {
-    hlog = new Log(Log::D, false);
+    hlog = new Log(Log::F, false);
 
-    HNPython py;
-    py.startPython(true);
-    py.appendPath("./");
-    py.loadModule("main");
+    HNParser parser;
 
-    PyObject* args;
-    args = PyTuple_New(0);
-    //PyTuple_SetItem(args, 0, 0);
-    py.execModFunction("main", "start", args);
+    std::ifstream file;
+    file.open("/etc/homenet/hnconfig.conf");
+    if (file.is_open()){
+        parser.parseStream(file);           
+    }else
+        LOGE("File was not found!");
+    
 
     FUN();
     LOGD("Hello");
