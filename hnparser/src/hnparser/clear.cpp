@@ -1,14 +1,13 @@
 #include "hnparser.h"
 
-HNParser::HNParser(){
-    FUN();
-}
-
-HNParser::~HNParser(){
+void HNParser::clear(){
     FUN();
 
-    //Delete all lines
+    LOGD("Clearing parsed cache");
+
     for (auto* i : this->_lines){
         delete i;
     }
+
+    this->_lines.clear();
 }

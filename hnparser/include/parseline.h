@@ -23,6 +23,13 @@ public:
      */
     int                                     parseFromLine(std::string line, char opener, char closer);
 
+    /**
+     * @brief   Converts this object to a line to write to something that can be parsed later
+     * @param   opener                      The opening char of a block (eg. '<')
+     * @param   closer                      The closing char of a block (eg. '>')
+     * @return                              The string containing the string to write to the stream
+     */
+    std::string                             toParseLine(char opener, char closer);
 
     std::vector<std::string>                getBlocks(){return this->_blocks;}
 

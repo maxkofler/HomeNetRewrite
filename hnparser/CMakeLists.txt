@@ -8,9 +8,13 @@ set (HEADERS
 set (SOURCES
     src/hnparser/hnparser.cpp
     src/hnparser/parseStream.cpp
+    src/hnparser/clear.cpp
+    src/hnparser/append.cpp
+    src/hnparser/writeToStream.cpp
 
     src/parseline/parseline.cpp
     src/parseline/parseFromLine.cpp
+    src/parseline/toParseLine.cpp
     )
 
 add_library(hnparser ${SOURCES} ${HEADERS})

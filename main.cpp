@@ -19,7 +19,13 @@ int main()
         parser.parseStream(file);           
     }else
         LOGE("File was not found!");
+    file.close();
     
+    std::ofstream outFile;
+    outFile.open("gaming.conf");
+    parser.writeToStream(outFile);
+
+    outFile.close();
 
     FUN();
     LOGD("Hello");
