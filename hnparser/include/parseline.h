@@ -33,6 +33,8 @@ public:
 
     std::vector<std::string>                getBlocks(){return this->_blocks;}
 
+    std::string                             getBlock(size_t pos){return this->_blocks.at(pos);}
+
 private:
     std::vector<std::string>                _blocks;
 
