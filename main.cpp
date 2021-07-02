@@ -11,7 +11,7 @@ Log* hlog;
 
 int main()
 {
-    hlog = new Log(Log::F, false);
+    hlog = new Log(Log::D, false);
     FUN();
 
 
@@ -20,13 +20,19 @@ int main()
     config.parse("/etc/homenet/hnconfig.conf");
 
     HNPython python;
-    python.startPython(false);
+    python.startPython();
 
     HNDrivers drivers;
     if (!drivers.init(config, &python)){
         LOGE("Failed in initializing drivers!");
     }else{
         LOGI("Initialized drivers");
+    }
+
+    if(!drivers.loadDrivers()){
+        LOGE("Failed loading drivers!");
+    }else{
+        LOGI("Loaded drivers");
     }
 
     return 0;

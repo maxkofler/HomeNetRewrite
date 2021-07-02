@@ -13,6 +13,8 @@ set (HEADERS
 set (SOURCES
     src/hndrivers.cpp
     src/init.cpp
+    src/loadDrivers.cpp
+    src/p_parseDriverlist.cpp
     )
 
 add_library(hndrivers ${SOURCES} ${HEADERS})

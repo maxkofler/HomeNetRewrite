@@ -54,6 +54,11 @@ public:
      */
     std::string                             execModFunction(std::string modName, std::string funName, PyObject* args);
 
+    /**
+     * @brief   Returns if the Python interpreter is running
+     **/
+    bool                                    isRunning(){return this->_py_running;}
+    
 private:
     bool                                    _py_running;
 

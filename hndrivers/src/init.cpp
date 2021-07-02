@@ -5,6 +5,8 @@
 bool HNDrivers::init(HNConfig& config, HNPython* pyInst){
     FUN();
 
+    this->_rl_initialized = false;
+
     std::string initDRstr = "Initializing HNDrivers: ";
 
     {   //Parse configs
@@ -38,12 +40,15 @@ bool HNDrivers::init(HNConfig& config, HNPython* pyInst){
     }
 
     {   //Check Python instance
-        LOGI(initDRstr + "Checking Python instance");
+        LOGI(initDRstr + "Checking for HNPython instance");
         if (pyInst == nullptr){
             LOGE(initDRstr + "Error in getting Python instance: not existing");
             return false;
         }
+
+        this->_pyInst = pyInst;
     }
 
+    this->_rl_initialized = true;
     return true;
 }
