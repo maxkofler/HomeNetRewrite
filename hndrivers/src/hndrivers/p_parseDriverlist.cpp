@@ -13,7 +13,9 @@ bool HNDrivers::p_parseDriverlist(){
     size_t driversParsed = 0;
     size_t valuesParsed = 0;
 
-    bool cur_driver = false;    //If currently a driver is parsing or if no driver tag is opened
+
+    bool driver_open = false;    //If currently a driver is parsing or if no driver tag is opened
+    HNDriver* curDriver;
     for (auto line : lines){
 
         //Check if the line is long enough
@@ -23,28 +25,36 @@ bool HNDrivers::p_parseDriverlist(){
         }
 
         if (line.getBlock(0) == "driver"){
-            if (cur_driver == true){
+            if (driver_open == true){
                 LOGE("Parser error: Started a new driver when one was already open!");
                 return false;
             }
 
-            cur_driver = true;
+            curDriver = new HNDriver();
+            driver_open = true;
 
             //@TODO Parse driver name
             //<driver><driver_name>
         }
 
         else if (line.getBlock(0) == "/driver"){
-            if (cur_driver == false){
+            if (driver_open == false){
                 LOGE("Parser error: Ended a driver without having one started!");
                 return false;
             }
 
             driversParsed++;
-            cur_driver = false;
+            this->_drivers.push_back(curDriver);
+            curDriver = nullptr;
+            driver_open = false;
         }
 
         else if (line.getBlock(0) == "value"){
+            if (!driver_open){
+                LOGE("Parser error: Defined value outside of a driver!");
+                return false;
+            }
+
             if (line.size() != 4){
                 LOGW("Parser error: Value line \"" + line.toParseLine('<', '>') + "\" has wrong length for parsing, ignoring!");
                 continue;
@@ -52,6 +62,14 @@ bool HNDrivers::p_parseDriverlist(){
 
             //@TODO parse value line
             //<value><value_name><value_display_type><value_unit>
+
+            hnvalue_t newValue;
+
+            newValue.name = line.getBlock(1);
+            newValue.displaytype = line.getBlock(2);
+            newValue.unit = line.getBlock(3);
+
+            curDriver->addValue(newValue);
 
             valuesParsed++;
         }

@@ -11,7 +11,7 @@ Log* hlog;
 
 int main()
 {
-    hlog = new Log(Log::F, false);
+    hlog = new Log(Log::F, true);
     FUN();
 
 

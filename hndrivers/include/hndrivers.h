@@ -4,9 +4,11 @@
 class HNDrivers;
 
 #include <string>
+#include <vector>
 
 #include "log.h"
 
+#include "hndriver.h"
 #include "hnconfig.h"
 #include "hnparser.h"
 #include "hnpython.h"
@@ -31,6 +33,8 @@ public:
 private:
     HNParser                                _driverlistParser;
     HNPython*                               _pyInst;
+
+    std::vector<HNDriver*>                  _drivers;
 
     std::string                             _driverlistPath;
     std::string                             _driversPath;

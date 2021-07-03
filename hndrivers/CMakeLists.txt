@@ -8,13 +8,17 @@ include_directories(${PROJECT_SOURCE_DIR}/hnpython/include ${PYTHON_INCLUDE_DIRS
 
 set (HEADERS
     include/hndrivers.h
+    include/hndriver.h
     )
 
 set (SOURCES
-    src/hndrivers.cpp
-    src/init.cpp
-    src/loadDrivers.cpp
-    src/p_parseDriverlist.cpp
+    src/hndrivers/hndrivers.cpp
+    src/hndrivers/init.cpp
+    src/hndrivers/loadDrivers.cpp
+    src/hndrivers/p_parseDriverlist.cpp
+
+    src/hndriver/hndriver.cpp
+    src/hndriver/addValue.cpp
     )
 
 add_library(hndrivers ${SOURCES} ${HEADERS})
