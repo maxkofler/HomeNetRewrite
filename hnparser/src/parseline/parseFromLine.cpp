@@ -1,6 +1,6 @@
 #include "parseline.h"
 
-int Parseline::parseFromLine(std::string line, char opener, char closer){
+int Parseline::parseFromLine(std::string line, char opener, char closer, bool acceptEmpty){
     FUN();
 
     //Clear the current vector
@@ -15,7 +15,7 @@ int Parseline::parseFromLine(std::string line, char opener, char closer){
 
         //If a block was found
         if (pos1 != std::string::npos && pos2 != std::string::npos){
-            if (!line.substr(pos1+1, pos2-pos1-1).empty()){
+            if (!line.substr(pos1+1, pos2-pos1-1).empty() || acceptEmpty){
                 this->_blocks.push_back(line.substr(pos1+1, pos2-pos1-1));
                 LOGF("Adding block \"" + this->_blocks.back() + "\"");
             }

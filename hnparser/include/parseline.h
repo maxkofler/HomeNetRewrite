@@ -21,7 +21,7 @@ public:
      * @param   closer                      The closing char of a block (eg. '>')
      * @return                              The amount of blocks parsed
      */
-    int                                     parseFromLine(std::string line, char opener, char closer);
+    int                                     parseFromLine(std::string line, char opener, char closer, bool acceptEmpty = false);
 
     /**
      * @brief   Converts this object to a line to write to something that can be parsed later
@@ -30,6 +30,8 @@ public:
      * @return                              The string containing the string to write to the stream
      */
     std::string                             toParseLine(char opener, char closer);
+
+    size_t                                  size(){return this->_blocks.size();}
 
     std::vector<std::string>                getBlocks(){return this->_blocks;}
 

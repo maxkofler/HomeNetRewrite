@@ -10,16 +10,14 @@ bool HNDrivers::init(HNConfig& config, HNPython* pyInst){
     std::string initDRstr = "Initializing HNDrivers: ";
 
     {   //Parse configs
-        LOGI(initDRstr + "fetching configs");
+        LOGI(initDRstr + "Fetching configs");
         this->_driverlistPath = config.getConfig("driverlist").back();
         this->_driversPath = config.getConfig("driverdir").back();
         this->_workdir = config.getConfig("workdir").back();
     }    
 
     {   //Init the driverlist parser
-        LOGI(initDRstr + "parsing driverlist");
-
-        HNParser _driverlistParser;
+        LOGI(initDRstr + "Preparsing driverlist");
 
         std::ifstream driverlist;
         driverlist.open(this->_driverlistPath);
@@ -30,11 +28,13 @@ bool HNDrivers::init(HNConfig& config, HNPython* pyInst){
             return false;
         }
 
-        if (_driverlistParser.parseStream(driverlist) <= 0){
-            LOGE(initDRstr + "Error in parsing driverlist file (empty?)");
+        if (this->_driverlistParser.parseStream(driverlist, true) <= 0){
+            LOGE(initDRstr + "Error in preparsing driverlist file (empty?)");
             driverlist.close();
             return false;
         }
+
+        LOGI("Preparsed " + std::to_string(this->_driverlistParser.size()) + " lines!");
 
         driverlist.close();
     }

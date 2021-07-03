@@ -21,7 +21,7 @@ public:
      * @param   instream                    The stream to parse
      * @return  The amount of lines parsed
      */
-    int                                     parseStream(std::istream& instream);
+    int                                     parseStream(std::istream& instream, bool acceptEmpty = false);
 
     /**
      * @brief   Clears all lines from cache
@@ -30,10 +30,9 @@ public:
 
     /**
      * @brief   Getter for all the lines
-     *          WARNING: the line instances are pointers that point to the REAL lines!!!
      * @return                              The vector of lines
      */
-    std::vector<Parseline*>                 getLines(){return this->_lines;}
+    std::vector<Parseline>                  getLines(){return this->_lines;}
 
     /**
      * @brief   Appends the provided line to the list of lines
@@ -48,8 +47,10 @@ public:
      */
     int                                     writeToStream(std::ostream& outstream);
 
+    size_t                                  size(){return this->_lines.size();}
+
 private:
-    std::vector<Parseline*>                 _lines;
+    std::vector<Parseline>                  _lines;
 };
 
 #endif

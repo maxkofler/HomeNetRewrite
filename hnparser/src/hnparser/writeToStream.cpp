@@ -9,9 +9,9 @@ int HNParser::writeToStream(std::ostream &outstream){
     }
 
     int linesWritten = 0;
-    for (auto* i : this->_lines){
-        outstream << i->toParseLine('<', '>') << std::endl;
-        LOGF("Written \"" + i->toParseLine('<', '>') + "\" to stream");
+    for (auto i : this->_lines){
+        outstream << i.toParseLine('<', '>') << std::endl;
+        LOGF("Written \"" + i.toParseLine('<', '>') + "\" to stream");
         linesWritten++;
     }
 

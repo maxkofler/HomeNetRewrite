@@ -5,9 +5,5 @@ void HNParser::clear(){
 
     LOGD("Clearing parsed cache");
 
-    for (auto* i : this->_lines){
-        delete i;
-    }
-
     this->_lines.clear();
 }

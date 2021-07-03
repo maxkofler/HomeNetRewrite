@@ -1,6 +1,6 @@
 #include "hnparser.h"
 
-int HNParser::parseStream(std::istream& instream){
+int HNParser::parseStream(std::istream& instream, bool acceptEmpty){
     FUN();
 
     if (!instream.good()){
@@ -15,10 +15,10 @@ int HNParser::parseStream(std::istream& instream){
         if (!buf.empty()){
 
             //Create a new line instance and let it parse from the line
-            LOGF("Parsing line \"" + buf + "\"");
-            Parseline* newLine = new Parseline();
-            newLine->parseFromLine(buf, '<', '>');
+            Parseline newLine;
+            newLine.parseFromLine(buf, '<', '>', acceptEmpty);
             this->_lines.push_back(newLine);
+            LOGF("Parsed line \"" + this->_lines.back().toParseLine('<', '>') + "\" lines: " + std::to_string(this->_lines.size()));
         }
     }
 

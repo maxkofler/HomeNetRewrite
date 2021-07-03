@@ -16,9 +16,9 @@ std::vector<std::string> HNConfig::getConfig(std::string key, bool throwExceptio
         size_t i = 0;
         while (!configFound){
             if (i < configs.size()){
-                if (configs[i]->getBlock(0) == key){
+                if (configs[i].getBlock(0) == key){
                     configFound = true;
-                    configLine = *configs[i];
+                    configLine = configs[i];
                     continue;
                 }
                 i++;

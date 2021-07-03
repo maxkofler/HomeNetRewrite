@@ -26,6 +26,11 @@ bool HNDrivers::loadDrivers(){
 
     {   //Parse the driverlist
         LOGI(fStr + "Parsing driverlist");
+
+        if (!p_parseDriverlist()){
+            LOGE(fStr + "Error in parsing driverlist!");
+            return false;
+        }
     }
 
     this->_rl_driversloaded = true;
