@@ -33,6 +33,15 @@ bool HNDrivers::loadDrivers(){
         }
     }
 
+    {   //Import drivers
+        LOGI(fStr + "Importing drivers");
+
+        if (!p_importDrivers()){
+            LOGE(fStr + "Error in importing drivers!");
+            return false;
+        }
+    }
+
     this->_rl_driversloaded = true;
     return true;
 }

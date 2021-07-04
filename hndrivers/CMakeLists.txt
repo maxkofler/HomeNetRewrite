@@ -16,6 +16,7 @@ set (SOURCES
     src/hndrivers/init.cpp
     src/hndrivers/loadDrivers.cpp
     src/hndrivers/p_parseDriverlist.cpp
+    src/hndrivers/p_importDrivers.cpp
 
     src/hndriver/hndriver.cpp
     src/hndriver/addValue.cpp

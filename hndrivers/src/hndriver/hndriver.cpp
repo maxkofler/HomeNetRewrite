@@ -1,7 +1,9 @@
 #include "hndriver.h"
 
-HNDriver::HNDriver(){
+HNDriver::HNDriver(std::string name){
     FUN();
+
+    this->_name = name;
 }
 
 HNDriver::~HNDriver(){

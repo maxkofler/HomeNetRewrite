@@ -47,6 +47,7 @@ private:
 
 
     bool                                    p_parseDriverlist();
+    bool                                    p_importDrivers();
 };
 
 #endif

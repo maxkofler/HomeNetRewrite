@@ -19,7 +19,7 @@ typedef struct{
 
 class HNDriver{
 public:
-    HNDriver();
+    HNDriver(std::string name);
     ~HNDriver();
 
     /**
@@ -29,9 +29,12 @@ public:
     bool                                    addValue(hnvalue_t newValue);
 
     std::vector<hnvalue_t>                  getValues(){return this->_values;}
+    std::string                             name(){return this->_name;}
 
 private:
     std::vector<hnvalue_t>                  _values;
+
+    std::string                             _name;
 };
 
 #endif
