@@ -1,7 +1,11 @@
 #include "hnpython.h"
 
-std::string HNPython::execModFunction(std::string modName, std::string funName, PyObject *args){
+#include <Python.h>
+
+std::string HNPython::execModFunction(std::string modName, std::string funName, void *argsV){
     FUN();
+
+    PyObject* args = (PyObject*) argsV;
 
     if (!this->_py_running){
         LOGE("Python-interpreter is not running, can not execute a function!");
@@ -16,7 +20,7 @@ std::string HNPython::execModFunction(std::string modName, std::string funName, 
     PyModule* curMod = this->_modules[modName];
 
     PyObject* pFunc;
-    pFunc = PyDict_GetItemString(curMod->_pDict, funName.c_str());
+    pFunc = PyDict_GetItemString((PyObject*)curMod->_pDict, funName.c_str());
 
     //Check if the function is callable
     if (!PyCallable_Check(pFunc)){

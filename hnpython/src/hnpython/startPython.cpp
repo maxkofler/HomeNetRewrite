@@ -1,5 +1,7 @@
 #include "hnpython.h"
 
+#include <Python.h>
+
 void HNPython::startPython(bool force){
     FUN();
     if (this->_py_running){

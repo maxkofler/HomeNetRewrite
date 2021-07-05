@@ -1,39 +1,24 @@
-#include <iostream>
-#include <fstream>
+#include <QCoreApplication>
+#include <QTimer>
 
 #include "log.h"
 
-#include "hnconfig.h"
-#include "hndrivers.h"
-#include "hnpython.h"
+#include "homenet.h"
 
 Log* hlog;
 
-int main()
+int main(int argc, char** argv)
 {
     hlog = new Log(Log::I, false);
     FUN();
 
+    QCoreApplication app(argc, argv);
 
-    HNConfig config;
+    HomeNet hn(&app);
 
-    config.parse("/etc/homenet/hnconfig.conf");
+    QObject::connect(&hn, &HomeNet::stop, &app, &QCoreApplication::quit);
 
-    HNPython python;
-    python.startPython();
+    QTimer::singleShot(0, &hn, &HomeNet::start);
 
-    HNDrivers drivers;
-    if (!drivers.init(config, &python)){
-        LOGE("Failed in initializing drivers!");
-    }else{
-        LOGI("Initialized drivers");
-    }
-
-    if(!drivers.loadDrivers()){
-        LOGE("Failed loading drivers!");
-    }else{
-        LOGI("Loaded drivers");
-    }
-
-    return 0;
+    return app.exec();
 }

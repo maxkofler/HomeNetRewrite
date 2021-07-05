@@ -1,7 +1,6 @@
 #ifndef HNPYTHON_H
 #define HNPYTHON_H
 
-#include <Python.h>
 #include <map>
 
 #include "log.h"
@@ -52,7 +51,7 @@ public:
      *          "SHello"                    String (Hello)
      *          "V"                         Void
      */
-    std::string                             execModFunction(std::string modName, std::string funName, PyObject* args);
+    std::string                             execModFunction(std::string modName, std::string funName, void* args);
 
     /**
      * @brief   Returns if the Python interpreter is running

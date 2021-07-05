@@ -3,7 +3,6 @@
 
 class PyModule;
 
-#include <Python.h>
 #include <string>
 
 #include "log.h"
@@ -20,9 +19,15 @@ public:
 private:
     bool                                    _is_loaded;
     std::string                             _name;
+    void*                                   _pName;
+    void*                                   _pModule;
+    void*                                   _pDict;
+
+    /*
     PyObject*                               _pName;         //The name in pystring form
     PyObject*                               _pModule;       //The module itself
     PyObject*                               _pDict;         //Its dictionary for symbols
+    */
 };
 
 #endif // PYMODULE_H

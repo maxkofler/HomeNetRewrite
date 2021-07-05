@@ -4,7 +4,7 @@ include_directories(include ${PROJECT_SOURCE_DIR}/Log/include)
 include_directories(${PROJECT_SOURCE_DIR}/hnconfig/include ${PROJECT_SOURCE_DIR}/hnparser/include)
 
 #hnpython
-include_directories(${PROJECT_SOURCE_DIR}/hnpython/include ${PYTHON_INCLUDE_DIRS})
+include_directories(${PROJECT_SOURCE_DIR}/hnpython/include)
 
 set (HEADERS
     include/hndrivers.h
@@ -24,6 +24,6 @@ set (SOURCES
 
 add_library(hndrivers ${SOURCES} ${HEADERS})
 
-target_link_libraries(hndrivers hnconfig hnparser hnpython ${PYTHON_LIBRARIES})
+target_link_libraries(hndrivers hnconfig hnparser hnpython)
 
 add_dependencies(hndrivers hnconfig hnparser hnpython)

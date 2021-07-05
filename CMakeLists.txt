@@ -12,7 +12,7 @@ add_subdirectory(hnparser)
 add_subdirectory(hnconfig)
 add_subdirectory(hndrivers)
 
-include_directories(include Log/include Argparser/include ${PYTHON_INCLUDE_DIRS})
+include_directories(include Log/include Argparser/include)
 
 #HomeNet internal headers
 include_directories(
@@ -20,6 +20,8 @@ include_directories(
     hnparser/include
     hnconfig/include
     hndrivers/include
+
+    homenet/include
     )
 
 set(CMAKE_CXX_STANDARD 17)
@@ -31,9 +33,15 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_executable(HomeNet
-    main.cpp)
+    main.cpp
 
-target_link_libraries(HomeNet Qt5::Core log argparser ${PYTHON_LIBRARIES})
+    homenet/include/homenet.h
+
+    homenet/src/homenet.cpp
+    homenet/src/sl_start.cpp
+    )
+
+target_link_libraries(HomeNet Qt5::Core log argparser)
 target_link_libraries(HomeNet hnpython hnparser hnconfig hndrivers)
 
 add_dependencies(HomeNet log argparser)

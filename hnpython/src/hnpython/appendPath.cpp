@@ -1,5 +1,7 @@
 #include "hnpython.h"
 
+#include <Python.h>
+
 bool HNPython::appendPath(std::string path){
     FUN();
 

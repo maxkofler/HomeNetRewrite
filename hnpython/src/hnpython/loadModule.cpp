@@ -1,5 +1,7 @@
 #include "hnpython.h"
 
+#include <Python.h>
+
 bool HNPython::loadModule(std::string name){
     FUN();
 
@@ -11,10 +13,10 @@ bool HNPython::loadModule(std::string name){
     PyModule* mod = new PyModule();
     //Tell the module its name
     mod->_name = name;
-    mod->_pName = PyUnicode_FromString(name.c_str());
+    mod->_pName = (void*) PyUnicode_FromString(name.c_str());
 
     //Import the module
-    mod->_pModule = PyImport_Import(mod->_pName);
+    mod->_pModule = (void*) PyImport_Import((PyObject*) mod->_pName);
 
     //Check if the import was done
     if (mod->_pModule == NULL){
@@ -23,7 +25,7 @@ bool HNPython::loadModule(std::string name){
     }
 
     //Load the dictionary
-    mod->_pDict = PyModule_GetDict(mod->_pModule);
+    mod->_pDict = PyModule_GetDict((PyObject*) mod->_pModule);
 
     //The module is loaded!
     mod->_is_loaded = true;
