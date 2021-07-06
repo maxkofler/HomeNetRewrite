@@ -9,7 +9,7 @@ Log* hlog;
 
 int main(int argc, char** argv)
 {
-    hlog = new Log(Log::I, false);
+    hlog = new Log(Log::F, false);
     FUN();
 
     QCoreApplication app(argc, argv);

@@ -11,6 +11,7 @@ add_subdirectory(hnpython)
 add_subdirectory(hnparser)
 add_subdirectory(hnconfig)
 add_subdirectory(hndrivers)
+add_subdirectory(hnnetworking)
 
 include_directories(include Log/include Argparser/include)
 
@@ -20,6 +21,7 @@ include_directories(
     hnparser/include
     hnconfig/include
     hndrivers/include
+    hnnetworking/include
 
     homenet/include
     )
@@ -42,7 +44,7 @@ add_executable(HomeNet
     )
 
 target_link_libraries(HomeNet Qt5::Core log argparser)
-target_link_libraries(HomeNet hnpython hnparser hnconfig hndrivers)
+target_link_libraries(HomeNet hnpython hnparser hnconfig hndrivers hnnetworking)
 
 add_dependencies(HomeNet log argparser)
-add_dependencies(HomeNet hnpython hnparser hnconfig hndrivers)
+add_dependencies(HomeNet hnpython hnparser hnconfig hndrivers hnnetworking)

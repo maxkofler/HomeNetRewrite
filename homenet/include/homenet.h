@@ -10,6 +10,7 @@ class HomeNet;
 #include "hndrivers.h"
 #include "hnconfig.h"
 #include "hnpython.h"
+#include "hnnetworking.h"
 
 class HomeNet : public QObject{
     Q_OBJECT
@@ -21,6 +22,7 @@ public:
         this->_config = new HNConfig();
         this->_python = new HNPython();
         this->_drivers = new HNDrivers();
+        this->_networking = new HNNetworking(this);
     }
     ~HomeNet();
 
@@ -34,6 +36,7 @@ private:
     HNConfig*                               _config;
     HNPython*                               _python;
     HNDrivers*                              _drivers;
+    HNNetworking*                           _networking;
 };
 
 #endif

@@ -6,5 +6,6 @@ r	workdir				The directory HN can do its actions (a ramdisk is recommended)
 r	driverdir		Where all the drivers are stored
 r	synctime		The delay between syncs
 r	driverlist		The list containing all drivers
+r   port            The port for the tcp server to listen on
 
 For a driver guide refer to driverguide.py
