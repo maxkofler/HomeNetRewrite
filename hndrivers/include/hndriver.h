@@ -9,12 +9,14 @@ class HNDriver;
 #include <vector>
 
 typedef struct{
-    std::string drivername;
-    std::string name;
-    std::string displaytype;
-    std::string unit;
-    std::string datatype;
-    std::string value;
+    std::string     drivername;
+    std::string     name;
+    std::string     displaytype;
+    std::string     unit;
+    std::string     datatype;
+    std::string     value;
+    size_t          lID;
+    size_t          gID;
 } hnvalue_t;
 
 class HNDriver{

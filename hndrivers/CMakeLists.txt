@@ -12,12 +12,18 @@ set (HEADERS
     )
 
 set (SOURCES
+    #HNDrivers
+    #public
     src/hndrivers/hndrivers.cpp
     src/hndrivers/init.cpp
     src/hndrivers/loadDrivers.cpp
+    src/hndrivers/sync.cpp
+    #private
     src/hndrivers/p_parseDriverlist.cpp
     src/hndrivers/p_importDrivers.cpp
 
+    #HNDriver
+    #public
     src/hndriver/hndriver.cpp
     src/hndriver/addValue.cpp
     )

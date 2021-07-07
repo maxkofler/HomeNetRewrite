@@ -30,6 +30,11 @@ public:
      */
     bool                                    loadDrivers();
 
+    /**
+     * @brief   Calls all values from the drivers
+     */
+    bool                                    sync();
+
 private:
     HNParser                                _driverlistParser;
     HNPython*                               _pyInst;
@@ -48,6 +53,7 @@ private:
 
     bool                                    p_parseDriverlist();
     bool                                    p_importDrivers();
+    size_t                                  _nextVId;
 };
 
 #endif

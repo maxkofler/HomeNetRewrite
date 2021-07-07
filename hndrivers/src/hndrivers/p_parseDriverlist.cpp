@@ -46,6 +46,28 @@ bool HNDrivers::p_parseDriverlist(){
                 return false;
             }
 
+            if (curDriver->getValues().size() <= 0){
+                LOGW(fStr + "Not adding driver \"" + curDriver->name() + "\": Has no members!");
+                curDriver = nullptr;
+                driver_open = false;
+                continue;
+            }
+
+            {   //Give all values their ID
+                size_t firstID = this->_nextVId;
+                size_t curVID = 0;
+                for (hnvalue_t& curValue : curDriver->getValues()){
+                    curValue.gID = this->_nextVId;
+                    curValue.lID = curVID;
+
+                    this->_nextVId = this->_nextVId+1;
+                    curVID++;
+                }
+
+                LOGI(   fStr + "Driver \"" + curDriver->name() + "\" has values from id #" + std::to_string(firstID) +
+                        " - #" + std::to_string(this->_nextVId-1));
+            }
+
             driversParsed++;
             this->_drivers.push_back(curDriver);
             curDriver = nullptr;

@@ -5,6 +5,7 @@ HNDrivers::HNDrivers(){
 
     this->_rl_initialized = false;
     this->_rl_driversloaded = false;
+    this->_nextVId = 0;
 }
 
 HNDrivers::~HNDrivers(){
