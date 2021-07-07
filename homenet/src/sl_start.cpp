@@ -42,4 +42,11 @@ void HomeNet::start(){
         }
     }
 
+    try{
+        this->_drivers->sync();
+    }catch(...){
+        emit stop();
+    }
+
+
 }

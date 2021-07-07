@@ -56,9 +56,9 @@ bool HNDrivers::p_parseDriverlist(){
             {   //Give all values their ID
                 size_t firstID = this->_nextVId;
                 size_t curVID = 0;
-                for (hnvalue_t& curValue : curDriver->getValues()){
-                    curValue.gID = this->_nextVId;
-                    curValue.lID = curVID;
+                for (hnvalue_t* curValue : curDriver->getValues()){
+                    curValue->gID = this->_nextVId;
+                    curValue->lID = curVID;
 
                     this->_nextVId = this->_nextVId+1;
                     curVID++;
@@ -87,11 +87,11 @@ bool HNDrivers::p_parseDriverlist(){
 
             //<value><value_name><value_display_type><value_unit>
 
-            hnvalue_t newValue;
+            hnvalue_t* newValue = new hnvalue_t;
 
-            newValue.name = line.getBlock(1);
-            newValue.displaytype = line.getBlock(2);
-            newValue.unit = line.getBlock(3);
+            newValue->name = line.getBlock(1);
+            newValue->displaytype = line.getBlock(2);
+            newValue->unit = line.getBlock(3);
 
             curDriver->addValue(newValue);
 

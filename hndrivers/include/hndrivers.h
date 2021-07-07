@@ -48,11 +48,9 @@ private:
     bool                                    _rl_initialized;
     bool                                    _rl_driversloaded;
 
-
-
-
     bool                                    p_parseDriverlist();
     bool                                    p_importDrivers();
+    bool                                    p_startDrivers();
     size_t                                  _nextVId;
 };
 

@@ -28,13 +28,13 @@ public:
      * @brief   Adds a hnvalue_t to the driver
      * @param   newValue                    The new value to add (gets copied)
      */
-    bool                                    addValue(hnvalue_t newValue);
+    bool                                    addValue(hnvalue_t* newValue);
 
-    std::vector<hnvalue_t>                  getValues(){return this->_values;}
+    std::vector<hnvalue_t*>                 getValues(){return this->_values;}
     std::string                             name(){return this->_name;}
 
 private:
-    std::vector<hnvalue_t>                  _values;
+    std::vector<hnvalue_t*>                 _values;
 
     std::string                             _name;
 };

@@ -29,7 +29,7 @@ bool HNPython::loadModule(std::string name){
 
     //The module is loaded!
     mod->_is_loaded = true;
-    LOGD("Loaded module \"" + mod->_name + "\"!");
+    LOGI("Loaded module \"" + mod->_name + "\"!");
     this->_modules[mod->_name] = mod;
     return true;
 }
