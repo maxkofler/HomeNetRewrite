@@ -11,6 +11,9 @@ void HomeNet::start(){
             LOGE(fStr + "Error in parsing config!");
             emit stop();
         }
+
+        LOGI(fStr + "Getting configs");
+        this->_time_sync = stoi(this->_config->getConfig("synctime").back());
     }
 
     {
@@ -34,6 +37,15 @@ void HomeNet::start(){
     }
 
     {
+        LOGI(fStr + "Initializing history module");
+
+        if (!this->_history->init(*this->_config)){
+            LOGE(fStr + "Error in initializing history module!");
+            emit stop();
+        }
+    }
+
+    {
         LOGI(fStr + "Starting networking module");
 
         if (!this->_networking->start(*this->_config)){
@@ -42,11 +54,11 @@ void HomeNet::start(){
         }
     }
 
-    try{
-        this->_drivers->sync();
-    }catch(...){
-        emit stop();
+    {
+        LOGI(fStr + "Starting syncloop with " + std::to_string(this->_time_sync) + " seconds");
+
+        this->_timerSync = new QTimer(this);
+        connect(this->_timerSync, &QTimer::timeout, this, QOverload<>::of(&HomeNet::sync));
+        this->_timerSync->start(this->_time_sync*1000);
     }
-
-
 }

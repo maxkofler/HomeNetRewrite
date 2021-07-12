@@ -2,6 +2,8 @@
 
 #include <Python.h>
 
+#include <filesystem>
+
 bool HNDrivers::sync(){
     FUN();
 
@@ -18,6 +20,10 @@ bool HNDrivers::sync(){
 
         for (hnvalue_t* curValue : curDriver->getValues()){
             std::string wp = this->_workdir + "/" + curDriver->name() + "/" + curValue->name + "/";
+
+            //Create the working path
+            std::filesystem::create_directories(wp);
+
             LOGI(   "Syncing \"" + curDriver->name() + "--" + curValue->name + "\" (gID: " +
                     std::to_string(curValue->gID) + " lID: " + std::to_string(curValue->lID) + " wd: " + wp + ")");
 

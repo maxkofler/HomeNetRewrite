@@ -3,6 +3,7 @@
 
 
 r	workdir				The directory HN can do its actions (a ramdisk is recommended)
+r	historydir		The directory to save all histories to
 r	driverdir		Where all the drivers are stored
 r	synctime		The delay between syncs
 r	driverlist		The list containing all drivers
