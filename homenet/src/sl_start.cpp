@@ -22,9 +22,18 @@ void HomeNet::start(){
     }
 
     {
+        LOGI(fStr + "Initializing history module");
+
+        if (!this->_history->init(*this->_config)){
+            LOGE(fStr + "Error in initializing history module!");
+            emit stop();
+        }
+    }
+
+    {
         LOGI(fStr + "Initializing drivers");
 
-        if (!this->_drivers->init(*this->_config, this->_python)){
+        if (!this->_drivers->init(*this->_config, this->_python, this->_history)){
             LOGE(fStr + "Error in initializing drivers!");
             emit stop();
         }
@@ -32,15 +41,6 @@ void HomeNet::start(){
         LOGI(fStr + "Loading drivers");
         if (!this->_drivers->loadDrivers()){
             LOGE(fStr + "Error in loading drivers!");
-            emit stop();
-        }
-    }
-
-    {
-        LOGI(fStr + "Initializing history module");
-
-        if (!this->_history->init(*this->_config)){
-            LOGE(fStr + "Error in initializing history module!");
             emit stop();
         }
     }

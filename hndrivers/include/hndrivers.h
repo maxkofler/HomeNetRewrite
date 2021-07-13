@@ -12,6 +12,7 @@ class HNDrivers;
 #include "hnconfig.h"
 #include "hnparser.h"
 #include "hnpython.h"
+#include "hnhistory.h"
 
 class HNDrivers{
 public:
@@ -23,7 +24,7 @@ public:
      * @param   config                      A reference to the main HNConfig
      * @param   pyInstance                  A pointer to the core HNPython instance
      */
-    bool                                    init(HNConfig& config, HNPython* pyInstance);
+    bool                                    init(HNConfig& config, HNPython* pyInstance, HNHistory* history);
 
     /**
      * @brief   Loads the drivers parsed from the driverlist provided from the HNConfig to init()
@@ -38,6 +39,7 @@ public:
 private:
     HNParser                                _driverlistParser;
     HNPython*                               _pyInst;
+    HNHistory*                              _history;
 
     std::vector<HNDriver*>                  _drivers;
 

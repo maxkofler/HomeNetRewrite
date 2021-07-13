@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-bool HNDrivers::init(HNConfig& config, HNPython* pyInst){
+bool HNDrivers::init(HNConfig& config, HNPython* pyInst, HNHistory* history){
     FUN();
 
     this->_rl_initialized = false;
@@ -48,6 +48,8 @@ bool HNDrivers::init(HNConfig& config, HNPython* pyInst){
 
         this->_pyInst = pyInst;
     }
+
+    this->_history = history;
 
     this->_rl_initialized = true;
     return true;

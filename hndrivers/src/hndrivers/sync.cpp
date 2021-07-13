@@ -35,6 +35,10 @@ bool HNDrivers::sync(){
 
             curValue->datatype = ret[0];
             curValue->value = ret.substr(1, ret.length()-1);
+
+            if (!this->_history->append(*curValue)){
+                LOGW("Failed to append value to history!");
+            }
         }
 
         {   //Pause the driver

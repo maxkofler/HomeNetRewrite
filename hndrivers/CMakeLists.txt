@@ -8,6 +8,9 @@ include_directories(${PROJECT_SOURCE_DIR}/hnconfig/include ${PROJECT_SOURCE_DIR}
 #hnpython
 include_directories(${PROJECT_SOURCE_DIR}/hnpython/include ${PYTHON_INCLUDE_DIRS})
 
+#hnhistory
+include_directories(${PROJECT_SOURCE_DIR}/hnhistory/include)
+
 set (HEADERS
     include/hndrivers.h
     include/hndriver.h
@@ -32,6 +35,6 @@ set (SOURCES
 
 add_library(hndrivers ${SOURCES} ${HEADERS})
 
-target_link_libraries(hndrivers hnconfig hnparser hnpython ${PYTHON_LIBRARIES})
+target_link_libraries(hndrivers hnconfig hnparser hnpython hnhistory ${PYTHON_LIBRARIES})
 
-add_dependencies(hndrivers hnconfig hnparser hnpython)
+add_dependencies(hndrivers hnconfig hnparser hnpython hnhistory)

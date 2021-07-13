@@ -22,6 +22,8 @@ public:
 
     bool                                    read(hnvalue_t value);
 
+    bool                                    append(hnvalue_t value);
+
 private:
     std::string                             _historyDir;
 
