@@ -20,6 +20,6 @@ set (SOURCES
 
 add_library(hnhistory ${SOURCES} ${HEADERS})
 
-target_link_libraries(hnhistory hnparser)
+target_link_libraries(hnhistory stdc++fs hnparser)
 
 add_dependencies(hnhistory hnparser)

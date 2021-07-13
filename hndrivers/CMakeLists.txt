@@ -35,6 +35,6 @@ set (SOURCES
 
 add_library(hndrivers ${SOURCES} ${HEADERS})
 
-target_link_libraries(hndrivers hnconfig hnparser hnpython hnhistory ${PYTHON_LIBRARIES})
+target_link_libraries(hndrivers stdc++fs hnconfig hnparser hnpython hnhistory ${PYTHON_LIBRARIES})
 
 add_dependencies(hndrivers hnconfig hnparser hnpython hnhistory)
