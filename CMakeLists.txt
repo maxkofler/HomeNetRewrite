@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(HomeNet LANGUAGES CXX)
 
@@ -29,8 +30,7 @@ include_directories(
     homenet/include
     )
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 
@@ -47,7 +47,8 @@ add_executable(HomeNet
     homenet/src/sl_sync.cpp
     )
 
-target_link_libraries(HomeNet Qt5::Core log argparser)
+
+target_link_libraries(HomeNet Qt5::Core stdc++fs log argparser)
 target_link_libraries(HomeNet hnpython hnparser hnconfig hndrivers hnnetworking hnhistory)
 
 add_dependencies(HomeNet log argparser)
