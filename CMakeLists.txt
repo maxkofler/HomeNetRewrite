@@ -45,6 +45,7 @@ add_executable(HomeNet
     homenet/src/homenet.cpp
     homenet/src/sl_start.cpp
     homenet/src/sl_sync.cpp
+    homenet/src/p_sigHandler.cpp
     )
 
 

@@ -3,6 +3,8 @@
 
 class HomeNet;
 
+#include <signal.h>
+
 #include <QObject>
 #include <QTimer>
 
@@ -20,6 +22,8 @@ class HomeNet : public QObject{
 public:
     HomeNet(QObject* parent = 0) : QObject(parent){
         FUN();
+
+        signal(SIGINT, p_sigHandler);
 
         this->_config = new HNConfig();
         this->_python = new HNPython();
@@ -47,6 +51,8 @@ private:
 
     size_t                                  _time_sync;
     QTimer*                                 _timerSync;
+
+    static void                             p_sigHandler(int signal);
 };
 
 #endif
