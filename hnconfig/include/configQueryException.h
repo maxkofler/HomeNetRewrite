@@ -6,6 +6,7 @@
 class ConfigQueryException{
 public:
     std::string                                     what;
+    std::string                                     key;
 };
 
 #endif

@@ -8,7 +8,7 @@ bool HNNetworking::start(HNConfig& config){
     {
         LOGI(fStr + "Getting configs");
 
-        this->_port = std::stoi(config.getConfig("port").back());
+        this->_port = std::stoi(config.getConfig("port", true).back());
     }
 
     {

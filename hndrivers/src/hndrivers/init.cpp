@@ -11,9 +11,9 @@ bool HNDrivers::init(HNConfig& config, HNPython* pyInst, HNHistory* history){
 
     {   //Parse configs
         LOGI(initDRstr + "Fetching configs");
-        this->_driverlistPath = config.getConfig("driverlist").back();
-        this->_driversPath = config.getConfig("driverdir").back();
-        this->_workdir = config.getConfig("workdir").back();
+        this->_driverlistPath = config.getConfig("driverlist", true).back();
+        this->_driversPath = config.getConfig("driverdir", true).back();
+        this->_workdir = config.getConfig("workdir", true).back();
     }    
 
     {   //Init the driverlist parser

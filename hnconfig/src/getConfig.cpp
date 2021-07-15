@@ -31,6 +31,7 @@ std::vector<std::string> HNConfig::getConfig(std::string key, bool throwExceptio
             if (throwException){
                 ConfigQueryException e;
                 e.what = "Could not find config with key \"" + key + "\"!";
+                e.key = key;
                 throw e;
             }else{
                 LOGW("Could not find config with key \"" + key + "\"!");
