@@ -1,6 +1,6 @@
 #include "hnnetworking.h"
 
-bool HNNetworking::processMessage(std::string message){
+bool HNNetworking::processMessage(std::string message, QTcpSocket* sender){
     FUN();
     std::string fStr = "processing message: ";
 
@@ -33,11 +33,11 @@ bool HNNetworking::processMessage(std::string message){
         switch(operation){
             case 'v':   //A value operation is requested
                         LOGD(fStr + "The message is a value operation");
-                        return processValueRequest(message);
+                        return processValueRequest(message, sender);
 
             case 's':   //A system operation is requested
                         LOGD(fStr + "The message is a system operation");
-                        return processSystemRequest(message);
+                        return processSystemRequest(message, sender);
         }
     }
 

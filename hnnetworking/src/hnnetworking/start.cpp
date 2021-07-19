@@ -1,6 +1,6 @@
 #include "hnnetworking.h"
 
-bool HNNetworking::start(HNConfig& config, HNDrivers* drivers){
+bool HNNetworking::start(HNConfig& config){
     FUN();
 
     std::string fStr = "Starting TCP server: ";

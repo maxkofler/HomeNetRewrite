@@ -5,7 +5,7 @@
 
 extern homenet_status stateHomeNet;
 
-bool HNNetworking::processSystemRequest(std::string message){
+bool HNNetworking::processSystemRequest(std::string message, QTcpSocket* sender){
     FUN();
 
     LOGD("The system request is: \"" + message + "\"");

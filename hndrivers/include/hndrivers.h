@@ -36,12 +36,23 @@ public:
      */
     bool                                    sync();
 
+    /**
+     * @brief   Returns a vector of pointers to all the values
+     */
+    std::vector<hnvalue_t*>*                getValues(){return &this->_values;}
+
+    /**
+     * @brief   Returns if this module can be used
+     */
+    bool                                    ok(){return this->_rl_driversloaded && this->_rl_initialized;}
+
 private:
     HNParser                                _driverlistParser;
     HNPython*                               _pyInst;
     HNHistory*                              _history;
 
     std::vector<HNDriver*>                  _drivers;
+    std::vector<hnvalue_t*>                 _values;
 
     std::string                             _driverlistPath;
     std::string                             _driversPath;

@@ -28,7 +28,7 @@ public:
         this->_config = new HNConfig();
         this->_python = new HNPython();
         this->_drivers = new HNDrivers();
-        this->_networking = new HNNetworking(this);
+        this->_networking = new HNNetworking(this->_drivers, this);
         this->_history = new HNHistory();
     }
     ~HomeNet();

@@ -9,7 +9,8 @@ class HNDriver;
 #include <vector>
 
 typedef struct{
-    std::string     drivername;
+    //std::string     drivername;
+    HNDriver*       driver;
     std::string     name;
     std::string     displaytype;
     std::string     unit;

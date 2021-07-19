@@ -62,6 +62,7 @@ bool HNDrivers::p_parseDriverlist(){
 
                     this->_nextVId = this->_nextVId+1;
                     curVID++;
+                    this->_values.push_back(curValue);
                 }
 
                 LOGI(   fStr + "Driver \"" + curDriver->name() + "\" has values from id #" + std::to_string(firstID) +
@@ -88,6 +89,8 @@ bool HNDrivers::p_parseDriverlist(){
             //<value><value_name><value_display_type><value_unit>
 
             hnvalue_t* newValue = new hnvalue_t;
+
+            newValue->driver = curDriver;
 
             newValue->name = line.getBlock(1);
             newValue->displaytype = line.getBlock(2);

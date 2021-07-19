@@ -56,7 +56,7 @@ void HomeNet::start(){
         {
             LOGI(fStr + "Starting networking module");
 
-            if (!this->_networking->start(*this->_config, this->_drivers)){
+            if (!this->_networking->start(*this->_config)){
                 LOGE(fStr + "Error in starting networking module!");
                 emit stop();
                 return;

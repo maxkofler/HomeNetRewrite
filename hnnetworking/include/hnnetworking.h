@@ -20,10 +20,9 @@ class HNNetworking : public QObject{
 Q_OBJECT
 
 public:
-    HNNetworking(QObject* parent = 0);
+    HNNetworking(HNDrivers* drivers, QObject* parent = 0);
     ~HNNetworking();
-
-    bool                                    start(HNConfig& config, HNDrivers* drivers);
+    bool                                    start(HNConfig& config);
 
 private slots:
     void                                    onNewConnection();
@@ -43,19 +42,19 @@ private:
      * @brief   Processes the message that is coming in from the network
      * @param   message
      */
-    bool                                    processMessage(std::string message);
+    bool                                    processMessage(std::string message, QTcpSocket* sender);
 
     /**
      * @brief   Gets used if the request is regarding a value
      * @param   message
      */
-    bool                                    processValueRequest(std::string message);
+    bool                                    processValueRequest(std::string message, QTcpSocket* sender);
 
     /**
      * @brief   Gets used if the request is regarding the system (OS and HomeNet)
      * @param   message
      */
-    bool                                    processSystemRequest(std::string message);
+    bool                                    processSystemRequest(std::string message, QTcpSocket* sender);
 };
 
 #endif

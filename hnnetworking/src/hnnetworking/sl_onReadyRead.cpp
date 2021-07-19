@@ -9,5 +9,5 @@ void HNNetworking::onReadyRead(){
 
     LOGI("Receiving from " + sender->peerAddress().toString().toStdString() + ": " + msg);
 
-    processMessage(msg);
+    processMessage(msg, sender);
 }
