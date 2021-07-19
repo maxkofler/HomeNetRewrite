@@ -4,8 +4,11 @@
 #include "log.h"
 
 #include "homenet.h"
+#include "homenet_status.h"
 
 Log* hlog;
+
+homenet_status stateHomeNet;
 
 int main(int argc, char** argv)
 {

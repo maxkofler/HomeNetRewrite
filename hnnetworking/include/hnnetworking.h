@@ -6,6 +6,7 @@ class HNNetworking;
 #include "log.h"
 
 #include "hnconfig.h"
+#include "hndrivers.h"
 
 #include <string>
 #include <map>
@@ -22,7 +23,7 @@ public:
     HNNetworking(QObject* parent = 0);
     ~HNNetworking();
 
-    bool                                    start(HNConfig& config);
+    bool                                    start(HNConfig& config, HNDrivers* drivers);
 
 private slots:
     void                                    onNewConnection();
@@ -31,8 +32,30 @@ private slots:
 
 private:
     int                                     _port;
+
+    HNDrivers*                              _drivers;
+
     QTcpServer*                             _server;
     QList<QTcpSocket*>                      _sockets;
+
+
+    /**
+     * @brief   Processes the message that is coming in from the network
+     * @param   message
+     */
+    bool                                    processMessage(std::string message);
+
+    /**
+     * @brief   Gets used if the request is regarding a value
+     * @param   message
+     */
+    bool                                    processValueRequest(std::string message);
+
+    /**
+     * @brief   Gets used if the request is regarding the system (OS and HomeNet)
+     * @param   message
+     */
+    bool                                    processSystemRequest(std::string message);
 };
 
 #endif

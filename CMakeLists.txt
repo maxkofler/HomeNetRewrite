@@ -41,6 +41,7 @@ add_executable(HomeNet
     main.cpp
 
     homenet/include/homenet.h
+    homenet/include/homenet_status.h
 
     homenet/src/homenet.cpp
     homenet/src/sl_start.cpp
