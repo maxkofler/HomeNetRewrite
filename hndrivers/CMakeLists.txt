@@ -14,6 +14,7 @@ include_directories(${PROJECT_SOURCE_DIR}/hnhistory/include)
 set (HEADERS
     include/hndrivers.h
     include/hndriver.h
+    include/hnvalue.h
     )
 
 set (SOURCES
@@ -31,6 +32,9 @@ set (SOURCES
     #public
     src/hndriver/hndriver.cpp
     src/hndriver/addValue.cpp
+
+    #hnvalue_t
+    src/hnvalue/hnvalue.cpp
     )
 
 add_library(hndrivers ${SOURCES} ${HEADERS})

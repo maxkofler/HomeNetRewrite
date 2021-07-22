@@ -3,22 +3,11 @@
 
 class HNDriver;
 
+#include "hnvalue.h"
 #include "log.h"
 
 #include <string>
 #include <vector>
-
-typedef struct{
-    //std::string     drivername;
-    HNDriver*       driver;
-    std::string     name;
-    std::string     displaytype;
-    std::string     unit;
-    std::string     datatype;
-    std::string     value;
-    size_t          lID;
-    size_t          gID;
-} hnvalue_t;
 
 class HNDriver{
 public:

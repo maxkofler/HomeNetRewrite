@@ -5,9 +5,9 @@
 bool HNHistory::read(hnvalue_t value){
     FUN();
 
-    LOGF("Opening history of value \"" + value.driver->name() + "." + value.name + "\"");
+    LOGF("Opening history of value \"" + ((HNDriver*)value.driver)->name() + "." + value.name + "\"");
 
-    std::string vHistoryDir = this->_historyDir + "/" + value.driver->name();
+    std::string vHistoryDir = this->_historyDir + "/" + ((HNDriver*)value.driver)->name();
 
     //Check if all directories for the value history exist
     if (!std::filesystem::exists(vHistoryDir)){
