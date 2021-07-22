@@ -36,7 +36,7 @@ bool HNDrivers::p_parseDriverlist(){
                 return false;
             }
 
-            curDriver = new HNDriver(line.getBlock(1));
+            curDriver = new HNDriver(line.getBlock(1), driversParsed);
             driver_open = true;
         }
 

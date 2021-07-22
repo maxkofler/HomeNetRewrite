@@ -11,7 +11,7 @@ class HNDriver;
 
 class HNDriver{
 public:
-    HNDriver(std::string name);
+    HNDriver(std::string name, size_t id);
     ~HNDriver();
 
     /**
@@ -22,11 +22,13 @@ public:
 
     std::vector<hnvalue_t*>                 getValues(){return this->_values;}
     std::string                             name(){return this->_name;}
+    size_t                                  id(){return this->_id;}
 
 private:
     std::vector<hnvalue_t*>                 _values;
 
     std::string                             _name;
+    size_t                                  _id;
 };
 
 #endif

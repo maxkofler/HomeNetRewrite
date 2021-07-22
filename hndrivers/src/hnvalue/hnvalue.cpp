@@ -14,9 +14,9 @@ std::string hnvalue_t::toTransmissionString(){
 
 
     ret += "<" + ((HNDriver*)driver)->name() + ">";
-    ret += "<0>";
+    ret += "<" + std::to_string(((HNDriver*)driver)->id()) + ">";
     ret += "<" + name + ">";
-    ret += "<0>";
+    ret += "<" + std::to_string(gID) + ">";
     ret += "<" + datatype + ">";
     ret += "<" + displaytype + ">";
     ret += "<" + value + ">";
