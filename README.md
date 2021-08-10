@@ -18,8 +18,8 @@ A feature called Triggers is planned that lets the user control devices attached
 
 # Installation
 ```
-git clone https://github.com/maxkofler/HomeNet
-cd HomeNet
+git clone https://github.com/maxkofler/homenet
+cd homenet
 git submodules update --init --recursive
 mkdir build && cd build
 cmake ..
