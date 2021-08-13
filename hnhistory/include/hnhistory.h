@@ -24,6 +24,9 @@ public:
 
     bool                                    append(hnvalue_t value);
 
+    std::string                             getHistory(time_t lookbackWindow);
+    std::string                             getHistory();
+
 private:
     std::string                             _historyDir;
 
