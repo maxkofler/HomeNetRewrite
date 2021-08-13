@@ -1,10 +1,11 @@
 #include "hnnetworking.h"
 
-HNNetworking::HNNetworking(HNDrivers* drivers, QObject* parent){
+HNNetworking::HNNetworking(HNDrivers* drivers, HNHistory* history, QObject* parent){
     FUN();
 
 
     this->_drivers = drivers;
+    this->_history = history;
 
     this->_server = new QTcpServer(this);
 }

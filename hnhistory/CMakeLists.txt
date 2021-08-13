@@ -14,8 +14,9 @@ set (HEADERS
 set (SOURCES
     src/hnhistory/hnhistory.cpp
     src/hnhistory/init.cpp
-    src/hnhistory/open.cpp
+    src/hnhistory/read.cpp
     src/hnhistory/append.cpp
+    src/hnhistory/getHistory.cpp
     )
 
 add_library(hnhistory ${SOURCES} ${HEADERS})

@@ -7,6 +7,7 @@ class HNNetworking;
 
 #include "hnconfig.h"
 #include "hndrivers.h"
+#include "hnhistory.h"
 
 #include <string>
 #include <map>
@@ -20,7 +21,7 @@ class HNNetworking : public QObject{
 Q_OBJECT
 
 public:
-    HNNetworking(HNDrivers* drivers, QObject* parent = 0);
+    HNNetworking(HNDrivers* drivers, HNHistory* history, QObject* parent = 0);
     ~HNNetworking();
     bool                                    start(HNConfig& config);
 
@@ -33,6 +34,7 @@ private:
     int                                     _port;
 
     HNDrivers*                              _drivers;
+    HNHistory*                              _history;
 
     QTcpServer*                             _server;
     QList<QTcpSocket*>                      _sockets;

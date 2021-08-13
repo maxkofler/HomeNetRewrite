@@ -7,11 +7,16 @@ bool HNHistory::read(hnvalue_t value){
 
     LOGF("Opening history of value \"" + ((HNDriver*)value.driver)->name() + "." + value.name + "\"");
 
-    std::string vHistoryDir = this->_historyDir + "/" + ((HNDriver*)value.driver)->name();
+    std::string vHistoryDir = this->_historyDir + "/" + ((HNDriver*)(value.driver))->name();
 
     //Check if all directories for the value history exist
     if (!std::filesystem::exists(vHistoryDir)){
         std::filesystem::create_directories(vHistoryDir);
+    }
+
+    if (this->_historyFile.is_open()){
+        LOGI("History file was already open, closing...");
+        this->_historyFile.close();
     }
 
     this->_historyFile.open(vHistoryDir + "/" + value.name + ".hnhist", std::ios::in);
@@ -22,5 +27,6 @@ bool HNHistory::read(hnvalue_t value){
     }
 
     this->_parser.clear();
-    return this->_parser.parseStream(this->_historyFile);
+    bool ret = this->_parser.parseStream(this->_historyFile);
+    return ret;
 }
