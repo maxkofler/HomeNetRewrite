@@ -8,10 +8,27 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
     char mode = message[0];
     if (message.length() >= 2)
         message = message.substr(1, message.length()-1);
+    else{
+        LOGE("The request is too short: \"" + message + "\"");
+        std::string retMsg = "<E><Request too short!>\n";
+        sender->write(retMsg.c_str());
+        sender->flush();
+        sender->waitForBytesWritten(retMsg.length());
+        return false;
+    }
 
     switch(mode){
     case 'q':   //Value query
                 {
+                LOGI("Value id length = " + std::to_string(message.length()));
+                if (message.length() <= 0){
+                    LOGE("Value query id is invalid!");
+                    std::string retMsg = "<E><ValueID invalid!>\n";
+                    sender->write(retMsg.c_str());
+                    sender->flush();
+                    sender->waitForBytesWritten(retMsg.length());
+                    break;
+                }
                 size_t valueIndex = stoi(message);
                 LOGI("Requesting value #" + std::to_string(valueIndex));
                 if (!this->_drivers->ok()){
@@ -51,6 +68,15 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
 
     case 'h':   //Value history
             {
+                LOGI("History id length = " + std::to_string(message.length()));
+                if (message.length() <= 0){
+                    LOGE("Value query id is invalid!");
+                    std::string retMsg = "<E><ValueID invalid!>\n";
+                    sender->write(retMsg.c_str());
+                    sender->flush();
+                    sender->waitForBytesWritten(retMsg.length());
+                    break;
+                }
                 size_t valueID;
                 time_t lookback = 0;
                 //Check if the request includes a lookback window

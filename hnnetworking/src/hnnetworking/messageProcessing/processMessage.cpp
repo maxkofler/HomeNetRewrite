@@ -47,6 +47,10 @@ bool HNNetworking::processMessage(std::string message, QTcpSocket* sender){
             case 's':   //A system operation is requested
                         LOGD(fStr + "The message is a system operation");
                         return processSystemRequest(message, sender);
+
+            case 'h':   //A help message was requested
+                        LOGD(fStr + "The message is a help request");
+                        return processHelpRequest(message, sender);
         }
     }
 

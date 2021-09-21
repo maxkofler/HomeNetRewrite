@@ -57,6 +57,13 @@ private:
      * @param   message
      */
     bool                                    processSystemRequest(std::string message, QTcpSocket* sender);
+
+    /**
+     * @brief   Gets used if the request is regarding help
+     * @param   message
+     */
+    bool                                    processHelpRequest(std::string message, QTcpSocket* sender);
+
 };
 
 #endif

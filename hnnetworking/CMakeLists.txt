@@ -27,6 +27,7 @@ set (SOURCES
     src/hnnetworking/messageProcessing/processMessage.cpp
     src/hnnetworking/messageProcessing/processValueRequest.cpp
     src/hnnetworking/messageProcessing/processSystemRequest.cpp
+    src/hnnetworking/messageProcessing/processHelpRequest.cpp
     )
 
 add_library(hnnetworking ${SOURCES} ${HEADERS})
