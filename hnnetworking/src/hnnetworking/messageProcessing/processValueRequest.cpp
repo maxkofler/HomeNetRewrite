@@ -1,32 +1,25 @@
 #include "hnnetworking.h"
 
+void answerWrongArgument(QTcpSocket* socket);
+
 bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
     FUN();
 
     LOGD("The value request is: \"" + message + "\"");
 
+    bool messageHasArgument = false;
     char mode = message[0];
-    if (message.length() >= 2)
+    if (message.length() >= 2){
         message = message.substr(1, message.length()-1);
-    else{
-        LOGE("The request is too short: \"" + message + "\"");
-        std::string retMsg = "<E><Request too short!>\n";
-        sender->write(retMsg.c_str());
-        sender->flush();
-        sender->waitForBytesWritten(retMsg.length());
-        return false;
+        messageHasArgument = true;
     }
 
     switch(mode){
     case 'q':   //Value query
                 {
-                LOGI("Value id length = " + std::to_string(message.length()));
-                if (message.length() <= 0){
+                if (!messageHasArgument){
                     LOGE("Value query id is invalid!");
-                    std::string retMsg = "<E><ValueID invalid!>\n";
-                    sender->write(retMsg.c_str());
-                    sender->flush();
-                    sender->waitForBytesWritten(retMsg.length());
+                    answerWrongArgument(sender);
                     break;
                 }
                 size_t valueIndex = stoi(message);
@@ -68,13 +61,9 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
 
     case 'h':   //Value history
             {
-                LOGI("History id length = " + std::to_string(message.length()));
-                if (message.length() <= 0){
+                if (!messageHasArgument){
                     LOGE("Value query id is invalid!");
-                    std::string retMsg = "<E><ValueID invalid!>\n";
-                    sender->write(retMsg.c_str());
-                    sender->flush();
-                    sender->waitForBytesWritten(retMsg.length());
+                    answerWrongArgument(sender);
                     break;
                 }
                 size_t valueID;
@@ -150,4 +139,12 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
     }
 
     return true;
+}
+
+
+void answerWrongArgument(QTcpSocket* sender){
+    std::string retMsg = "<E><Invalid argument!>\n";
+    sender->write(retMsg.c_str());
+    sender->flush();
+    sender->waitForBytesWritten(retMsg.length());
 }
