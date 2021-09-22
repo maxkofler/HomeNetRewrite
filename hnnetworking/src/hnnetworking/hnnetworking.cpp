@@ -13,10 +13,16 @@ HNNetworking::HNNetworking(HNDrivers* drivers, HNHistory* history, QObject* pare
 HNNetworking::~HNNetworking(){
     FUN();
 
-    if (this->_server->isListening()){
-        LOGW("TCP Server is still listening, forcing quit!");
-        this->_server->close();
+    //Close ALL client connections
+    for (QTcpSocket* sock : this->_sockets){
+        if (sock->isOpen()){
+            LOGW("Closing connection to " + sock->peerAddress().toString().toStdString());
+            sock->close();
+        }
     }
+
+    LOGD("Closing server...");
+    this->_server->close();
     
     delete this->_server;
 }
