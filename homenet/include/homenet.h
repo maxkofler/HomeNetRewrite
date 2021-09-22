@@ -53,6 +53,7 @@ private:
     QTimer*                                 _timerSync;
 
     static void                             p_sigHandler(int signal);
+    void                                    p_stopOnError();
 };
 
 #endif

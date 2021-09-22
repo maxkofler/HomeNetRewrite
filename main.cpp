@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include <QTimer>
+#include <QThread>
 
 #include "log.h"
 
@@ -12,16 +13,31 @@ homenet_status stateHomeNet;
 
 int main(int argc, char** argv)
 {
-    hlog = new Log(Log::I, false, true);
-    FUN();
+    stateHomeNet.running = true;
 
-    QCoreApplication app(argc, argv);
+    bool ret;
+    while(stateHomeNet.running){
+        hlog = new Log(Log::I, false, true);
+        {
+            FUN();
 
-    HomeNet hn(&app);
+            QCoreApplication app(argc, argv);
 
-    QObject::connect(&hn, &HomeNet::stop, &app, &QCoreApplication::quit);
+            HomeNet hn(&app);
 
-    QTimer::singleShot(0, &hn, &HomeNet::start);
+            QObject::connect(&hn, &HomeNet::stop, &app, &QCoreApplication::quit);
 
-    return app.exec();
+            QTimer::singleShot(0, &hn, &HomeNet::start);
+
+            ret = app.exec();
+        }
+        delete hlog;
+
+        if (stateHomeNet.running){
+            //Wait some time
+            QThread::sleep(2);
+        }
+    }    
+
+    return ret; 
 }

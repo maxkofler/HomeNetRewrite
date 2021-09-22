@@ -1,5 +1,7 @@
 #include "homenet.h"
 
+#include "homenet_status.h"
+
 #include "configQueryException.h"
 
 void HomeNet::start(){
@@ -12,7 +14,7 @@ void HomeNet::start(){
             LOGI(fStr + "Parsing config");
             if (!this->_config->parse("/etc/homenet/hnconfig.conf")){
                 LOGE(fStr + "Error in parsing config!");
-                emit stop();
+                p_stopOnError();
                 return;
             }
 
@@ -31,7 +33,7 @@ void HomeNet::start(){
 
             if (!this->_history->init(*this->_config)){
                 LOGE(fStr + "Error in initializing history module!");
-                emit stop();
+                p_stopOnError();
                 return;
             }
         }
@@ -41,14 +43,14 @@ void HomeNet::start(){
 
             if (!this->_drivers->init(*this->_config, this->_python, this->_history)){
                 LOGE(fStr + "Error in initializing drivers!");
-                emit stop();
+                p_stopOnError();
                 return;
             }
 
             LOGI(fStr + "Loading drivers");
             if (!this->_drivers->loadDrivers()){
                 LOGE(fStr + "Error in loading drivers!");
-                emit stop();
+                p_stopOnError();
                 return;
             }
         }
@@ -58,7 +60,7 @@ void HomeNet::start(){
 
             if (!this->_networking->start(*this->_config)){
                 LOGE(fStr + "Error in starting networking module!");
-                emit stop();
+                p_stopOnError();
                 return;
             }
         }
@@ -74,13 +76,18 @@ void HomeNet::start(){
 
     catch(ConfigQueryException e){
         LOGE("Could not find a critical configuration: " + e.key);
-        emit stop();
+        p_stopOnError();
         return;
     }
 
     catch(...){
         LOGE("A critical error raised during execution!");
-        emit stop();
+        p_stopOnError();
         return;
     }
+}
+
+void HomeNet::p_stopOnError(){
+    stateHomeNet.running = false;
+    emit HomeNet::stop();
 }
