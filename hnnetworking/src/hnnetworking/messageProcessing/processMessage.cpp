@@ -24,7 +24,7 @@ bool HNNetworking::processMessage(std::string message, QTcpSocket* sender){
 
         if (message.length() <= 2){
             LOGE(fStr + "Message is too short!");
-            std::string retMsg = "<E><Message does not contain any operation!>\n";
+            std::string retMsg = "<E><Message does not contain any operation!>\n<eot>\n";
             sender->write(retMsg.c_str());
             sender->flush();
             sender->waitForBytesWritten(retMsg.length());

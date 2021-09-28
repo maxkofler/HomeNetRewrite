@@ -30,12 +30,12 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
                 }
                 std::vector<hnvalue_t*>* valuesVector = this->_drivers->getValues();
                 if (valueIndex < valuesVector->size()){
-                    std::string response = valuesVector->at(valueIndex)->toTransmissionString() + "\n";
+                    std::string response = valuesVector->at(valueIndex)->toTransmissionString() + "\n<eot>\n";
                     sender->write(response.c_str());
                     sender->flush();
                     sender->waitForBytesWritten(response.length());
                 }else{
-                    std::string retMsg = "<E><ValueID out of bounds!>\n";
+                    std::string retMsg = "<E><ValueID out of bounds!>\n<eot>\n";
                     sender->write(retMsg.c_str());
                     sender->flush();
                     sender->waitForBytesWritten(retMsg.length());
@@ -51,6 +51,8 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
                 for (hnvalue_t* curValue : *valuesVector){
                     retMsg += curValue->toTransmissionString() + "\n";
                 }
+
+                retMsg += "<eot>\n";
 
                 sender->write(retMsg.c_str());
                 sender->flush();
@@ -88,7 +90,7 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
                         }catch(std::out_of_range& e){
                             LOGE("Value lookback is out of range: " + std::string(e.what()));
 
-                            std::string retMsg = "<E><Value lookback is out of range: " + std::string(e.what()) + ">\n";
+                            std::string retMsg = "<E><Value lookback is out of range: " + std::string(e.what()) + ">\n<eot>\n";
                             sender->write(retMsg.c_str());
                             sender->flush();
                             sender->waitForBytesWritten(retMsg.length());
@@ -99,7 +101,7 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
                         if (lookback == 0){
                             LOGE("Lookback can not be 0!");
 
-                            std::string retMsg = "<E><Lookback can not be 0!>\n";
+                            std::string retMsg = "<E><Lookback can not be 0!>\n<eot>\n";
                             sender->write(retMsg.c_str());
                             sender->flush();
                             sender->waitForBytesWritten(retMsg.length());
@@ -131,7 +133,7 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
 
     default:
             {
-                std::string retMsg = "<E><Not a valid value request!>\n";
+                std::string retMsg = "<E><Not a valid value request!>\n<eot>\n";
                 sender->write(retMsg.c_str());
                 sender->flush();
                 sender->waitForBytesWritten(retMsg.length());
@@ -143,7 +145,7 @@ bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
 
 
 void answerWrongArgument(QTcpSocket* sender){
-    std::string retMsg = "<E><Invalid argument!>\n";
+    std::string retMsg = "<E><Invalid argument!>\n<eot>\n";
     sender->write(retMsg.c_str());
     sender->flush();
     sender->waitForBytesWritten(retMsg.length());

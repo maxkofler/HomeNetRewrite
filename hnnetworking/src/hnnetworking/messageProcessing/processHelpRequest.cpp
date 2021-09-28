@@ -14,7 +14,7 @@ bool HNNetworking::processHelpRequest(std::string message, QTcpSocket* sender){
     retMsg += "\t\tquit\tStops the HomeNet server\n";
     retMsg += "\t\trestart\tRestarts the HomeNet server\n";
 
-    retMsg += "\n\th\tHelp request (This page)\n";
+    retMsg += "\n\th\tHelp request (This page)\n<eot>\n";
 
     sender->write(retMsg.c_str());
     sender->flush();
