@@ -1,5 +1,7 @@
 #include "hnhistory.h"
 
+#include <sstream>
+
 std::string HNHistory::getHistory(time_t lookback){
     FUN();
     std::string ret;

@@ -7,7 +7,7 @@
 #include "homenet.h"
 #include "homenet_status.h"
 
-Log* hlog;
+Log::Log* hlog;
 
 homenet_status stateHomeNet;
 
@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 
     bool ret;
     while(stateHomeNet.running){
-        hlog = new Log(Log::I, false, true);
+        hlog = new Log::Log(Log::D);
         {
             FUN();
 

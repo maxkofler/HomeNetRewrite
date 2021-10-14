@@ -48,7 +48,7 @@ std::vector<std::string> HNConfig::getConfig(std::string key, bool throwExceptio
             e.what = "Config with key \"" + key + "\" was found but contains no data!";
             throw e;
         }else{
-            LOGW("Config with key \"" + key + "\" was found but contains no data!")
+            LOGW("Config with key \"" + key + "\" was found but contains no data!");
                     return ret;
         }
     }

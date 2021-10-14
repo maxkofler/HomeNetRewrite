@@ -1,5 +1,7 @@
 #include "hnnetworking.h"
 
+#include <sstream>
+
 void answerWrongArgument(QTcpSocket* socket);
 
 bool HNNetworking::processValueRequest(std::string message, QTcpSocket* sender){
