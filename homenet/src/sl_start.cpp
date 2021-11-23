@@ -65,6 +65,16 @@ void HomeNet::start(){
             }
         }
 
+		{
+			LOGI(fStr + "Starting history daemon");
+			if (!this->_historyDaemon->init(*this->_config)){
+				LOGE(fStr + "Error in starting history daemon!");
+				p_stopOnError();
+				return;
+			}
+			this->_historyDaemon->start();
+		}
+
         {
             LOGI(fStr + "Starting syncloop with " + std::to_string(this->_time_sync) + " seconds");
 

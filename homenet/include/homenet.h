@@ -15,6 +15,7 @@ class HomeNet;
 #include "hnpython.h"
 #include "hnnetworking.h"
 #include "hnhistory.h"
+#include "hnhistorydaemon.h"
 
 class HomeNet : public QObject{
     Q_OBJECT
@@ -29,6 +30,7 @@ public:
         this->_python = new HNPython();
         this->_drivers = new HNDrivers();
         this->_history = new HNHistory();
+		this->_historyDaemon = new HNHistoryDaemon();
         this->_networking = new HNNetworking(this->_drivers, this->_history, this);
     }
     ~HomeNet();
@@ -48,6 +50,7 @@ private:
     HNDrivers*                              _drivers;
     HNNetworking*                           _networking;
     HNHistory*                              _history;
+	HNHistoryDaemon*						_historyDaemon;
 
     size_t                                  _time_sync;
     QTimer*                                 _timerSync;

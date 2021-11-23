@@ -28,6 +28,14 @@ public:
      */
     std::vector<std::string>                getConfig(std::string key, bool throwException = false);
 
+	/**
+	 * @brief   Fetches the first config of the specified key
+	 * @param   key                         The key to search for
+	 * @param   throwException              Whether to throw a configNotFoundException if the key was not found
+	 * @return  The string of the first config found, empty if none found
+	 */
+	std::string                             getFirstConfig(std::string key, bool throwException = false);
+
 private:
     HNParser                                _parser;
 };
