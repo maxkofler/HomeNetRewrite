@@ -10,4 +10,6 @@ void HomeNet::sync(){
     }catch(...){
         LOGE("Fatal exception during syncing!");
     }
+
+	this->_historyDaemon->release();
 }

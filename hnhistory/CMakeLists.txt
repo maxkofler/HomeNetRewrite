@@ -27,6 +27,7 @@ set (SOURCES
     src/hnhistorydaemon/hnhistorydaemon.cpp
     src/hnhistorydaemon/run.cpp
     src/hnhistorydaemon/init.cpp
+    src/hnhistorydaemon/release.cpp
     )
 
 add_library(hnhistory ${SOURCES} ${HEADERS})
