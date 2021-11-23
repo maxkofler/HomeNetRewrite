@@ -7,8 +7,14 @@ include_directories(${PROJECT_SOURCE_DIR}/hnparser/include)
 #HNPDrivers
 include_directories(${PROJECT_SOURCE_DIR}/hndrivers/include)
 
+find_package(Qt5 COMPONENTS Core REQUIRED)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 set (HEADERS
     include/hnhistory.h
+
+    include/hnhistorydaemon.h
     )
 
 set (SOURCES
@@ -17,10 +23,12 @@ set (SOURCES
     src/hnhistory/read.cpp
     src/hnhistory/append.cpp
     src/hnhistory/getHistory.cpp
+
+    src/hnhistorydaemon/hnhistorydaemon.cpp
     )
 
 add_library(hnhistory ${SOURCES} ${HEADERS})
 
-target_link_libraries(hnhistory stdc++fs hnparser)
+target_link_libraries(hnhistory Qt5::Core stdc++fs hnparser)
 
 add_dependencies(hnhistory hnparser)
