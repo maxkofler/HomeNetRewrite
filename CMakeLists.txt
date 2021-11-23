@@ -6,6 +6,7 @@ project(HomeNet LANGUAGES CXX)
 
 find_package(PythonLibs REQUIRED)
 
+add_subdirectory(Log/googletest)
 add_subdirectory(Log)
 add_subdirectory(Argparser)
 
