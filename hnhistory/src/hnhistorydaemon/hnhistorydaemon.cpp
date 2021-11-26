@@ -4,5 +4,10 @@
 HNHistoryDaemon::HNHistoryDaemon(){
 	FUN();
 
+}
 
+HNHistoryDaemon::~HNHistoryDaemon(){
+	FUN();
+
+	this->stop();
 }

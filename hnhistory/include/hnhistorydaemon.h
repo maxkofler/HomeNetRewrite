@@ -4,6 +4,8 @@
 #include <QThread>
 
 #include "hnconfig.h"
+#include "hnvalue.h"
+#include "valuehistory.h"
 
 #include <mutex>
 
@@ -16,17 +18,20 @@ class HNHistoryDaemon : public QThread{
 	Q_OBJECT
 public:
 
-	/**
-	 * @brief	Constructs the history daemon
-	 */
 	HNHistoryDaemon();
+	~HNHistoryDaemon();
 
 	/**
 	 * @brief	Initializes the history daemon
 	 * @param	config			The config to get configs of
-	 * @return
 	 */
 	bool						init(HNConfig& config);
+
+	/**
+	 * @brief	Stops the event loop and releases all resources
+	 * @brief	Gets called by destructor
+	 */
+	bool						stop();
 
 	/**
 	 * @brief	Releases the history daemon from sleep
@@ -34,7 +39,25 @@ public:
 	 */
 	void						release();
 
+	/**
+	 * @brief	Queues a history read, emits onHistoryReady() once finished
+	 * @param	value			The value to get the history from
+	 */
+	bool						getHistory(hnvalue_t value);
+
+	/**
+	 * @brief	The daemons main execution loop, gets run asynchronously
+	 */
 	void						run() override;
+
+signals:
+
+	/**
+	 * @brief	Gets emited once a value history is ready
+	 * @param	value			The value the history has been read of
+	 * @param	history			A history object containing the history to access
+	 */
+	void						onHistoryRead(hnvalue_t value, ValueHistory history);
 
 private:
 	/**
@@ -42,13 +65,16 @@ private:
 	 */
 	size_t                      _maxThreads;
 
+	/**
+	 * @brief	Whether the event loop should keep on running
+	 */
 	bool						_run;
 
 	/**
 	 * @brief	As long as it is locked the event loop does nothing and waits for a command
 	 * @note	Just unlocking is valid, DO NOT lock it
 	 */
-	std::mutex					_m_operationPending;
+	std::mutex					_m_eventLoop;
 };
 
 #endif

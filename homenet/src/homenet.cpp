@@ -8,4 +8,5 @@ HomeNet::~HomeNet(){
     delete this->_drivers;
     delete this->_networking;
     delete this->_history;
+	delete this->_historyDaemon;
 }

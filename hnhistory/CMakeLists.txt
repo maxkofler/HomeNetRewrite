@@ -13,8 +13,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set (HEADERS
     include/hnhistory.h
-
     include/hnhistorydaemon.h
+    include/valuehistory.h
     )
 
 set (SOURCES
@@ -27,6 +27,7 @@ set (SOURCES
     src/hnhistorydaemon/hnhistorydaemon.cpp
     src/hnhistorydaemon/run.cpp
     src/hnhistorydaemon/init.cpp
+    src/hnhistorydaemon/stop.cpp
     src/hnhistorydaemon/release.cpp
     )
 

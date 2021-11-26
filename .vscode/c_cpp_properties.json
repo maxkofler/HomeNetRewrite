@@ -1,17 +1,18 @@
 {
-	"configurations": [
-		{
-			"name": "Linux",
-			"includePath": [
-				"${workspaceFolder}/hnconfig/include",
-				"${workspaceFolder}/hndrivers/include",
-				"${workspaceFolder}/hnhistory/include",
-				"${workspaceFolder}/hnnetworking/include",
-				"${workspaceFolder}/hnparser/include",
-				"${workspaceFolder}/hnpython/include",
-				"${workspaceFolder}/homenet/include"
-			]
-		}
-	],
-	"version": 4
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/hnconfig/include",
+                "${workspaceFolder}/hndrivers/include",
+                "${workspaceFolder}/hnhistory/include",
+                "${workspaceFolder}/hnnetworking/include",
+                "${workspaceFolder}/hnparser/include",
+                "${workspaceFolder}/hnpython/include",
+                "${workspaceFolder}/homenet/include",
+                "/usr/include/qt/QtCore"
+            ]
+        }
+    ],
+    "version": 4
 }
