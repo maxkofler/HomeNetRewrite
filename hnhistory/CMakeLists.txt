@@ -11,25 +11,8 @@ find_package(Qt5 COMPONENTS Core REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set (HEADERS
-    include/hnhistory.h
-    include/hnhistorydaemon.h
-    include/valuehistory.h
-    )
-
-set (SOURCES
-    src/hnhistory/hnhistory.cpp
-    src/hnhistory/init.cpp
-    src/hnhistory/read.cpp
-    src/hnhistory/append.cpp
-    src/hnhistory/getHistory.cpp
-
-    src/hnhistorydaemon/hnhistorydaemon.cpp
-    src/hnhistorydaemon/run.cpp
-    src/hnhistorydaemon/init.cpp
-    src/hnhistorydaemon/stop.cpp
-    src/hnhistorydaemon/release.cpp
-    )
+file(GLOB_RECURSE HEADERS "include/**.h")
+file(GLOB_RECURSE SOURCES "src/**.cpp")
 
 add_library(hnhistory ${SOURCES} ${HEADERS})
 

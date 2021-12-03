@@ -3,6 +3,11 @@
 bool HNHistoryDaemon::stop(){
 	FUN();
 
+	if (!this->_run){
+		LOGD("Failed to stop history daemon: it was not running");
+		return false;
+	}
+
 	std::string fStr = "Stopping history daemon: ";
 	LOGI(fStr + "Stopping...");
 
@@ -16,5 +21,5 @@ bool HNHistoryDaemon::stop(){
 		LOGI(fStr + "Event loop finished");
 	}
 
-
+	return true;
 }

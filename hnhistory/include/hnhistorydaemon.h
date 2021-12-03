@@ -6,6 +6,7 @@
 #include "hnconfig.h"
 #include "hnvalue.h"
 #include "valuehistory.h"
+#include "hnhistorydaemon/job_type.h"
 
 #include <mutex>
 
@@ -60,6 +61,7 @@ signals:
 	void						onHistoryRead(hnvalue_t value, ValueHistory history);
 
 private:
+
 	/**
 	 * @brief	The maximum amount of threads this daemon can spawn before having to queue tasks
 	 */
@@ -75,6 +77,26 @@ private:
 	 * @note	Just unlocking is valid, DO NOT lock it
 	 */
 	std::mutex					_m_eventLoop;
+
+	/**
+	 * @brief	Is locked if an operation is pending and it is not allowed to write to event loop variables
+	 */
+	std::mutex					_m_reserved;
+
+	/**
+	 * @brief	Hold the type for the job that is to execute next
+	 */
+	job_type					_curJob_type;
+
+	/**
+	 * @brief	The argument list for the current job
+	 */
+	std::vector<std::string>	_curJob_args;
+
+	/**
+	 * @brief	Holds a map of currently running jobs
+	 */
+	std::map<int, QThread*>		_running_jobs;
 };
 
 #endif
