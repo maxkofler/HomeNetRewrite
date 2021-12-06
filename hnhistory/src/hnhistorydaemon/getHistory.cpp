@@ -15,7 +15,13 @@ bool HNHistoryDaemon::getHistory(hnvalue_t value){
 
 	{
 		//TODO: implement job creation
+		this->_curJob_type = JOB_GET_HISTORY;
+		Args args;
+		this->_curJob_args = args;
 	}
+
+	//Release the daemon to do deploy this job
+	this->release();
 
 	return true;
 }

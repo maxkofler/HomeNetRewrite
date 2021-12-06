@@ -4,8 +4,11 @@ include_directories(include ${PROJECT_SOURCE_DIR}/Log/include ${PROJECT_SOURCE_D
 include_directories(${PROJECT_SOURCE_DIR}/hnconfig/include)
 #HNParser
 include_directories(${PROJECT_SOURCE_DIR}/hnparser/include)
-#HNPDrivers
+#HNDrivers
 include_directories(${PROJECT_SOURCE_DIR}/hndrivers/include)
+
+#HomeNetException
+include_directories(${PROJECT_SOURCE_DIR}/homenet/include)
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 set(CMAKE_AUTOMOC ON)

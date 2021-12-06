@@ -27,7 +27,6 @@ include_directories(
     hndrivers/include
     hnnetworking/include
     hnhistory/include
-
     homenet/include
     )
 
@@ -38,16 +37,14 @@ find_package(Qt5 COMPONENTS Core REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+file (GLOB_RECURSE SOURCES "homenet/src/**.cpp")
+file (GLOB_RECURSE HEADERS "homenet/include/**.h")
+
 add_executable(HomeNet
     main.cpp
 
-    homenet/include/homenet.h
-    homenet/include/homenet_status.h
-
-    homenet/src/homenet.cpp
-    homenet/src/sl_start.cpp
-    homenet/src/sl_sync.cpp
-    homenet/src/p_sigHandler.cpp
+    ${HEADERS}
+    ${SOURCES}
     )
 
 

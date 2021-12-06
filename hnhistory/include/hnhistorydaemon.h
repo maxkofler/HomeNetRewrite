@@ -7,6 +7,7 @@
 #include "hnvalue.h"
 #include "valuehistory.h"
 #include "hnhistorydaemon/job_type.h"
+#include "hnhistorydaemon/args.h"
 
 #include <mutex>
 
@@ -91,7 +92,7 @@ private:
 	/**
 	 * @brief	The argument list for the current job
 	 */
-	std::vector<std::string>	_curJob_args;
+	Args						_curJob_args;
 
 	/**
 	 * @brief	Holds a map of currently running jobs

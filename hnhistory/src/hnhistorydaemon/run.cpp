@@ -17,6 +17,8 @@ void HNHistoryDaemon::run(){
 		this->_m_eventLoop.lock();
 		LOGD(fStr + "Pending operation, awaking from sleep");
 		this->_m_reserved.unlock();
+
+		
 	}
 
 	LOGI(fStr + "Exited from event loop");

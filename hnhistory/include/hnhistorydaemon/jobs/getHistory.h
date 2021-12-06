@@ -6,7 +6,9 @@
 class GetHistory : public Job{
 
 public:
-	GetHistory(job_type type);
+	GetHistory(job_type type, Args args);
+
+	void					run() override;
 
 };
 

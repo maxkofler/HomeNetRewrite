@@ -11,7 +11,8 @@
                 "${workspaceFolder}/hnpython/include",
                 "${workspaceFolder}/homenet/include",
                 "/usr/include/qt/QtCore"
-            ]
+            ],
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4
