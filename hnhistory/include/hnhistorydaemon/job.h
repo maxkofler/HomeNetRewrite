@@ -20,8 +20,6 @@ public:
 #ifndef FRIEND_JOB
 protected:
 #endif
-
-	job_type					_expected_job_type;
 	Args						_args;
 
 #ifndef FRIEND_JOB

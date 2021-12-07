@@ -9,5 +9,6 @@ Job::Job(job_type expected, job_type actual, Args args){
 		throw ex;
 	}
 
+	this->_job_type = actual;
 	this->_args = args;
 }

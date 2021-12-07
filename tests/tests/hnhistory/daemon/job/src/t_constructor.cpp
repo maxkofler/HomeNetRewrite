@@ -6,7 +6,6 @@ TEST(Job, Constructor){
 	Job job(JOB_GET_HISTORY, JOB_GET_HISTORY, args);
 
 	EXPECT_EQ(JOB_GET_HISTORY, job._job_type);
-	EXPECT_EQ(args, job._args);
 }
 
 TEST(Job, Constructor_Wrong_Type){
