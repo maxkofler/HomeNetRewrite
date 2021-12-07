@@ -15,7 +15,7 @@ class Job : public QThread{
 	Q_OBJECT
 
 public:
-	explicit Job(job_type expected_job_type, job_type actual_job_type, Args args);
+	explicit Job(job_type type, Args args);
 
 #ifndef FRIEND_JOB
 protected:

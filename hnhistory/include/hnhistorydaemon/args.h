@@ -8,7 +8,7 @@ class Args{
 
 public:
 	Args();
-	Args(std::vector<std::string>);
+	Args(std::vector<void*>);
 
 	/**
 	 * @brief	Get the argument at the specified position
@@ -18,13 +18,19 @@ public:
 	std::string					at(size_t index);
 
 	/**
+	 * @brief	Appends the provided argument to the argument list
+	 * @param 	arg 			A pointer to the argument, the memory does not get managed!
+	 */
+	void						addArg(void* arg);
+
+	/**
 	 * @brief	Returns the amount of arguments
 	 */
 	size_t						size();
 
 private:
 
-	std::vector<std::string>	_args;
+	std::vector<void*>			_args;
 
 };
 

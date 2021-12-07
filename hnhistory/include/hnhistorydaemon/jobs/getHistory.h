@@ -3,12 +3,16 @@
 
 #include "hnhistorydaemon/job.h"
 
-class GetHistory : public Job{
+namespace Jobs{
 
-public:
-	GetHistory(job_type type, Args args);
+	class GetHistory : public Job{
 
-	void					run() override;
+	public:
+		GetHistory(Args args);
+
+		void					run() override;
+
+	};
 
 };
 

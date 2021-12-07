@@ -2,7 +2,7 @@
 #include "hnhistorydaemon/jobs/getHistory.h"
 #include "log.h"
 
-bool HNHistoryDaemon::getHistory(hnvalue_t value){
+bool HNHistoryDaemon::getHistory(hnvalue_t* value){
 	FUN();
 
 	{//Reserve the daemon to deploy a job
@@ -13,14 +13,14 @@ bool HNHistoryDaemon::getHistory(hnvalue_t value){
 		}
 	}
 
-	{
-		//TODO: implement job creation
-		this->_curJob_type = JOB_GET_HISTORY;
+	{//Deploy the new job
 		Args args;
-		this->_curJob_args = args;
+		args.addArg((void*)value);
+		Job* newJob = new Jobs::GetHistory(args);
+		this->_waiting_jobs.push(newJob);
 	}
 
-	//Release the daemon to do deploy this job
+	//Release the daemon so it can maybe immediately start this job
 	this->release();
 
 	return true;

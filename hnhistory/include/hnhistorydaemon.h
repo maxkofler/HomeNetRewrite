@@ -8,8 +8,10 @@
 #include "valuehistory.h"
 #include "hnhistorydaemon/job_type.h"
 #include "hnhistorydaemon/args.h"
+#include "hnhistorydaemon/job.h"
 
 #include <mutex>
+#include <queue>
 
 /**
  * @brief This class implements a daemon for managing history access
@@ -45,7 +47,7 @@ public:
 	 * @brief	Queues a history read, emits onHistoryReady() once finished
 	 * @param	value			The value to get the history from
 	 */
-	bool						getHistory(hnvalue_t value);
+	bool						getHistory(hnvalue_t* value);
 
 	/**
 	 * @brief	The daemons main execution loop, gets run asynchronously
@@ -99,7 +101,12 @@ private:
 	/**
 	 * @brief	Holds a map of currently running jobs
 	 */
-	std::map<int, QThread*>		_running_jobs;
+	std::queue<Job*>			_running_jobs;
+
+	/**
+	 * @brief Contains all the jobs that are still waiting for execution
+	 */
+	std::queue<Job*>			_waiting_jobs;
 };
 
 #endif

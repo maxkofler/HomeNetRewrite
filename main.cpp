@@ -32,6 +32,9 @@ int main(int argc, char** argv)
 
             ret = app.exec();
         }
+
+        LOGU("HomeNet server stopped, good bye!");
+
         delete hlog;
 
         if (stateHomeNet.running){

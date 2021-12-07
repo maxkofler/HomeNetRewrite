@@ -5,7 +5,7 @@ Args::Args(){
 	FUN();
 }
 
-Args::Args(std::vector<std::string> args){
+Args::Args(std::vector<void*> args){
 	FUN();
 
 	this->_args = args;

@@ -17,7 +17,7 @@ bool HNHistoryDaemon::stop(){
 		this->release();
 		
 		LOGI(fStr + "Waiting for event loop to finish...");
-		this->wait(QDeadlineTimer::Forever);
+		this->wait();
 		LOGI(fStr + "Event loop finished");
 	}
 
