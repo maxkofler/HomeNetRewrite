@@ -20,6 +20,7 @@ add_subdirectory(hnconfig)
 add_subdirectory(hndrivers)
 add_subdirectory(hnnetworking)
 add_subdirectory(hnhistory)
+add_subdirectory(homenet)
 
 include_directories(include Log/include Argparser/include Log/googletest/googletest/include)
 
@@ -32,9 +33,7 @@ include_directories(
     hnnetworking/include
     hnhistory/include
     homenet/include
-    )
-
-
+)
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 

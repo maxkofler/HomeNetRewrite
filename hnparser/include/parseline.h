@@ -37,7 +37,10 @@ public:
 
     std::string                             getBlock(size_t pos){return this->_blocks.at(pos);}
 
+#ifndef FRIEND_PARSELINE
 private:
+#endif
+
     std::vector<std::string>                _blocks;
 
 };

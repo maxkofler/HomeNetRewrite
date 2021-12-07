@@ -36,7 +36,10 @@ public:
 	 */
 	std::string                             getFirstConfig(std::string key, bool throwException = false);
 
+#ifndef FRIEND_HNCONFIG
 private:
+#endif
+
     HNParser                                _parser;
 };
 

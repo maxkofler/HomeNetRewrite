@@ -6,7 +6,6 @@ include_directories(${PROJECT_SOURCE_DIR}/hnconfig/include)
 include_directories(${PROJECT_SOURCE_DIR}/hnparser/include)
 #HNDrivers
 include_directories(${PROJECT_SOURCE_DIR}/hndrivers/include)
-
 #HomeNetException
 include_directories(${PROJECT_SOURCE_DIR}/homenet/include)
 
@@ -19,6 +18,6 @@ file(GLOB_RECURSE SOURCES "src/**.cpp")
 
 add_library(hnhistory ${SOURCES} ${HEADERS})
 
-target_link_libraries(hnhistory Qt5::Core stdc++fs hnparser)
+target_link_libraries(hnhistory Qt5::Core stdc++fs hnconfig homenet)
 
 add_dependencies(hnhistory hnparser)

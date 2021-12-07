@@ -17,11 +17,17 @@ class Job : public QThread{
 public:
 	explicit Job(job_type expected_job_type, job_type actual_job_type, Args args);
 
+#ifndef FRIEND_JOB
 protected:
+#endif
+
 	job_type					_expected_job_type;
 	Args						_args;
 
+#ifndef FRIEND_JOB
 private:
+#endif
+
 	job_type					_job_type;
 };
 

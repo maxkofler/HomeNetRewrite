@@ -3,10 +3,11 @@
 
 
 r	workdir				The directory HN can do its actions (a ramdisk is recommended)
-r	historydir		The directory to save all histories to
-r	driverdir		Where all the drivers are stored
-r	synctime		The delay between syncs
-r	driverlist		The list containing all drivers
-r   port            The port for the tcp server to listen on
+r	historydir			The directory to save all histories to
+r	driverdir			Where all the drivers are stored
+r	synctime			The delay between syncs
+r	driverlist			The list containing all drivers
+r   port            	The port for the tcp server to listen on
+o 	historyThreads		The maximum amount of threads the history daemon is allowed to spawn
 
 For a driver guide refer to driverguide.py

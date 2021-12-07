@@ -49,7 +49,10 @@ public:
 
     size_t                                  size(){return this->_lines.size();}
 
+#ifndef FRIEND_HNPARSER
 private:
+#endif
+
     std::vector<Parseline>                  _lines;
 };
 

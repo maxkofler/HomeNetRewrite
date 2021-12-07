@@ -61,7 +61,9 @@ signals:
 	 */
 	void						onHistoryRead(hnvalue_t value, ValueHistory history);
 
+#ifndef FRIEND_HNHISTORYDAEMON
 private:
+#endif
 
 	/**
 	 * @brief	The maximum amount of threads this daemon can spawn before having to queue tasks
