@@ -6,9 +6,13 @@ project(HomeNet LANGUAGES CXX)
 
 find_package(PythonLibs REQUIRED)
 
+enable_testing()
+
 add_subdirectory(Log/googletest)
 add_subdirectory(Log)
 add_subdirectory(Argparser)
+
+add_subdirectory(tests)
 
 add_subdirectory(hnpython)
 add_subdirectory(hnparser)
@@ -17,7 +21,7 @@ add_subdirectory(hndrivers)
 add_subdirectory(hnnetworking)
 add_subdirectory(hnhistory)
 
-include_directories(include Log/include Argparser/include)
+include_directories(include Log/include Argparser/include Log/googletest/googletest/include)
 
 #HomeNet internal headers
 include_directories(
