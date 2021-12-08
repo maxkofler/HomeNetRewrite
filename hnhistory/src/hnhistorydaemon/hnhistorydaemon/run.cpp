@@ -14,28 +14,29 @@ void HNHistoryDaemon::run(){
 	//Lock the mutex for now, there is nothing to do at this stage
 	this->_m_eventLoop.try_lock();
 
-	while (this->_run){
-		LOGD(fStr + "Going to sleep");
-		this->_m_eventLoop.lock();
-		LOGD(fStr + "Pending operation, awaking from sleep");
-		this->_m_reserved.unlock();
+	{//This is the main execution loop
+		while (this->_run){
+			LOGD(fStr + "Going to sleep");
+			this->_m_eventLoop.lock();
+			LOGD(fStr + "Pending operation, awaking from sleep");
 
-		if (!this->_run)
-			continue;
+			if (!this->_run)
+				continue;
 
-		bool result = true;
-		result &= this->cleanFinishedJobs();
-		result &= this->moveJobs();
+			bool result = true;
+			result &= this->cleanFinishedJobs();
+			result &= this->moveJobs();
 
-		if (!result)
-			LOGD(fStr + "There was nothing to do");
+			if (!result)
+				LOGD(fStr + "There was nothing to do");
 
+		}
 	}
 
 	LOGI(fStr + "Stopping history daemon");
 	this->cleanFinishedJobs();
 
-	{
+	{//Clean up all jobs and quit everything nicely
 		LOGI(fStr + "Cleaning up all current jobs...");
 
 		{//Remove all waiting jobs

@@ -1,21 +1,22 @@
 #ifndef __JOB_H__
 #define __JOB_H__
 
+class Job;
+
 #include <QThread>
 
 #include <string>
 #include <vector>
 
 #include "job_type.h"
-#include "args.h"
-
 #include "exceptions.h"
+#include "hnhistorydaemon.h"
 
 class Job : public QThread{
 	Q_OBJECT
 
 public:
-	explicit Job(job_type type, Args args);
+	explicit Job(HNHistoryDaemon* daemon, job_type type);
 
 	/**
 	 * @brief	Returns the job's id
@@ -37,8 +38,8 @@ signals:
 protected:
 #endif
 
-	Args						_args;
 	bool						_is_running;
+	HNHistoryDaemon*			_historyDaemon;
 
 #ifndef FRIEND_JOB
 private:

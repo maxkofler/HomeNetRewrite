@@ -34,6 +34,16 @@ public:
      */
     std::vector<Parseline>                  getLines(){return this->_lines;}
 
+	/**
+	 * @brief	Get a pointer to the lines vector contained in the parser
+	 */
+	std::vector<Parseline>*					getLinesPointer(){return &this->_lines;}
+
+	/**
+	 * @brief	Set the lines contained in the parser
+	 */
+	void									setLines(std::vector<Parseline> lines){this->_lines = lines;}
+
     /**
      * @brief   Appends the provided line to the list of lines
      * @param   line                        The line to append to the parsed cache

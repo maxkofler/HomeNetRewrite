@@ -8,10 +8,9 @@ void HomeNet::sync(){
 	try{
 		this->_drivers->sync();
 		hnvalue_t value;
-		this->_historyDaemon->getHistory(&value);
+		this->_historyDaemon->d_getHistory(value);
+		this->_historyDaemon->d_cleanHistory("/etc/homenet/history/WSxUMBDriver/Temperatur.hnhist");
 	}catch(...){
 		LOGE("Fatal exception during syncing!");
 	}
-
-	this->_historyDaemon->release();
 }

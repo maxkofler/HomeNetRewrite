@@ -1,13 +1,14 @@
 #ifndef __HNHISTORYDAEMON_H__
 #define __HNHISTORYDAEMON_H__
 
+class HNHistoryDaemon;
+
 #include <QThread>
 
 #include "hnconfig.h"
 #include "hnvalue.h"
 #include "valuehistory.h"
 #include "hnhistorydaemon/job_type.h"
-#include "hnhistorydaemon/args.h"
 #include "hnhistorydaemon/job.h"
 
 #include <mutex>
@@ -47,12 +48,32 @@ public:
 	 * @brief	Queues a history read, emits onHistoryReady() once finished
 	 * @param	value			The value to get the history from
 	 */
-	bool						getHistory(hnvalue_t* value);
+	bool						d_getHistory(hnvalue_t value);
+
+	/**
+	 * @brief	Queues a history cleanup, emits onHistoryCleaned() once finished
+	 * @param	path			The path to the history file to clean up
+	 */
+	bool						d_cleanHistory(std::string path);
 
 	/**
 	 * @brief	The daemons main execution loop, gets run asynchronously
 	 */
 	void						run() override;
+
+	/**
+	 * @brief	Acquires the specified file path
+	 * @param	path			The path to aqcuire
+	 * @return	false if acquiring failed (TODO: timeout)
+	 */
+	bool						acquireFile(std::string path);
+
+	/**
+	 * @brief	Releases an acquired file path
+	 * @param	path			The path of the file to release
+	 * @return	false if file was never acquired
+	 */
+	bool						releaseFile(std::string path);
 
 signals:
 
@@ -62,6 +83,12 @@ signals:
 	 * @param	history			A history object containing the history to access
 	 */
 	void						onHistoryRead(hnvalue_t value, ValueHistory history);
+
+	/**
+	 * @brief	Gets emited once a file has been released
+	 * @param	path			The path to the file released
+	 */
+	void						fileReleased(std::string path);
 
 #ifndef FRIEND_HNHISTORYDAEMON
 private:
@@ -84,19 +111,16 @@ private:
 	std::mutex					_m_eventLoop;
 
 	/**
-	 * @brief	Is locked if an operation is pending and it is not allowed to write to event loop variables
-	 */
-	std::mutex					_m_reserved;
-
-	/**
 	 * @brief	Hold the type for the job that is to execute next
 	 */
 	job_type					_curJob_type;
 
 	/**
-	 * @brief	The argument list for the current job
+	 * @brief	A map containing mutexes for all files that are locked and thus can not
+	 *			be accessed TODO: delete mutexes at destructor
 	 */
-	Args						_curJob_args;
+	std::map<std::string, std::mutex*>	_file_mutexes;
+	std::mutex							_m_file_mutexes;
 
 	/**
 	 * @brief	Holds a map of currently running jobs
@@ -108,6 +132,7 @@ private:
 	 * @brief 	Contains all the jobs that are still waiting for execution
 	 */
 	std::queue<Job*>			_waiting_jobs;
+	std::mutex					_m_waiting_jobs;
 
 	/**
 	 * @brief	Holds the next job id that gets given to new jobs
@@ -138,6 +163,17 @@ private:
 	 * @return	false if no budget was left or no jobs were waiting
 	 */
 	bool						moveJobs();
+
+	/**
+	 * @brief	Aqcuires the history daemons mutex for _running_jobs
+	 * @param	context			A string hinting the context the mutex is needed for
+	 */
+	void						lock_waiting(std::string context);
+
+	/**
+	 * @brief	Contains the log prefix for all messages coming from this class
+	 */
+	std::string					_cN = "History daemon: ";
 
 private slots:
 	void						jobJoined(size_t id);

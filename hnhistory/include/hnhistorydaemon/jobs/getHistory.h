@@ -2,13 +2,14 @@
 #define GETHISTORY_H
 
 #include "hnhistorydaemon/job.h"
+#include "hnvalue.h"
 
 namespace Jobs{
 
 	class GetHistory : public Job{
 
 	public:
-		GetHistory(Args args);
+		GetHistory(HNHistoryDaemon*, hnvalue_t value);
 
 		void					run() override;
 

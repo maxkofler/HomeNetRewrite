@@ -1,9 +1,9 @@
 #include "hnhistorydaemon/job.h"
 #include "log.h"
 
-Job::Job(job_type type, Args args){
+Job::Job(HNHistoryDaemon* daemon, job_type type){
 	FUN();
 
 	this->_job_type = type;
-	this->_args = args;
+	this->_historyDaemon = daemon;
 }

@@ -2,8 +2,7 @@
 #include "../t_job.h"
 
 TEST(Job, Constructor){
-	Args args;
-	Job job(JOB_GET_HISTORY, args);
+	Job job(nullptr, JOB_GET_HISTORY);
 
 	EXPECT_EQ(JOB_GET_HISTORY, job._job_type);
 }

@@ -3,7 +3,8 @@
 
 enum job_type{
 	JOB_NONE,
-	JOB_GET_HISTORY
+	JOB_GET_HISTORY,
+	JOB_CLEAN_HISTORY
 };
 
 #endif
