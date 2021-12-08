@@ -73,5 +73,7 @@
         "complex": "cpp",
         "optional": "cpp",
         "cfenv": "cpp"
-    }
+    },
+	"editor.detectIndentation": false,
+	"cmake.configureOnOpen": false
 }

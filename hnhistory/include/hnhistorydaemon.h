@@ -101,12 +101,46 @@ private:
 	/**
 	 * @brief	Holds a map of currently running jobs
 	 */
-	std::queue<Job*>			_running_jobs;
+	std::map<size_t, Job*>		_running_jobs;
+	std::mutex					_m_running_jobs;
 
 	/**
-	 * @brief Contains all the jobs that are still waiting for execution
+	 * @brief 	Contains all the jobs that are still waiting for execution
 	 */
 	std::queue<Job*>			_waiting_jobs;
+
+	/**
+	 * @brief	Holds the next job id that gets given to new jobs
+	 */
+	size_t						_nextJobID = 0;
+
+	/**
+	 * @brief	Connects the provided job with the daemons slots
+	 * @param	job				The job to connect slots to
+	 */
+	void						connectJob(Job* job);
+
+	/**
+	 * @brief	Add a job to the running map
+	 * @param	job				The job to add
+	 * @return	false if the thread budget is maxed
+	 */
+	bool						addRunningJob(Job* job);
+
+	/**
+	 * @brief	Cleans up all old and finished jobs from _running_jobs
+	 * @return	false if nothing was cleaned
+	 */
+	bool						cleanFinishedJobs();
+
+	/**
+	 * @brief	Tries to move waiting jobs to running unless budget is maxed
+	 * @return	false if no budget was left or no jobs were waiting
+	 */
+	bool						moveJobs();
+
+private slots:
+	void						jobJoined(size_t id);
 };
 
 #endif

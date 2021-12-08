@@ -23,27 +23,17 @@ void HNHistoryDaemon::run(){
 		if (!this->_run)
 			continue;
 
-		if (this->_waiting_jobs.size() <= 0){
-			LOGD(fStr + "No jobs waiting for deployment");
-			continue;
-		}
+		bool result = true;
+		result &= this->cleanFinishedJobs();
+		result &= this->moveJobs();
 
-		if (this->_running_jobs.size() >= this->_maxThreads){
-			LOGD(fStr + "Thread-budget is maxed, waiting for jobs to finish to deploy next job");
-			continue;
-		}
+		if (!result)
+			LOGD(fStr + "There was nothing to do");
 
-		{//Move the job from waiting to running and start it
-			LOGD(fStr + "Deploying a new job...");
-			Job* curJob = this->_waiting_jobs.front();
-			this->_waiting_jobs.pop();
-			this->_running_jobs.push(curJob);
-			curJob->start();
-			LOGD(fStr + "Finished deploying the new job");
-		}
 	}
 
 	LOGI(fStr + "Stopping history daemon");
+	this->cleanFinishedJobs();
 
 	{
 		LOGI(fStr + "Cleaning up all current jobs...");
@@ -62,10 +52,11 @@ void HNHistoryDaemon::run(){
 		{//Wait for all jobs to join
 			size_t killed = 0;
 			while(!this->_running_jobs.empty()){
-				LOGD(fStr + "Waiting for one of " + std::to_string(this->_running_jobs.size()) + 
+				LOGD(fStr + "Waiting for one of " + std::to_string(this->_running_jobs.size()) +
 							" running jobs to join...");
 				this->_m_eventLoop.lock();
 				LOGD(fStr + "One Job joined");
+				this->cleanFinishedJobs();
 			}
 			LOGI(fStr + std::to_string(killed) + " running jobs joined");
 		}
