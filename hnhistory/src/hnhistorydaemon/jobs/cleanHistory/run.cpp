@@ -71,6 +71,8 @@ void Jobs::CleanHistory::run(){
 			LOGI("Written back " + std::to_string(outLines) + " lines, " + std::to_string(linesParsed - outLines) + " less than read");
 			this->_historyFile.close();
 		}
+
+		delete historyParser;
 	}
 
 END:
