@@ -9,6 +9,9 @@ include_directories(${PROJECT_SOURCE_DIR}/hnpython/include ${PYTHON_INCLUDE_DIRS
 #hnhistory
 include_directories(${PROJECT_SOURCE_DIR}/hnhistory/include)
 
+#homenet
+include_directories(${PROJECT_SOURCE_DIR}/homenet/include)
+
 set (HEADERS
     include/hndrivers.h
     include/hndriver.h

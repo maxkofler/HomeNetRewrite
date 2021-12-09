@@ -12,13 +12,14 @@ namespace Jobs{
 	class CleanHistory : public Job{
 
 	public:
-		CleanHistory(HNHistoryDaemon*, std::string path);
+		CleanHistory(HNHistoryDaemon*, hnvalue_t* value);
 
 		void					run() override;
 
 	private:
 
 		std::fstream			_historyFile;
+		hnvalue_t*				_value;
 		std::string				_path;
 	};
 

@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-bool HNDrivers::init(HNConfig& config, HNPython* pyInst, HNHistory* history){
+bool HNDrivers::init(HNConfig& config, HNPython* pyInst, HNHistory* history, HNHistoryDaemon* daemon){
     FUN();
 
     this->_rl_initialized = false;
@@ -48,6 +48,10 @@ bool HNDrivers::init(HNConfig& config, HNPython* pyInst, HNHistory* history){
 
         this->_pyInst = pyInst;
     }
+
+	{//Add the history daemon
+		this->_historyDaemon = daemon;
+	}
 
     this->_history = history;
 

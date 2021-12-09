@@ -8,6 +8,8 @@ r	driverdir			Where all the drivers are stored
 r	synctime			The delay between syncs
 r	driverlist			The list containing all drivers
 r   port            	The port for the tcp server to listen on
+
+o	cleanupSyncs		The sync cycles until a history cleanup gets done
 o 	historyThreads		The maximum amount of threads the history daemon is allowed to spawn
 
 For a driver guide refer to driverguide.py

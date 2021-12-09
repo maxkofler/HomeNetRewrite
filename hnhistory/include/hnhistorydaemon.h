@@ -54,7 +54,7 @@ public:
 	 * @brief	Queues a history cleanup, emits onHistoryCleaned() once finished
 	 * @param	path			The path to the history file to clean up
 	 */
-	bool						d_cleanHistory(std::string path);
+	bool						d_cleanHistory(hnvalue_t* value);
 
 	/**
 	 * @brief	The daemons main execution loop, gets run asynchronously
@@ -74,6 +74,11 @@ public:
 	 * @return	false if file was never acquired
 	 */
 	bool						releaseFile(std::string path);
+
+	/**
+	 * @brief	Returns the file location of the history
+	 */
+	std::string					getHistoryDir(){return this->_historyDir;}
 
 signals:
 
@@ -138,6 +143,8 @@ private:
 	 * @brief	Holds the next job id that gets given to new jobs
 	 */
 	size_t						_nextJobID = 0;
+
+	std::string					_historyDir;
 
 	/**
 	 * @brief	Connects the provided job with the daemons slots

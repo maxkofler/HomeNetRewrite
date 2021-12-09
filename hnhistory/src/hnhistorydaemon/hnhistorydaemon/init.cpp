@@ -20,5 +20,9 @@ bool HNHistoryDaemon::init(HNConfig &config){
 		return false;
 	}
 
+	this->_historyDir = config.getFirstConfig("historydir", true);
+
+	LOGI(this->_cN + "Using " + std::to_string(this->_maxThreads) + " threads");
+
 	return true;
 }

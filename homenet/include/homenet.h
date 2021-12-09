@@ -35,6 +35,11 @@ public:
     }
     ~HomeNet();
 
+	/**
+	 * @brief	Cleans up the history from garbage and duplications, gets executed in history daemon
+	 */
+	void									cleanupHistory();
+
 public slots:
     void                                    start();
 
@@ -51,6 +56,9 @@ private:
     HNNetworking*                           _networking;
     HNHistory*                              _history;
 	HNHistoryDaemon*						_historyDaemon;
+
+	size_t									_syncs_for_cleanup = 0;
+	size_t									_syncs_since_cleanup = 0;
 
     size_t                                  _time_sync;
     QTimer*                                 _timerSync;

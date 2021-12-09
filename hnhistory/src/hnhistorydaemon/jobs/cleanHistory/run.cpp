@@ -11,6 +11,8 @@ void Jobs::CleanHistory::run(){
 
 	this->_historyDaemon->acquireFile(this->_path);
 
+	LOGI("Starting cleanup of history file \"" + this->_path + "\"");
+
 	{
 		HNParser* historyParser = new HNParser();
 		int linesParsed = 0;
@@ -72,6 +74,7 @@ void Jobs::CleanHistory::run(){
 	}
 
 END:
+	LOGI("Finished cleanup of history file \"" + this->_path + "\"");
 
 	this->_historyDaemon->releaseFile(this->_path);
 

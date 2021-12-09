@@ -11,9 +11,6 @@ void HNHistoryDaemon::run(){
 
 	this->_run = true;
 
-	//Lock the mutex for now, there is nothing to do at this stage
-	this->_m_eventLoop.try_lock();
-
 	{//This is the main execution loop
 		while (this->_run){
 			LOGD(fStr + "Going to sleep");
