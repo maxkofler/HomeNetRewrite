@@ -11,7 +11,7 @@ void Jobs::CleanHistory::run(){
 
 	this->_historyDaemon->acquireFile(this->_path);
 
-	LOGI("Starting cleanup of history file \"" + this->_path + "\"");
+	LOGD("Starting cleanup of history file \"" + this->_path + "\"");
 
 	{
 		HNParser* historyParser = new HNParser();
@@ -22,7 +22,9 @@ void Jobs::CleanHistory::run(){
 			if (!this->_historyFile.is_open() || this->_historyFile.bad()){
 				LOGE("History file " + this->_path + " could not be opened!");
 				this->_historyFile.close();
-				goto END;
+				this->_historyDaemon->releaseFile(this->_path);
+				this->finished();
+				return;
 			}
 		}
 
@@ -62,23 +64,25 @@ void Jobs::CleanHistory::run(){
 			if (!this->_historyFile.is_open() || this->_historyFile.bad()){
 				LOGE("History file " + this->_path + " could not be opened!");
 				this->_historyFile.close();
-				goto END;
+				this->_historyDaemon->releaseFile(this->_path);
+				this->finished();
+				return;
 			}
 		}
 
 		{//Write back results
 			int outLines = historyParser->writeToStream(this->_historyFile);
-			LOGI("Written back " + std::to_string(outLines) + " lines, " + std::to_string(linesParsed - outLines) + " less than read");
+			LOGI(	"History cleanup of \"" + this->_path + "\" done: " +
+					"Written back " + std::to_string(outLines) + " lines, " + 
+					std::to_string(linesParsed - outLines) + " less than read");
 			this->_historyFile.close();
 		}
 
 		delete historyParser;
 	}
 
-END:
-	LOGI("Finished cleanup of history file \"" + this->_path + "\"");
+	LOGD("Finished cleanup of history file \"" + this->_path + "\"");
 
 	this->_historyDaemon->releaseFile(this->_path);
-
 	this->finished();
 }

@@ -45,6 +45,12 @@ public:
 	void						release();
 
 	/**
+	 * @brief	Queues a history append of the value provided
+	 * @param	value			The value to append the history of
+	 */
+	bool						d_appendHistory(hnvalue_t value);
+
+	/**
 	 * @brief	Queues a history read, emits onHistoryReady() once finished
 	 * @param	value			The value to get the history from
 	 */
@@ -114,6 +120,11 @@ private:
 	 * @note	Just unlocking is valid, DO NOT lock it
 	 */
 	std::mutex					_m_eventLoop;
+
+	/**
+	 * @brief	Is locked as long as the history daemon is reserved for some operation
+	 */
+	std::mutex					_m_reserved;
 
 	/**
 	 * @brief	Hold the type for the job that is to execute next

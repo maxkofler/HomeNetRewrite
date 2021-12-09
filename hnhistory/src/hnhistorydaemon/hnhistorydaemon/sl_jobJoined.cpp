@@ -4,7 +4,7 @@
 void HNHistoryDaemon::jobJoined(size_t id){
 	FUN();
 
-	LOGI("History daemon: A job joined!");
+	LOGD("History daemon: Job " + std::to_string(id) + " joined");
 
-	this->release();
+	this->_m_eventLoop.unlock();
 }

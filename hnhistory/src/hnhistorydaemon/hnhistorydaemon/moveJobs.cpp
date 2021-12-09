@@ -6,7 +6,7 @@ bool HNHistoryDaemon::moveJobs(){
 
 	std::string fStr = "Homenet daemon: ";
 
-	LOGD(fStr + 	"Jobs waiting: " + std::to_string(this->_waiting_jobs.size()) + ", " + 
+	LOGD(fStr + 	"Jobs waiting: " + std::to_string(this->_waiting_jobs.size()) + ", " +
 					"Jobs running: " + std::to_string(this->_running_jobs.size()));
 
 	{
@@ -15,19 +15,17 @@ bool HNHistoryDaemon::moveJobs(){
 
 			if (this->_waiting_jobs.size() <= 0){
 				LOGD(fStr + "No jobs waiting for deployment");
-				return false;
+				run = false;
+				continue;
 			}
 
 			if (this->_running_jobs.size() >= this->_maxThreads){
 				LOGD(fStr + "Thread-budget is maxed, waiting for jobs to finish to deploy next job");
-				return false;
+				run = false;
+				continue;
 			}
 
-			if (!this->_m_running_jobs.try_lock()){
-				LOGD(fStr + "Waiting for permission to running jobs...");
-				this->_m_running_jobs.lock();
-			}
-
+			this->lock_waiting("daemon");
 			{//Move the job from waiting to running and start it
 				LOGD(fStr + "Deploying a new job...");
 				Job* curJob = this->_waiting_jobs.front();
@@ -38,7 +36,7 @@ bool HNHistoryDaemon::moveJobs(){
 				LOGD(fStr + "Finished deploying the new job");
 			}
 
-			this->_m_running_jobs.unlock();
+			this->_m_waiting_jobs.unlock();
 
 		}
 

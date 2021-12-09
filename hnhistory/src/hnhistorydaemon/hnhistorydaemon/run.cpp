@@ -8,12 +8,14 @@ void HNHistoryDaemon::run(){
 	std::string fStr = "History daemon: ";
 
 	LOGI("Starting HNHistory Daemon...");
+	this->_m_reserved.try_lock();
 
 	this->_run = true;
 
 	{//This is the main execution loop
 		while (this->_run){
 			LOGD(fStr + "Going to sleep");
+			this->_m_reserved.unlock();
 			this->_m_eventLoop.lock();
 			LOGD(fStr + "Pending operation, awaking from sleep");
 

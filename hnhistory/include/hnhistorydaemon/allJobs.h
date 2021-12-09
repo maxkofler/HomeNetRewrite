@@ -3,5 +3,6 @@
 
 #include "jobs/getHistory.h"
 #include "jobs/cleanHistory.h"
+#include "jobs/appendHistory.h"
 
 #endif
