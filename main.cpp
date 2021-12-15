@@ -13,31 +13,35 @@ homenet_status stateHomeNet;
 
 int main(int argc, char** argv)
 {
-    stateHomeNet.running = true;
+	stateHomeNet.running = true;
 
-    bool ret;
-    while(stateHomeNet.running){
-        hlog = new Log::Log(Log::D);
-        {
-            FUN();
+	bool ret;
+	while(stateHomeNet.running){
+		hlog = new Log::Log(Log::I);
+		hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
+		{
+			FUN();
 
-            QCoreApplication app(argc, argv);
+			QCoreApplication app(argc, argv);
 
-            HomeNet hn(&app);
+			HomeNet hn(&app);
 
-            QObject::connect(&hn, &HomeNet::stop, &app, &QCoreApplication::quit);
+			QObject::connect(&hn, &HomeNet::stop, &app, &QCoreApplication::quit);
 
-            QTimer::singleShot(0, &hn, &HomeNet::start);
+			QTimer::singleShot(0, &hn, &HomeNet::start);
 
-            ret = app.exec();
-        }
-        delete hlog;
+			ret = app.exec();
+		}
 
-        if (stateHomeNet.running){
-            //Wait some time
-            QThread::sleep(2);
-        }
-    }    
+		LOGU("HomeNet server stopped, good bye!");
 
-    return ret; 
+		delete hlog;
+
+		if (stateHomeNet.running){
+			//Wait some time
+			QThread::sleep(2);
+		}
+	}
+
+	return ret;
 }

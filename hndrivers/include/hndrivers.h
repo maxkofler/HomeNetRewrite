@@ -13,6 +13,7 @@ class HNDrivers;
 #include "hnparser.h"
 #include "hnpython.h"
 #include "hnhistory.h"
+#include "hnhistorydaemon.h"
 
 class HNDrivers{
 public:
@@ -24,7 +25,7 @@ public:
      * @param   config                      A reference to the main HNConfig
      * @param   pyInstance                  A pointer to the core HNPython instance
      */
-    bool                                    init(HNConfig& config, HNPython* pyInstance, HNHistory* history);
+    bool                                    init(HNConfig& config, HNPython* pyInstance, HNHistory* history, HNHistoryDaemon* daemon);
 
     /**
      * @brief   Loads the drivers parsed from the driverlist provided from the HNConfig to init()
@@ -46,10 +47,12 @@ public:
      */
     bool                                    ok(){return this->_rl_driversloaded && this->_rl_initialized;}
 
+	friend class HomeNet;
 private:
     HNParser                                _driverlistParser;
     HNPython*                               _pyInst;
     HNHistory*                              _history;
+	HNHistoryDaemon*						_historyDaemon;
 
     std::vector<HNDriver*>                  _drivers;
     std::vector<hnvalue_t*>                 _values;

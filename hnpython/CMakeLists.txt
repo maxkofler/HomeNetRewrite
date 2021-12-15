@@ -5,6 +5,7 @@ find_package(PythonLibs REQUIRED)
 set (HEADERS
     include/hnpython.h
     include/pymodule.h
+    include/pyargs.h
     )
 
 set (SOURCES
@@ -16,6 +17,9 @@ set (SOURCES
     src/hnpython/execModFunction.cpp
 
     src/pymodule/pymodule.cpp
+
+    src/pyargs/pyargs.cpp
+    src/pyargs/setitem.cpp
     )
 
 add_library(hnpython ${SOURCES} ${HEADERS})

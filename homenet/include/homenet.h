@@ -15,6 +15,7 @@ class HomeNet;
 #include "hnpython.h"
 #include "hnnetworking.h"
 #include "hnhistory.h"
+#include "hnhistorydaemon.h"
 
 class HomeNet : public QObject{
     Q_OBJECT
@@ -29,9 +30,15 @@ public:
         this->_python = new HNPython();
         this->_drivers = new HNDrivers();
         this->_history = new HNHistory();
+		this->_historyDaemon = new HNHistoryDaemon();
         this->_networking = new HNNetworking(this->_drivers, this->_history, this);
     }
     ~HomeNet();
+
+	/**
+	 * @brief	Cleans up the history from garbage and duplications, gets executed in history daemon
+	 */
+	void									cleanupHistory();
 
 public slots:
     void                                    start();
@@ -48,6 +55,10 @@ private:
     HNDrivers*                              _drivers;
     HNNetworking*                           _networking;
     HNHistory*                              _history;
+	HNHistoryDaemon*						_historyDaemon;
+
+	size_t									_syncs_for_cleanup = 0;
+	size_t									_syncs_since_cleanup = 0;
 
     size_t                                  _time_sync;
     QTimer*                                 _timerSync;

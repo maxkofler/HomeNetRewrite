@@ -1,0 +1,2 @@
+add_subdirectory(daemon/hnhistorydaemon)
+add_subdirectory(daemon/job)

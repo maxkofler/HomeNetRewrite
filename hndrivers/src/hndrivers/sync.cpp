@@ -1,52 +1,49 @@
 #include "hndrivers.h"
 
-#include <Python.h>
-
-#include <filesystem>
+#include <ctime>
 
 bool HNDrivers::sync(){
-    FUN();
+	FUN();
 
-    PyObject* args = PyTuple_New(3);
+	//PyObject* args = PyTuple_New(3);
+	PyArgs args(3);
 
-    for (HNDriver* curDriver : this->_drivers){
+	for (HNDriver* curDriver : this->_drivers){
 
-        {   //Resume the driver
-            if (this->_pyInst->execModFunction(curDriver->name() + ".main", "resume", nullptr) == "E"){
-                LOGE("Error resuming driver \"" + curDriver->name() + "\"!");
-                continue;
-            }
-        }
+		{   //Resume the driver
+			if (this->_pyInst->execModFunction(curDriver->name() + ".main", "resume", nullptr) == "E"){
+				LOGE("Error resuming driver \"" + curDriver->name() + "\"!");
+				continue;
+			}
+		}
 
-        for (hnvalue_t* curValue : curDriver->getValues()){
-            std::string wp = this->_workdir + "/" + curDriver->name() + "/" + curValue->name + "/";
+		for (hnvalue_t* curValue : curDriver->getValues()){
 
-            //Create the working path
-            std::filesystem::create_directories(wp);
+			std::string wp = this->_workdir + "/" + curDriver->name() + "/" + curValue->name + "/";
 
-            LOGI(   "Syncing \"" + curDriver->name() + "--" + curValue->name + "\" (gID: " +
-                    std::to_string(curValue->gID) + " lID: " + std::to_string(curValue->lID) + " wd: " + wp + ")");
+			LOGI(   "Syncing \"" + curDriver->name() + "--" + curValue->name + "\" (gID: " +
+					std::to_string(curValue->gID) + " lID: " + std::to_string(curValue->lID) + " wd: " + wp + ")");
 
-            PyTuple_SetItem(args, 0, Py_BuildValue("i#", curValue->gID));
-            PyTuple_SetItem(args, 1, Py_BuildValue("i#", curValue->lID));
-            PyTuple_SetItem(args, 2, Py_BuildValue("s#", wp.c_str(), wp.length()));
+			args.setItem(0, "i#", curValue->gID);
+			args.setItem(1, "i#", curValue->lID);
+			args.setItem(2, "s#", wp.c_str(), wp.length());
 
-            std::string ret = this->_pyInst->execModFunction(curDriver->name() + ".main", "getValue", args);
+			std::string ret = this->_pyInst->execModFunction(curDriver->name() + ".main", "getValue", args.getArgv());
 
-            curValue->datatype = ret[0];
-            curValue->value = ret.substr(1, ret.length()-1);
+			curValue->datatype = ret[0];
+			curValue->value = ret.substr(1, ret.length()-1);
+			curValue->syncTime = std::time(0);
 
-            if (!this->_history->append(*curValue)){
-                LOGW("Failed to append value to history!");
-            }
-        }
 
-        {   //Pause the driver
-            if (this->_pyInst->execModFunction(curDriver->name() + ".main", "pause", nullptr) == "E"){
-                LOGE("Error stopping driver \"" + curDriver->name() + "\"!");
-            }
-        }
-    }
+			this->_historyDaemon->d_appendHistory(*curValue);
+		}
 
-    return true;
+		{   //Pause the driver
+			if (this->_pyInst->execModFunction(curDriver->name() + ".main", "pause", nullptr) == "E"){
+				LOGE("Error stopping driver \"" + curDriver->name() + "\"!");
+			}
+		}
+	}
+
+	return true;
 }

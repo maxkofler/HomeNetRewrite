@@ -6,8 +6,13 @@ project(HomeNet LANGUAGES CXX)
 
 find_package(PythonLibs REQUIRED)
 
+enable_testing()
+
+add_subdirectory(Log/googletest)
 add_subdirectory(Log)
 add_subdirectory(Argparser)
+
+add_subdirectory(tests)
 
 add_subdirectory(hnpython)
 add_subdirectory(hnparser)
@@ -15,8 +20,9 @@ add_subdirectory(hnconfig)
 add_subdirectory(hndrivers)
 add_subdirectory(hnnetworking)
 add_subdirectory(hnhistory)
+add_subdirectory(homenet)
 
-include_directories(include Log/include Argparser/include)
+include_directories(include Log/include Argparser/include Log/googletest/googletest/include)
 
 #HomeNet internal headers
 include_directories(
@@ -26,27 +32,22 @@ include_directories(
     hndrivers/include
     hnnetworking/include
     hnhistory/include
-
     homenet/include
-    )
-
-
+)
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+file (GLOB_RECURSE SOURCES "homenet/src/**.cpp")
+file (GLOB_RECURSE HEADERS "homenet/include/**.h")
+
 add_executable(HomeNet
     main.cpp
 
-    homenet/include/homenet.h
-    homenet/include/homenet_status.h
-
-    homenet/src/homenet.cpp
-    homenet/src/sl_start.cpp
-    homenet/src/sl_sync.cpp
-    homenet/src/p_sigHandler.cpp
+    ${HEADERS}
+    ${SOURCES}
     )
 
 

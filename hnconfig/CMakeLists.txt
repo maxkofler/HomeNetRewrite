@@ -9,6 +9,7 @@ set (SOURCES
     src/hnconfig.cpp
     src/parse.cpp
     src/getConfig.cpp
+    src/getFirstConfig.cpp
     )
 
 add_library(hnconfig ${SOURCES} ${HEADERS})

@@ -6,6 +6,7 @@
 #include "log.h"
 
 #include "pymodule.h"
+#include "pyargs.h"
 
 class HNPython
 {

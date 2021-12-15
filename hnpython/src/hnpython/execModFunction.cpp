@@ -2,7 +2,7 @@
 
 #include <Python.h>
 
-std::string HNPython::execModFunction(std::string modName, std::string funName, void *argsV){
+std::string HNPython::execModFunction(std::string modName, std::string funName, void* argsV){
     FUN();
 
     PyObject* args = (PyObject*) argsV;

@@ -4,23 +4,20 @@ include_directories(include ${PROJECT_SOURCE_DIR}/Log/include ${PROJECT_SOURCE_D
 include_directories(${PROJECT_SOURCE_DIR}/hnconfig/include)
 #HNParser
 include_directories(${PROJECT_SOURCE_DIR}/hnparser/include)
-#HNPDrivers
+#HNDrivers
 include_directories(${PROJECT_SOURCE_DIR}/hndrivers/include)
+#HomeNetException
+include_directories(${PROJECT_SOURCE_DIR}/homenet/include)
 
-set (HEADERS
-    include/hnhistory.h
-    )
+find_package(Qt5 COMPONENTS Core REQUIRED)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set (SOURCES
-    src/hnhistory/hnhistory.cpp
-    src/hnhistory/init.cpp
-    src/hnhistory/read.cpp
-    src/hnhistory/append.cpp
-    src/hnhistory/getHistory.cpp
-    )
+file(GLOB_RECURSE HEADERS "include/**.h")
+file(GLOB_RECURSE SOURCES "src/**.cpp")
 
 add_library(hnhistory ${SOURCES} ${HEADERS})
 
-target_link_libraries(hnhistory stdc++fs hnparser)
+target_link_libraries(hnhistory Qt5::Core stdc++fs hnconfig homenet)
 
 add_dependencies(hnhistory hnparser)

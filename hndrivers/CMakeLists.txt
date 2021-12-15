@@ -1,7 +1,5 @@
 include_directories(include ${PROJECT_SOURCE_DIR}/Log/include)
 
-find_package(PythonLibs REQUIRED)
-
 #hnconfig
 include_directories(${PROJECT_SOURCE_DIR}/hnconfig/include ${PROJECT_SOURCE_DIR}/hnparser/include)
 
@@ -10,6 +8,9 @@ include_directories(${PROJECT_SOURCE_DIR}/hnpython/include ${PYTHON_INCLUDE_DIRS
 
 #hnhistory
 include_directories(${PROJECT_SOURCE_DIR}/hnhistory/include)
+
+#homenet
+include_directories(${PROJECT_SOURCE_DIR}/homenet/include)
 
 set (HEADERS
     include/hndrivers.h
@@ -39,6 +40,6 @@ set (SOURCES
 
 add_library(hndrivers ${SOURCES} ${HEADERS})
 
-target_link_libraries(hndrivers stdc++fs hnconfig hnparser hnpython hnhistory ${PYTHON_LIBRARIES})
+target_link_libraries(hndrivers stdc++fs hnconfig hnparser hnpython hnhistory)
 
 add_dependencies(hndrivers hnconfig hnparser hnpython hnhistory)
