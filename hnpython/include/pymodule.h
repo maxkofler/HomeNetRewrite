@@ -12,14 +12,22 @@ class PyModule;
 class PyModule
 {
 public:
-    PyModule();
+    PyModule(HNPython* pyInstance);
     ~PyModule();
+
+	/**
+	 * @brief	Imports the module from the specified module name
+	 * @param	name						The name of the module: "mypackage.mymodule", you must not append .py!
+	 */
+	bool									import(std::string name);
 
     friend class HNPython;
 private:
-    bool                                    _is_loaded;
+	HNPython*								_pyInst;
+    bool                                    _is_imported;
     std::string                             _name;
     void*                                   _pName;
+
     void*                                   _pModule;
     void*                                   _pDict;
 

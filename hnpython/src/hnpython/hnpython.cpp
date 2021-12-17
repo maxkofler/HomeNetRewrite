@@ -13,6 +13,7 @@ HNPython::~HNPython(){
     }
 
     //Delete all modules
+	//@TODO investigate map clear
     int modcount = 0;
     std::map<std::string, PyModule*>::iterator it = this->_modules.begin();
     while (it != this->_modules.end()){

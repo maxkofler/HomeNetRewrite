@@ -1,11 +1,12 @@
 #include "pymodule.h"
 
-PyModule::PyModule(){
+PyModule::PyModule(HNPython* pyInst)
+	:	_is_imported(false), _pyInst(pyInst)
+{
     FUN();
-    this->_is_loaded = false;
 }
 
 PyModule::~PyModule(){
     FUN();
-    this->_is_loaded = false;
+	//TODO: Free PyObjects!!!
 }

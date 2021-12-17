@@ -1,6 +1,8 @@
 #ifndef HNPYTHON_H
 #define HNPYTHON_H
 
+class HNPython;
+
 #include <map>
 
 #include "log.h"
