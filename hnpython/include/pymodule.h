@@ -3,39 +3,61 @@
 
 class PyModule;
 
+#include "hnpython.h"
+#include "pyargs.h"
+
 #include <string>
 
-#include "log.h"
-
-#include "hnpython.h"
-
-class PyModule
-{
+class PyModule{
 public:
-    PyModule(HNPython* pyInstance);
-    ~PyModule();
+	PyModule(HNPython* pyInstance);
+	~PyModule();
 
 	/**
 	 * @brief	Imports the module from the specified module name
-	 * @param	name						The name of the module: "mypackage.mymodule", you must not append .py!
+	 * @param	name			The name of the module: "mypackage.mymodule", you must not append .py!
 	 */
-	bool									import(std::string name);
+	bool						import(std::string name);
 
-    friend class HNPython;
+	/**
+	 * @brief	Removes all the modules data from memory
+	 */
+	void						remove();
+
+	/**
+	 * @brief	Executes a function of this module
+	 * @param	funName			The name of the funciton to execute
+	 * @param	args			The arguments of the function to execute
+	 * @return
+	 */
+	std::string					exec(std::string funName, PyArgs* args);
+
+	friend class HNPython;
 private:
-	HNPython*								_pyInst;
-    bool                                    _is_imported;
-    std::string                             _name;
-    void*                                   _pName;
+	/** @brief	The Python instance wrapper */
+	HNPython*					_pyInst;
 
-    void*                                   _pModule;
-    void*                                   _pDict;
+	/** @brief	Is true if the if the module is loaded */
+	bool						_is_imported;
 
-    /*
-    PyObject*                               _pName;         //The name in pystring form
-    PyObject*                               _pModule;       //The module itself
-    PyObject*                               _pDict;         //Its dictionary for symbols
-    */
+	/** @brief	The name of the module */
+	std::string					_name;
+
+
+	//
+	//	Python pointers
+	//
+
+	//is_imported
+	/** @brief	PyObject containing the module name for Python */
+	void*						_pName;
+
+	/** @brief	PyObject* containing the module */
+	void*						_pModule;
+
+	//Not protected
+	/**	@brief	[discontinued] Python dictionary */
+	void*						_pDict;
 };
 
-#endif // PYMODULE_H
+#endif
