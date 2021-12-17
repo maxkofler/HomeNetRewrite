@@ -28,7 +28,18 @@ public:
 	 * @brief	Executes a function of this module
 	 * @param	funName			The name of the funciton to execute
 	 * @param	args			The arguments of the function to execute
-	 * @return
+	 * @return	ES				System errore:
+	 * 				ES1			Python instance not running
+	 * 				ES2			Python module was not imported
+	 * 				ES3			Python function not loaded (NULL returned)
+	 * 				ES4			Python function is not callable
+	 * 				ES5			Exception during call of function
+	 * 				ES6			Function call failed (NULL returned)
+	 * 			V				No return value
+	* 			S[]				String value following: 		"SVALUE" 	-> 		"VALUE"
+	 * 			I[]				Integer value following 		"I10" 		-> 		10
+	 * 			F[]				Float value following			"F1.99" 	-> 		1.99f
+	 * 			...
 	 */
 	std::string					exec(std::string funName, PyArgs* args);
 
@@ -56,7 +67,10 @@ private:
 	void*						_pModule;
 
 	//Not protected
-	/**	@brief	[discontinued] Python dictionary */
+	/**	@brief	[discontinued] Python dictionary
+	 * 	@note	Will get removed in future commits
+	 * 	//TODO:	Remove this
+	 */
 	void*						_pDict;
 };
 

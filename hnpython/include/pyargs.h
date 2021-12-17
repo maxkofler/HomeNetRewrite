@@ -15,6 +15,9 @@ public:
 	void                setItem(size_t pos, const char* type, int value);
 	void                setItem(size_t pos, const char* type, const char* value, int len);
 
+	/**
+	 * @brief	Returns the PyTuple as a PyObject* cast to void*
+	 */
 	void*               getArgv(){return this->_argv;}
 
 
