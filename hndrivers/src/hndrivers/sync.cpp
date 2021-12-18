@@ -7,11 +7,14 @@ bool HNDrivers::sync(){
 
 	//PyObject* args = PyTuple_New(3);
 	PyArgs args(3);
+	PyArgs emptyArgs(0);
 
 	for (HNDriver* curDriver : this->_drivers){
+		PyModule mod(this->_pyInst);
+		mod.import(curDriver->name() + ".main");
 
 		{   //Resume the driver
-			if (this->_pyInst->execModFunction(curDriver->name() + ".main", "resume", nullptr) == "E"){
+			if (mod.exec("resume", &emptyArgs) == "E"){
 				LOGE("Error resuming driver \"" + curDriver->name() + "\"!");
 				continue;
 			}
@@ -28,7 +31,9 @@ bool HNDrivers::sync(){
 			args.setItem(1, "i#", curValue->lID);
 			args.setItem(2, "s#", wp.c_str(), wp.length());
 
-			std::string ret = this->_pyInst->execModFunction(curDriver->name() + ".main", "getValue", args.getArgv());
+			//std::string ret = this->_pyInst->execModFunction(curDriver->name() + ".main", "getValue", args.getArgv());
+
+			std::string ret = mod.exec("getValue", &args);
 
 			curValue->datatype = ret[0];
 			curValue->value = ret.substr(1, ret.length()-1);

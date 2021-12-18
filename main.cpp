@@ -17,8 +17,8 @@ int main(int argc, char** argv)
 
 	bool ret;
 	while(stateHomeNet.running){
-		hlog = new Log::Log(Log::I);
-		hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, false);
+		hlog = new Log::Log(Log::A);
+		hlog->setFeature(Log::FEATURE_PRINTFUNNAMES, true);
 		{
 			FUN();
 
