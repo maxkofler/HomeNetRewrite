@@ -17,3 +17,4 @@ add_subdirectory(test_main)
 
 add_subdirectory(tests/Sanity)
 add_subdirectory(tests/hnhistory)
+add_subdirectory(tests/hnpython)

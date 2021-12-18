@@ -7,11 +7,6 @@ static std::string fStr = "Executing python: ";
 
 std::string PyModule::exec(std::string funName, PyArgs* args){
 	FUN();
-	
-	std::string ret;
-	PyObject* pArgs = (PyObject*)args->getArgv();
-	PyObject* pFunc;
-	PyObject* pRet;
 
 	{//Pre-checks
 		LOGD(fStr + "Checking prerequisites...");
@@ -26,6 +21,11 @@ std::string PyModule::exec(std::string funName, PyArgs* args){
 			return "ES2";
 		}
 	}
+
+	std::string ret;
+	PyObject* pArgs = (PyObject*)args->getArgv();
+	PyObject* pFunc;
+	PyObject* pRet;
 	
 	{//Get and check python function object
 		LOGD(fStr + "Getting python function object...");

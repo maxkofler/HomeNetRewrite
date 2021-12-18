@@ -44,7 +44,11 @@ public:
 	std::string					exec(std::string funName, PyArgs* args);
 
 	friend class HNPython;
+
+#ifndef FRIEND_PYMODULE
 private:
+#endif
+
 	/** @brief	The Python instance wrapper */
 	HNPython*					_pyInst;
 

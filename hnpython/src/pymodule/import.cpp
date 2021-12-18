@@ -23,6 +23,7 @@ bool PyModule::import(std::string name){
 		this->_pName = PyUnicode_DecodeFSDefault(name.c_str());
 		if (this->_pName == NULL){
 			LOGE(fStr + "Failed to create module name");
+			PyErr_Print();
 			Py_XDECREF(this->_pName);
 			return false;
 		}
