@@ -10,11 +10,15 @@ bool HNDrivers::sync(){
 	PyArgs emptyArgs(0);
 
 	for (HNDriver* curDriver : this->_drivers){
-		PyModule mod(this->_pyInst);
-		mod.import(curDriver->name() + ".main");
+		PyModule* curModule = this->_pyInst->getModule(curDriver->name() + ".main");
+
+		if (curModule == nullptr){
+			LOGE("Failed to load module " + curDriver->name() + "!");
+			continue;
+		}
 
 		{   //Resume the driver
-			if (mod.exec("resume", &emptyArgs) == "E"){
+			if (curModule->exec("resume", &emptyArgs) == "E"){
 				LOGE("Error resuming driver \"" + curDriver->name() + "\"!");
 				continue;
 			}
@@ -33,7 +37,7 @@ bool HNDrivers::sync(){
 
 			//std::string ret = this->_pyInst->execModFunction(curDriver->name() + ".main", "getValue", args.getArgv());
 
-			std::string ret = mod.exec("getValue", &args);
+			std::string ret = curModule->exec("getValue", &args);
 
 			curValue->datatype = ret[0];
 			curValue->value = ret.substr(1, ret.length()-1);
@@ -44,7 +48,7 @@ bool HNDrivers::sync(){
 		}
 
 		{   //Pause the driver
-			if (this->_pyInst->execModFunction(curDriver->name() + ".main", "pause", nullptr) == "E"){
+			if (curModule->exec("pause", nullptr) == "E"){
 				LOGE("Error stopping driver \"" + curDriver->name() + "\"!");
 			}
 		}

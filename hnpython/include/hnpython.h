@@ -40,21 +40,11 @@ public:
 	bool                                    loadModule(std::string name);
 
 	/**
-	 * @brief   Executes a function of a module
-	 * @param   modName                     The name of the module
-	 * @param   funName                     The name of the function
-	 * @param   args                        A Tuple of arguments
-	 * @return  The return value in a special form:
-	 *          "E1"                        An error
-	 *              "ES1"                   System (1) - python not running
-	 *              "ES2"                   System (2) - module not found
-	 *              "ES3"                   System (3) - function not found
-	 *          "I1"                        Integer (1)
-	 *          "F2.1"                      Float (2.1)
-	 *          "SHello"                    String (Hello)
-	 *          "V"                         Void
+	 * @brief	Returns a pointer to the asked module
+	 * @param	name						The name of the module
+	 * @return	nullptr if the module does not exist
 	 */
-	std::string                             execModFunction(std::string modName, std::string funName, void* args);
+	PyModule*								getModule(std::string name);
 
 	/**
 	 * @brief   Returns if the Python interpreter is running
@@ -68,4 +58,4 @@ private:
 	std::map<std::string, PyModule*>        _modules;
 };
 
-#endif // HNPYTHON_H
+#endif
