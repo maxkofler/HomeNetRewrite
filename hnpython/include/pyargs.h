@@ -2,6 +2,7 @@
 #define __PYARGS_H__
 
 #include <cstddef>
+#include <string>
 
 /**
  * @brief A class that wraps a python argument tuple
@@ -10,10 +11,10 @@
 class PyArgs{
 
 public:
-	PyArgs(size_t argc);
+	PyArgs(int argc);
 
-	void                setItem(size_t pos, const char* type, int value);
-	void                setItem(size_t pos, const char* type, const char* value, int len);
+	bool                setLongItem(int pos, long value);
+	bool                setStringItem(int pos, std::string value);
 
 	/**
 	 * @brief	Returns the PyTuple as a PyObject* cast to void*

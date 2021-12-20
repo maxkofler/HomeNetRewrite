@@ -31,9 +31,16 @@ bool HNDrivers::sync(){
 			LOGI(   "Syncing \"" + curDriver->name() + "--" + curValue->name + "\" (gID: " +
 					std::to_string(curValue->gID) + " lID: " + std::to_string(curValue->lID) + " wd: " + wp + ")");
 
-			args.setItem(0, "i#", curValue->gID);
-			args.setItem(1, "i#", curValue->lID);
-			args.setItem(2, "s#", wp.c_str(), wp.length());
+			bool res = true;
+			res &= args.setLongItem(0, curValue->gID);
+			res &= args.setLongItem(1, curValue->lID);
+			res &= args.setStringItem(2, wp);
+
+			//TODO: check behavior
+			if (!res){
+				LOGE("Failed to set arguments");
+				continue;
+			}
 
 			//std::string ret = this->_pyInst->execModFunction(curDriver->name() + ".main", "getValue", args.getArgv());
 
@@ -48,7 +55,7 @@ bool HNDrivers::sync(){
 		}
 
 		{   //Pause the driver
-			if (curModule->exec("pause", nullptr) == "E"){
+			if (curModule->exec("pause", &emptyArgs) == "E"){
 				LOGE("Error stopping driver \"" + curDriver->name() + "\"!");
 			}
 		}

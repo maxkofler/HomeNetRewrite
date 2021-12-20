@@ -23,7 +23,11 @@ std::string PyModule::exec(std::string funName, PyArgs* args){
 	}
 
 	std::string ret;
-	PyObject* pArgs = (PyObject*)args->getArgv();
+	
+	PyObject* pArgs = nullptr;
+	if (args != nullptr)
+		pArgs = (PyObject*)args->getArgv();
+
 	PyObject* pFunc;
 	PyObject* pRet;
 	
