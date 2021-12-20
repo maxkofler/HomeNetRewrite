@@ -7,10 +7,6 @@ HNPython::HNPython(){
 
 HNPython::~HNPython(){
     FUN();
-    if (this->_py_running){
-        LOGW("Python-interpreter is still running, forcing quit");
-        this->stopPython();
-    }
 
     //Delete all modules
 	//@TODO investigate map clear
@@ -22,4 +18,9 @@ HNPython::~HNPython(){
         modcount++;
     }
     LOGD("Cleaned " + std::to_string(modcount) + " modules from memory!");
+
+	if (this->_py_running){
+        LOGW("Python-interpreter is still running, forcing quit");
+        this->stopPython();
+    }
 }
