@@ -1,5 +1,5 @@
 
-set(TEST_NAME SampleTest)
+set(TEST_NAME PyModule)
 
 file(GLOB_RECURSE sources "./**.cpp")
 

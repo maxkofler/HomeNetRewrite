@@ -1,35 +1,45 @@
 #include "hnpython.h"
-
 #include <Python.h>
+
+static std::string fStr = "Loading module: ";
 
 bool HNPython::loadModule(std::string name){
     FUN();
 
-    if (!this->_py_running){
-        LOGE("Python-interpreter is not running, can not load a module!");
-        return false;
-    }
+	{//Check if the module is not already lodaed
+		if (this->_modules.count(name) > 0){
+			LOGW(fStr + "Module \"" + name + "\" seems to be already imported!");
 
-    PyModule* mod = new PyModule();
-    //Tell the module its name
-    mod->_name = name;
-    mod->_pName = (void*) PyUnicode_FromString(name.c_str());
+			//Check if the module is not a nullptr
+			if (this->_modules[name] == nullptr){
+				LOGD(fStr + "Module \"" + name + "\" is no more in memory, overriding it...");
+				this->_modules.erase(name);
+			} else {
+				if (this->_modules[name]->_is_imported)
+				LOGE(fStr + "Failed to load module \"" + name + "\": It is already loaded");
+				return false;
+			}
+		}
+	}
 
-    //Import the module
-    mod->_pModule = (void*) PyImport_Import((PyObject*) mod->_pName);
+	PyModule* newMod = new PyModule(this);
+	
+	//Import the module
+	bool ret = newMod->import(name);
 
-    //Check if the import was done
-    if (mod->_pModule == NULL){
-        LOGE("Could not import module \"" + mod->_name + "\"!");
-        return false;
-    }
+	//If the import failed
+	if (!ret){
+		delete newMod;
+		LOGD(fStr + "Removing module \"" + name + "\" from modules due to failed import");
+		
+		if (this->_modules.count(name) > 0)
+			this->_modules.erase(name);
 
-    //Load the dictionary
-    mod->_pDict = PyModule_GetDict((PyObject*) mod->_pModule);
+		return false;
+	}
 
-    //The module is loaded!
-    mod->_is_loaded = true;
-    LOGI("Loaded module \"" + mod->_name + "\"!");
-    this->_modules[mod->_name] = mod;
-    return true;
+	LOGD(fStr + "Adding module \"" + name + "\" to modules list...");
+	this->_modules[name] = newMod;
+
+	return true;
 }

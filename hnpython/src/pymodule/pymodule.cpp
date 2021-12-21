@@ -1,11 +1,14 @@
+#include "log.h"
 #include "pymodule.h"
 
-PyModule::PyModule(){
-    FUN();
-    this->_is_loaded = false;
+PyModule::PyModule(HNPython* pyInst)
+	:	_is_imported(false), _pyInst(pyInst)
+{
+	FUN();
 }
 
 PyModule::~PyModule(){
-    FUN();
-    this->_is_loaded = false;
+	FUN();
+
+	this->remove();
 }

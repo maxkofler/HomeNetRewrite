@@ -73,7 +73,8 @@
 		"complex": "cpp",
 		"optional": "cpp",
 		"cfenv": "cpp",
-		"qthread": "cpp"
+		"qthread": "cpp",
+		"source_location": "cpp"
 	},
 	"editor.detectIndentation": false,
 	"cmake.configureOnOpen": false
