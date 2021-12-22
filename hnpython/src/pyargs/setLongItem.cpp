@@ -29,9 +29,12 @@ bool PyArgs::setLongItem(int pos, long value){
 		}
 	}
 
-	PyTuple_SetItem((PyObject*)this->_argv, pos, arg);
-
-	//TODO check memory of arg
+	int res = PyTuple_SetItem((PyObject*)this->_argv, pos, arg);
+	
+	if (res != 0){
+		LOGE("Failed to set PyTuple item");
+		return false;
+	}
 
 	return true;
 }

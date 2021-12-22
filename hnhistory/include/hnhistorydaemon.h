@@ -51,13 +51,13 @@ public:
 	bool						d_appendHistory(hnvalue_t value);
 
 	/**
-	 * @brief	Queues a history read, emits onHistoryReady() once finished
+	 * @brief	Queues a history read, emits onHistoryReady() once finished TODO: emit onHistoryRead()
 	 * @param	value			The value to get the history from
 	 */
 	bool						d_getHistory(hnvalue_t value);
 
 	/**
-	 * @brief	Queues a history cleanup, emits onHistoryCleaned() once finished
+	 * @brief	Queues a history cleanup, emits onHistoryCleaned() once finished TIDO: emit onHistoryCleaned()
 	 * @param	path			The path to the history file to clean up
 	 */
 	bool						d_cleanHistory(hnvalue_t* value);

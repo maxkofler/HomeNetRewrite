@@ -29,9 +29,12 @@ bool PyArgs::setStringItem(int pos, std::string value){
 		}
 	}
 
-	PyTuple_SetItem((PyObject*)this->_argv, pos, arg);
-
-	//TODO check memory of arg
+	int res = PyTuple_SetItem((PyObject*)this->_argv, pos, arg);
+	
+	if (res != 0){
+		LOGE("Failed to set PyTuple item");
+		return false;
+	}
 
 	return true;
 }

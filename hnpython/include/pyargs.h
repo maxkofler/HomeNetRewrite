@@ -12,6 +12,7 @@ class PyArgs{
 
 public:
 	PyArgs(int argc);
+	~PyArgs();
 
 	bool                setLongItem(int pos, long value);
 	bool                setStringItem(int pos, std::string value);

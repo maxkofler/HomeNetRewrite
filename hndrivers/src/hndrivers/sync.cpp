@@ -36,7 +36,6 @@ bool HNDrivers::sync(){
 			res &= args.setLongItem(1, curValue->lID);
 			res &= args.setStringItem(2, wp);
 
-			//TODO: check behavior
 			if (!res){
 				LOGE("Failed to set arguments");
 				continue;

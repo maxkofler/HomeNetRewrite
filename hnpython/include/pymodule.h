@@ -69,13 +69,6 @@ private:
 
 	/** @brief	PyObject* containing the module */
 	void*						_pModule;
-
-	//Not protected
-	/**	@brief	[discontinued] Python dictionary
-	 * 	@note	Will get removed in future commits
-	 * 	//TODO:	Remove this
-	 */
-	void*						_pDict;
 };
 
 #endif
