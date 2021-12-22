@@ -40,19 +40,13 @@ find_package(Qt5 COMPONENTS Core REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-file (GLOB_RECURSE SOURCES "homenet/src/**.cpp")
-file (GLOB_RECURSE HEADERS "homenet/include/**.h")
+file (GLOB_RECURSE SOURCES "main/src/**.cpp")
 
-add_executable(HomeNet
-    main.cpp
-
-    ${HEADERS}
-    ${SOURCES}
-    )
+add_executable(HomeNet ${SOURCES})
 
 
 target_link_libraries(HomeNet Qt5::Core stdc++fs log argparser)
-target_link_libraries(HomeNet hnpython hnparser hnconfig hndrivers hnnetworking hnhistory)
+target_link_libraries(HomeNet hnconfig hndrivers hnhistory hnnetworking hnparser hnpython homenet)
 
 add_dependencies(HomeNet log argparser)
-add_dependencies(HomeNet hnpython hnparser hnconfig hndrivers hnnetworking hnhistory)
+add_dependencies(HomeNet hnconfig hndrivers hnhistory hnnetworking hnparser hnpython homenet)
