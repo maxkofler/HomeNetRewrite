@@ -4,6 +4,12 @@
 TEST(HNHistoryDaemon, Init_Default_Threads){
 	HNConfig config;
 	HNHistoryDaemon daemon;
+
+	{//Set history dir
+		Parseline line;
+		line.parseFromLine("<historydir><./>", '<', '>');
+		config._parser.append(line);
+	}
 	
 	daemon.init(config);
 
@@ -17,6 +23,12 @@ TEST(HNHistoryDaemon, Init_Specified_Threads){
 	{//Set threads
 		Parseline line;
 		line.parseFromLine("<historyThreads><100>", '<', '>');
+		config._parser.append(line);
+	}
+
+	{//Set history dir
+		Parseline line;
+		line.parseFromLine("<historydir><./>", '<', '>');
 		config._parser.append(line);
 	}
 
