@@ -2,7 +2,3 @@
 	path = Log
 	url = https://github.com/maxkofler/Log
 	branch = main
-[submodule "Argparser"]
-	path = Argparser
-	url = https://github.com/maxkofler/Argparser
-	branch = main

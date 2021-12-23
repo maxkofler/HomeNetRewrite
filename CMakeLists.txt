@@ -10,7 +10,6 @@ enable_testing()
 
 add_subdirectory(Log/googletest)
 add_subdirectory(Log)
-add_subdirectory(Argparser)
 
 add_subdirectory(tests)
 
@@ -22,7 +21,7 @@ add_subdirectory(hnnetworking)
 add_subdirectory(hnhistory)
 add_subdirectory(homenet)
 
-include_directories(include Log/include Argparser/include Log/googletest/googletest/include)
+include_directories(include Log/include Log/googletest/googletest/include)
 
 #HomeNet internal headers
 include_directories(
@@ -45,8 +44,8 @@ file (GLOB_RECURSE SOURCES "main/src/**.cpp")
 add_executable(HomeNet ${SOURCES})
 
 
-target_link_libraries(HomeNet Qt5::Core stdc++fs log argparser)
+target_link_libraries(HomeNet Qt5::Core stdc++fs log)
 target_link_libraries(HomeNet hnconfig hndrivers hnhistory hnnetworking hnparser hnpython homenet)
 
-add_dependencies(HomeNet log argparser)
+add_dependencies(HomeNet log)
 add_dependencies(HomeNet hnconfig hndrivers hnhistory hnnetworking hnparser hnpython homenet)
