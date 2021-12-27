@@ -38,7 +38,7 @@ signals:
 protected:
 #endif
 
-	bool						_is_running;
+	bool						_is_running = false;
 	HNHistoryDaemon*			_historyDaemon;
 
 #ifndef FRIEND_JOB
