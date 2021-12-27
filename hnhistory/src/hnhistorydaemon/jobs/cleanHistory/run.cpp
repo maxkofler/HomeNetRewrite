@@ -5,13 +5,15 @@
 
 #include <fstream>
 
+static std::string fN = "Cleaning history: ";
+
 void Jobs::CleanHistory::run(){
 	FUN();
 	this->_is_running = true;
 
 	this->_historyDaemon->acquireFile(this->_path);
 
-	LOGD("Starting cleanup of history file \"" + this->_path + "\"");
+	LOGD(fN + "Starting cleanup of history file \"" + this->_path + "\"");
 
 	{
 		HNParser* historyParser = new HNParser();
@@ -20,7 +22,7 @@ void Jobs::CleanHistory::run(){
 		{//Open the file for reading
 			this->_historyFile.open(this->_path, std::ios::in);
 			if (!this->_historyFile.is_open() || this->_historyFile.bad()){
-				LOGE("History file " + this->_path + " could not be opened!");
+				LOGE(fN + "History file " + this->_path + " could not be opened!");
 				this->_historyFile.close();
 				this->_historyDaemon->releaseFile(this->_path);
 				this->finished();
@@ -29,16 +31,20 @@ void Jobs::CleanHistory::run(){
 		}
 
 		{//Parse the file
-			LOGF("Parsing file " + this->_path + "...");
+			LOGF(fN + "Parsing file " + this->_path + "...");
 			linesParsed = historyParser->parseStream(this->_historyFile);
 			this->_historyFile.close();
-			LOGD("Done parsing file " + this->_path + ": " + std::to_string(linesParsed) + " lines parsed");
+			LOGD(fN + "Done parsing file " + this->_path + ": " + std::to_string(linesParsed) + " lines parsed");
 		}
 
 		std::vector<Parseline>* lines = historyParser->getLinesPointer();
 		std::vector<Parseline>* newLines = new std::vector<Parseline>();
+		newLines->reserve(lines->size());
 
 		{//Clean up history
+			LOGD(fN + "Entering cleaning stage");
+			auto start = std::chrono::high_resolution_clock::now();
+
 			Parseline curLine;
 			newLines->push_back(lines->at(0));
 			for (size_t i = 1; i < lines->size()-1; i++){
@@ -49,6 +55,11 @@ void Jobs::CleanHistory::run(){
 							}
 			}
 			newLines->push_back(lines->at(lines->size()-1));
+			newLines->shrink_to_fit();
+
+			auto stop = std::chrono::high_resolution_clock::now();
+			auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+			LOGD(fN + "Finished cleaning, took " + std::to_string(duration.count()) + " µs");
 		}
 
 		{//We can delete the old lines from the parser
@@ -62,7 +73,7 @@ void Jobs::CleanHistory::run(){
 		{//Open the file for writing
 			this->_historyFile.open(this->_path, std::ios::out);
 			if (!this->_historyFile.is_open() || this->_historyFile.bad()){
-				LOGE("History file " + this->_path + " could not be opened!");
+				LOGE(fN + "History file " + this->_path + " could not be opened!");
 				this->_historyFile.close();
 				this->_historyDaemon->releaseFile(this->_path);
 				this->finished();
@@ -72,7 +83,7 @@ void Jobs::CleanHistory::run(){
 
 		{//Write back results
 			int outLines = historyParser->writeToStream(this->_historyFile);
-			LOGI(	"History cleanup of \"" + this->_path + "\" done: " +
+			LOGI(	fN + "History cleanup of \"" + this->_path + "\" done: " +
 					"Written back " + std::to_string(outLines) + " lines, " + 
 					std::to_string(linesParsed - outLines) + " less than read");
 			this->_historyFile.close();
@@ -81,7 +92,7 @@ void Jobs::CleanHistory::run(){
 		delete historyParser;
 	}
 
-	LOGD("Finished cleanup of history file \"" + this->_path + "\"");
+	LOGD(fN + "Finished cleanup of history file \"" + this->_path + "\"");
 
 	this->_historyDaemon->releaseFile(this->_path);
 	this->finished();
