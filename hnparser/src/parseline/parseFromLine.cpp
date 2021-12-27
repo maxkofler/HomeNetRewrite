@@ -3,6 +3,7 @@
 int Parseline::parseFromLine(std::string line, char opener, char closer, bool acceptEmpty){
     FUN();
 
+	/*
     //Clear the current vector
     this->_blocks.clear();
 
@@ -22,6 +23,26 @@ int Parseline::parseFromLine(std::string line, char opener, char closer, bool ac
         }else
             break;
     }
+	*/
+
+	//Clear old vector
+	this->_blocks.clear();
+
+	std::string curBlock;
+	char curChar;
+
+	for(size_t i = 0; i < line.length(); i++){
+		curChar = line[i];
+
+		if(curChar == opener){
+			curBlock.clear();
+		}else if(curChar == closer){
+			if (acceptEmpty || !curBlock.empty())
+				this->_blocks.push_back(curBlock);
+		}else{
+			curBlock += curChar;
+		}
+	}
 
     return this->_blocks.size();
 }

@@ -4,7 +4,7 @@
 bool HNHistoryDaemon::moveJobs(){
 	FUN();
 
-	std::string fStr = "Homenet daemon: ";
+	std::string fStr = "History daemon: ";
 
 	LOGD(fStr + 	"Jobs waiting: " + std::to_string(this->_waiting_jobs.size()) + ", " +
 					"Jobs running: " + std::to_string(this->_running_jobs.size()));
