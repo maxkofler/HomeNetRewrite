@@ -3,8 +3,13 @@
 #include "log.h"
 Log::Log* hlog;
 
+int glob_argc;
+char** glob_argv;
+
 GTEST_API_ int main(int argc, char **argv) {
   printf("Running main() from %s\n", __FILE__);
+  glob_argc = argc;
+  glob_argv = argv;
   testing::InitGoogleTest(&argc, argv);
 
   hlog = new Log::Log(Log::D);

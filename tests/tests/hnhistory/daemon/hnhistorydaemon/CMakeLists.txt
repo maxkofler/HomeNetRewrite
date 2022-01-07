@@ -20,3 +20,5 @@ add_test(
     NAME ${TEST_NAME}
     COMMAND ${TEST_NAME}
 )
+
+set_tests_properties(${TEST_NAME} PROPERTIES TIMEOUT 5)

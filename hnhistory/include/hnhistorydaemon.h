@@ -45,6 +45,12 @@ public:
 	void						release();
 
 	/**
+	 * @brief	Queues a job that does nothing other than waiting (for testing)
+	 * @param	time			The time in ms to wait until finishing 
+	 */
+	bool						d_void(int time);
+
+	/**
 	 * @brief	Queues a history append of the value provided
 	 * @param	value			The value to append the history of
 	 */
