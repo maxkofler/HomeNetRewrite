@@ -33,12 +33,6 @@ public:
 	bool						init(HNConfig& config);
 
 	/**
-	 * @brief	Stops the event loop and releases all resources
-	 * @brief	Gets called by destructor
-	 */
-	bool						stop();
-
-	/**
 	 * @brief	Releases the history daemon from sleep
 	 * @note	If there is nothing to do it immediately returns to sleep
 	 */
@@ -49,6 +43,11 @@ public:
 	 * @param	time			The time in ms to wait until finishing 
 	 */
 	bool						d_void(int time);
+
+	/**
+	 * @brief	Queues a job that stops the history daemon on execution (for testing)
+	 */
+	bool						d_stop();
 
 	/**
 	 * @brief	Queues a history append of the value provided
@@ -106,6 +105,11 @@ signals:
 	 * @param	path			The path to the file released
 	 */
 	void						fileReleased(std::string path);
+
+	/**
+	 * @brief	Gets emited once the event loop has finished
+	 */
+	void						finished();
 
 #ifndef FRIEND_HNHISTORYDAEMON
 private:
@@ -201,6 +205,13 @@ private:
 
 private slots:
 	void						jobJoined(size_t id);
+
+public slots:
+	/**
+	 * @brief	Stops the event loop and releases all resources
+	 * @brief	Gets called by destructor
+	 */
+	bool						stop();
 };
 
 #endif

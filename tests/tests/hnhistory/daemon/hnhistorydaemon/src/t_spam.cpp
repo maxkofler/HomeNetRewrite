@@ -14,6 +14,7 @@ TEST(HNHistoryDaemon, Spam){
 	HNConfig config;
 	HNHistoryDaemon daemon;
 	QCoreApplication app(glob_argc, glob_argv);
+	QObject::connect(&daemon, &HNHistoryDaemon::finished, &app, &QCoreApplication::quit);
 
 	{//Set history dir
 		Parseline line;
@@ -25,9 +26,14 @@ TEST(HNHistoryDaemon, Spam){
 
 	ASSERT_EQ(2, daemon._maxThreads);
 
+	LOGI("[TEST] Starting daemon");
 	daemon.start();
 
-	QTimer::singleShot(2, &daemon, &HNHistoryDaemon::stop);
+	for (int i = 0; i < 100; i++){
+		daemon.d_void(100);
+	}
+
+	daemon.d_stop();
 
 	app.exec();
 }

@@ -5,19 +5,21 @@
 void HNHistoryDaemon::run(){
 	FUN();
 
-	std::string fStr = "History daemon: ";
+	std::string fStr = "History daemon loop: ";
 
 	LOGI("Starting HNHistory Daemon...");
 	this->_m_reserved.try_lock();
+	this->_m_eventLoop.try_lock();
 
 	this->_run = true;
 
 	{//This is the main execution loop
 		while (this->_run){
-			LOGD(fStr + "Going to sleep");
+			this->_m_eventLoop.try_lock();
 			this->_m_reserved.unlock();
 			this->_m_eventLoop.lock();
-			LOGD(fStr + "Pending operation, awaking from sleep");
+			this->_m_reserved.lock();
+			LOGD(fStr + "Becoming active to process event");
 
 			if (!this->_run)
 				continue;
@@ -25,10 +27,6 @@ void HNHistoryDaemon::run(){
 			bool result = true;
 			result &= this->cleanFinishedJobs();
 			result &= this->moveJobs();
-
-			if (!result)
-				LOGD(fStr + "There was nothing to do");
-
 		}
 	}
 
@@ -63,4 +61,5 @@ void HNHistoryDaemon::run(){
 	}
 
 	LOGI(fStr + "Exited from event loop");
+	emit finished();
 }

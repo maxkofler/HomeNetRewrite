@@ -6,7 +6,11 @@
 void Jobs::Void::run(){
 	FUN();
 
-	QThread::sleep(this->_waittime);
+	this->_is_running = true;
+
+	LOGD("Void job: Waiting for " + std::to_string(this->_waittime));
+	QThread::msleep(this->_waittime);
+	LOGD("Void job: Finished waiting");
 	
 	this->finished();
 }
